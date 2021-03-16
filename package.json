@@ -3,13 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node agility/agility.sync.js sync",
     "dev": "next dev",
+    "prebuild": "node agility/agility.sync.js prebuild",
     "build": "next build",
-    "start": "next start"
+    "postbuild": "node agility/agility.sync.js postbuild",
+    "start": "next start",
+    "cms-pull": "NODE_ENV=development && node agility/agility.sync.js sync",
+    "cms-clear": "node agility/agility.sync.js clear"
   },
   "dependencies": {
     "next": "10.0.9",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@agility/content-sync": "^0.1.24",
+    "@tailwindcss/jit": "^0.1.1",
+    "@tailwindcss/typography": "^0.4.0",
+    "@types/node": "^14.14.35",
+    "@types/react": "^17.0.3",
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.3",
+    "truncate-html": "^1.0.3",
+    "typescript": "^4.2.3"
   }
 }

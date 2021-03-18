@@ -8,9 +8,11 @@ import type {
 import Layout from "components/common/Layout"
 
 import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node"
+import { handlePreview } from "@agility/nextjs"
 import { getModule } from "components/agility-modules"
 import GlobalHeader from "components/common/GlobalHeader"
 import GlobalFooter from "components/common/GlobalFooter"
+import LoadingWidget from "components/common/LoadingWidget"
 
 export async function getStaticProps({ preview, params, locale, defaultLocale, locales }: GetStaticPropsContext<{ slug: string[] }>) {
 
@@ -46,9 +48,9 @@ export async function getStaticPaths({ locales, defaultLocale }: GetStaticPathsC
 }
 
 const AgilityPage = (props:any) => {
-	// if (handlePreview()) {
-	// 	return <div>Activating preview mode...</div>
-	// }
+	if (handlePreview()) {
+		return <LoadingWidget message="Activating preview mode..."/>
+	}
 
 	return <Layout {...props} />;
 }

@@ -1,4 +1,4 @@
-import { validatePreview, getDynamicPageURL } from '@agility/nextjs'
+import { validatePreview, getDynamicPageURL } from '@agility/nextjs/node'
 
 // A simple example for testing it manually from your browser.
 // If this is located at pages/api/preview.js, then

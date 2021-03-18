@@ -1,4 +1,4 @@
-import { generatePreviewKey } from "@agility/nextjs"
+import { generatePreviewKey } from "@agility/nextjs/node"
 
 export default async (req, res) => {
 

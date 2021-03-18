@@ -6,12 +6,20 @@ import type {
 } from 'next'
 
 import Layout from "components/common/Layout"
-import { getAgilityPageProps, getAgilityPaths } from "agility/agility.node";
 
+import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node"
+import { getModule } from "components/agility-modules"
+import GlobalHeader from "components/common/GlobalHeader"
+import GlobalFooter from "components/common/GlobalFooter"
 
-export async function getStaticProps({ preview, params, locale }: GetStaticPropsContext<{ slug: string[] }>) {
+export async function getStaticProps({ preview, params, locale, defaultLocale, locales }: GetStaticPropsContext<{ slug: string[] }>) {
 
-	const agilityProps = await getAgilityPageProps({ preview, params, locale });
+	const globalComponents = {
+		"header": GlobalHeader,
+		"footer": GlobalFooter
+	}
+
+	const agilityProps = await getAgilityPageProps({ preview, params, locale, getModule, defaultLocale, globalComponents });
 
 	let rebuildFrequency = 10
 
@@ -26,9 +34,10 @@ export async function getStaticProps({ preview, params, locale }: GetStaticProps
 	}
 }
 
-export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+export async function getStaticPaths({ locales, defaultLocale }: GetStaticPathsContext) {
+
 	//get the paths configured in agility
-	let agilityPaths = await getAgilityPaths(false)
+	let agilityPaths = await getAgilityPaths({ preview:false, locales, defaultLocale })
 
 	return {
 		paths: agilityPaths,
@@ -37,6 +46,10 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
 }
 
 const AgilityPage = (props:any) => {
+	// if (handlePreview()) {
+	// 	return <div>Activating preview mode...</div>
+	// }
+
 	return <Layout {...props} />;
 }
 

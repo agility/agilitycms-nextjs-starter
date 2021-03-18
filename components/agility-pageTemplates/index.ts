@@ -13,7 +13,7 @@ const allTemplates:[TemplateObj] =[
 ]
 
 export const getPageTemplate = (templateName:string):any => {
-
+	if (! templateName) return null
 	const obj = allTemplates.find(m => m.name.toLowerCase() === templateName.toLowerCase())
 	if (! obj) return null
 	return obj?.template

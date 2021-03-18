@@ -1,17 +1,15 @@
 import React, {FC} from 'react';
-import { renderHTML } from 'agility/utils'
+import { renderHTML, Module } from '@agility/nextjs'
 
-interface Fields {
+
+interface RichText {
 	textblob:string,
 }
 
-interface Props {
-	fields: Fields
-}
+const RichTextArea:Module<RichText> =  ({ module: {fields: {textblob}} }) => {
 
-const RichTextArea:FC<Props> =  ({fields}) => {
 	return (
-		<section className="my-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full" dangerouslySetInnerHTML={renderHTML(fields.textblob)}>
+		<section className="my-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full" dangerouslySetInnerHTML={renderHTML(textblob)}>
 		</section>
 	);
 

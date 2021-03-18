@@ -1,9 +1,34 @@
 import React, { Component, useState } from 'react';
 import Link from 'next/link';
-import { expandLinkedList } from "agility/utils"
 
-const GlobalFooter = (props) => {
-	const { globalFooterProps } = props;
+import { ComponentWithInit, expandLinkedList } from "@agility/nextjs"
+
+interface ICustomData {
+	siteName: string
+	siteDescription: string
+	column2Title: string
+	column3Title: string
+	column4Title: string
+	facebookURL: string
+	twitterURL: string
+	youTubeURL: string
+	column2Links: any[]
+	column3Links: any[]
+	column4Links: any[]
+}
+
+const GlobalFooter:ComponentWithInit<ICustomData> = (props) => {
+	const { globalData } = props;
+
+	const globalFooterProps:ICustomData = globalData["footer"]
+
+	if (globalFooterProps == null) {
+		return (
+			<footer>
+				No footer
+			</footer>
+		)
+	}
 
 	return (
 
@@ -118,6 +143,8 @@ GlobalFooter.getCustomInitialProps = async function ({ agility, languageCode, ch
 				sortIDField: "column4SortIDs"
 			})
 
+		} else {
+			return null
 		}
 
 

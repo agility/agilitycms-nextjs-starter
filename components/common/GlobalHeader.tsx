@@ -1,10 +1,20 @@
 import React, { Component, useState } from 'react';
 import Link from 'next/link';
+import { ComponentWithInit } from "@agility/nextjs"
 
-const GlobalHeader = (props) => {
+interface ICustomData {
+	contentItem: any,
+	links: any[]
+}
+
+const GlobalHeader:ComponentWithInit<ICustomData> = ({ globalData, sitemapNode, page }) => {
 	const [open, setOpen] = useState(false)
 
-	const { globalHeaderProps, sitemapNode, page } = props;
+	const globalHeaderProps:ICustomData = globalData["header"]
+
+	if (! globalHeaderProps) {
+		return <header>No Header</header>
+	}
 
 	const globalHeader = globalHeaderProps.contentItem;
 	const links = globalHeaderProps.links
@@ -116,7 +126,7 @@ const GlobalHeader = (props) => {
 							<span className="w-full flex rounded-md shadow-sm">
 
 								{globalHeader.fields.primaryCTA &&
-									<a href={globalHeader.fields.primaryCTA.path} target={globalHeader.fields.primaryCTA.target} className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+									<a href={globalHeader.fields.primaryCTA.href} target={globalHeader.fields.primaryCTA.target} className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
 										{globalHeader.fields.primaryCTA.text}
 									</a>
 								}
@@ -131,11 +141,10 @@ const GlobalHeader = (props) => {
 
 }
 
-GlobalHeader.getCustomInitialProps = async function (props) {
+GlobalHeader.getCustomInitialProps = async function ({agility, languageCode, channelName}) {
 
-	const api = props.agility;
-	const languageCode = props.languageCode;
-	const channelName = props.channelName;
+	const api = agility;
+
 	let contentItem = null;
 	let links = [];
 
@@ -146,12 +155,14 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 			languageCode: languageCode
 		});
 
-		if (contentItemList && contentItemList.length) {
+		if (contentItemList && contentItemList.length > 0) {
 			contentItem = contentItemList[0];
-
+		} else {
+			return null
 		}
 	} catch (error) {
 		if (console) console.error("Could not load global header item.", error);
+		return null
 	}
 
 

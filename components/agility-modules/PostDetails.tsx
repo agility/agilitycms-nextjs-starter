@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { renderHTML } from 'agility/utils'
-import { ContentItem, ImageField } from 'agility/types';
+import { ContentItem, ImageField, ModuleWithDynamic, renderHTML } from '@agility/nextjs'
 
 
 interface Tag {
@@ -25,17 +24,23 @@ interface Post {
 	tags:[ContentItem<Tag>]
 }
 
-interface Props {
-	dynamicPageItem: ContentItem<Post>
-}
 
-const PostDetails: FC<Props> = ({ dynamicPageItem }) => {
+const PostDetails: ModuleWithDynamic<any, Post> = ({ dynamicPageItem, languageCode }) => {
 
 	const post = dynamicPageItem.fields
-	const category = post.category.fields.title
-	const author = post.author.fields.name
-	const tagNames = post.tags.map(tag => tag.fields.title).join(", ")
-	const dateStr = new Date(post.date).toLocaleDateString()
+	const category = post.category?.fields.title
+	const author = post.author?.fields.name
+	const tagNames = post.tags?.map(tag => tag.fields.title).join(", ")
+
+	let dateStr = null;
+	try {
+		//try to format the date with the current lang
+		dateStr = new Date(post.date).toLocaleDateString(languageCode)
+	} catch (e) {
+		dateStr = new Date(post.date).toLocaleDateString()
+	}
+
+
 
 	return (
 		<section className="my-6">
@@ -49,6 +54,7 @@ const PostDetails: FC<Props> = ({ dynamicPageItem }) => {
 				<div className="font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide">{author}</div>
 				<div className="">{dateStr}</div>
 				<div className="text-gray-700">{tagNames}</div>
+				{ post.image &&
 				<div className="my-2 flex items-center justify-center">
 					<picture className="rounded">
 						<source srcSet={`${post.image.url}?w=1024`}
@@ -58,6 +64,7 @@ const PostDetails: FC<Props> = ({ dynamicPageItem }) => {
 						<img className="rounded" src={`${post.image.url}?w=400`} alt={post.image.label} loading="lazy" />
 					</picture>
 				</div>
+				}
 			</div>
 			<div className="p-10 prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full" style={{ maxWidth: "100%" }}
 				dangerouslySetInnerHTML={renderHTML(post.content)}>

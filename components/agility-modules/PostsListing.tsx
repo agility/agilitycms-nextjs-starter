@@ -1,10 +1,9 @@
 import React from 'react';
-import { renderHTML } from 'agility/utils'
-import { ModuleWithInit } from 'agility/types';
+import { ModuleWithInit, renderHTML } from '@agility/nextjs'
 import truncate from 'truncate-html'
 import Link from 'next/link';
 
-interface Fields {
+interface IPostListing {
 	title: string,
 	subtitle: string,
 	preHeader: string,
@@ -25,14 +24,8 @@ interface CustomData {
 	posts: [Post]
 }
 
-interface Props {
-	fields: Fields,
-	customData: CustomData
-}
-
-
-const PostListing: ModuleWithInit<Props, CustomData> = ({ fields, customData }) => {
-
+const PostListing: ModuleWithInit<IPostListing, CustomData> = ({module, customData}) => {
+	const fields = module.fields
 	let href = "/pages/[...slug]"
 
 	return (
@@ -52,7 +45,6 @@ const PostListing: ModuleWithInit<Props, CustomData> = ({ fields, customData }) 
 
 				<div className="mt-10">
 					<ul className="md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-
 						{customData.posts.map(post => {
 							return (
 								<li key={`post-${post.contentID}`}>
@@ -124,7 +116,7 @@ PostListing.getCustomInitialProps = async ({ agility, channelName, languageCode 
 
 			const category = categories?.find(c => c.contentID == categoryID);
 			const author = authors?.find(a => a.contentID == authorID);
-			const url = dynamicUrls[post.contentID]
+			const url = dynamicUrls[post.contentID] || "#"
 
 			let imageSrc = post.fields.image?.url || null
 			let imageAlt = post.fields.image?.label || null

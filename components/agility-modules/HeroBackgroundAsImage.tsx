@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { renderHTML } from 'agility/utils'
-import { ImageField, URLField } from 'agility/types';
+import React from 'react';
 
-interface Fields {
+import { ImageField, Module, URLField } from '@agility/nextjs'
+
+interface IHero {
 	title: string,
 	subTitle: string,
 	announcement: string,
@@ -11,11 +11,7 @@ interface Fields {
 	videoURL: string
 }
 
-interface Props {
-	fields: Fields
-}
-
-const Module: FC<Props> = ({ fields }) => {
+const Hero: Module<IHero> = ({ module:{ fields} }) => {
 
 	return (
 		<section className="my-6 relative bg-white overflow-hidden">
@@ -42,7 +38,7 @@ const Module: FC<Props> = ({ fields }) => {
 							<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 
 								<div className="rounded-md shadow">
-									<a href="{{fields.primaryCTA.href}}" target="{{fields.primaryCTA.target}}" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+									<a href={fields.primaryCTA.href} target={fields.primaryCTA.target} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
 										{fields.primaryCTA.text}
 									</a>
 								</div>
@@ -58,7 +54,10 @@ const Module: FC<Props> = ({ fields }) => {
 						media="(min-width: 1400px)" />
 					<source srcSet={ `${fields.backgroundImage.url}?q=60&w=800` }
 						media="(min-width: 1000px)" />
-					<img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ `${fields.backgroundImage.url}?q=60&w=500`} alt={ fields.backgroundImage.label } loading="lazy" />
+					<img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+						src={ `${fields.backgroundImage.url}?q=60&w=500`}
+						alt={ fields.backgroundImage.label }
+						loading="lazy" />
 				</picture>
 			</div>
 		</section>
@@ -66,4 +65,4 @@ const Module: FC<Props> = ({ fields }) => {
 
 }
 
-export default Module
+export default Hero

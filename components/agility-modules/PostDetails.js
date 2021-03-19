@@ -41,7 +41,7 @@ const PostDetails = ({ dynamicPageItem }) => {
           />
         </div>
         <div className="pl-2">
-          <p className="font-medium">{author}</p>
+          <p className="font-medium">{author.name}</p>
           <p className="text-gray-400 text-sm">Published: {dateStr}</p>
         </div>
       </div>

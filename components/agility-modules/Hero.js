@@ -5,7 +5,7 @@ import Image from "next/image";
 const Hero = ({ module }) => {
   const { fields } = module;
   return (
-    <section className="container mx-auto px-6 mb-20 text-center md:flex md:flex-row-reverse md:items-center">
+    <section className="container mx-auto px-6 mb-16 md:mb-6 text-center md:flex md:flex-row-reverse md:items-center">
       <div className="md:flex-1 md:p-6">
         <Image
           src={fields.heroImage.url}
@@ -18,13 +18,14 @@ const Hero = ({ module }) => {
         <p className="font-medium text-indigo-600 md:border-l-4 pl-2 mb-2">
           {fields.kicker}
         </p>
-        <h1 className="text-4xl font-bold mb-12">{fields.title}</h1>
+        <h1 className="text-4xl font-bold mb-4">{fields.title}</h1>
+        <p className="mb-8 text-gray-500">{fields.announcement}</p>
         <Link href="[.../slug]" as={fields.primaryCTA.href}>
           <a
             title={fields.primaryCTA.text}
             href={fields.primaryCTA.href}
             target={fields.primaryCTA.target}
-            className="px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+            className="inline-block px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
           >
             {fields.primaryCTA.text}
           </a>

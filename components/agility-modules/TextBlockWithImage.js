@@ -21,7 +21,7 @@ const TextBlockWithImage = ({ module }) => {
             />
           </div>
           <div className="flex-1 md:pr-14">
-            <p className="text-indigo-700 font-medium uppercase mb-2">
+            <p className="text-indigo-700 font-medium text-sm uppercase">
               {fields.tagline}
             </p>
             <h2 className="text-4xl font-bold">{fields.title}</h2>
@@ -42,7 +42,7 @@ const TextBlockWithImage = ({ module }) => {
         // display image on left side
         <div className="flex flex-col md:flex-row mb-16 md:items-center">
           <div className="order-2 md:flex-1 md:pl-14">
-            <p className="text-indigo-700 font-medium uppercase mb-2">
+            <p className="text-indigo-700 font-medium text-sm uppercase">
               {fields.tagline}
             </p>
             <h2 className="text-4xl font-bold">{fields.title}</h2>

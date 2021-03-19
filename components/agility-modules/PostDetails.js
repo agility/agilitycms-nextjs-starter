@@ -35,7 +35,7 @@ const PostDetails = ({ dynamicPageItem }) => {
         <div>
           <img
             src={
-              author?.fields?.image
+              author?.fields.image
                 ? author.fields.image.url
                 : "https://picsum.photos/200"
             }

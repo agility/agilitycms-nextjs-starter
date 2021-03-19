@@ -7,13 +7,13 @@ const Metrics = ({ module }) => {
       <h3 className="font-bold text-3xl mb-6">{fields.title}</h3>
       <p className="text-gray-50 md:max-w-lg md:m-auto">{fields.text}</p>
       <div className="mt-8 md:grid md:grid-cols-3 md:max-w-4xl md:m-auto md:mt-12">
-        <div>
+        <div className="mb-12 md:m-0">
           <h3 className="font-bold text-3xl mb-2 tracking-wider">
             {fields.metric1}
           </h3>
           <p>{fields.metric1Title}</p>
         </div>
-        <div>
+        <div className="mb-12 md:m-0">
           <h3 className="font-bold text-3xl mb-2 tracking-wider">
             {fields.metric2}
           </h3>

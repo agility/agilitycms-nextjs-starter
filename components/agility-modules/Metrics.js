@@ -1,6 +1,7 @@
 import React from "react";
 
 const Metrics = ({ module }) => {
+  // get module fields
   const { fields } = module;
   return (
     <div className="bg-indigo-600 text-center text-white py-16 px-6 mb-8">

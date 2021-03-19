@@ -17,10 +17,6 @@ const allModules = [
   { name: "RichTextArea", module: RichTextArea },
 ];
 
-/**
- * Find the component for a module by name.
- * @param moduleName
- */
 export const getModule = (moduleName) => {
   if (!moduleName) return null;
   const obj = allModules.find(

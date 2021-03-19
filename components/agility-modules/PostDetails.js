@@ -3,14 +3,14 @@ import { renderHTML } from "@agility/nextjs";
 import Image from "next/image";
 
 const PostDetails = ({ dynamicPageItem }) => {
-  // get fields for post
+  // get post fields
   const post = dynamicPageItem.fields;
 
   // get category
   const category = post.category?.fields.title || "Uncategorized";
 
   // get author
-  const author = post?.author;
+  const author = post?.author || "Unknown";
 
   // set up date string
   let dateStr = null;
@@ -41,9 +41,7 @@ const PostDetails = ({ dynamicPageItem }) => {
           />
         </div>
         <div className="pl-2">
-          <p className="font-medium">
-            {author ? author.fields.name : "Unknown"}
-          </p>
+          <p className="font-medium">{author}</p>
           <p className="text-gray-400 text-sm">Published: {dateStr}</p>
         </div>
       </div>

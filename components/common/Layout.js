@@ -50,11 +50,13 @@ function Layout(props) {
       </Head>
       <PreviewBar {...props} />
 
-      <main>
+      <div className="flex flex-col min-h-screen">
         <SiteHeader {...props} />
-        <AgilityPageTemplate {...props} />
+        <main className="flex-grow">
+          <AgilityPageTemplate {...props} />
+        </main>
         <SiteFooter {...props} />
-      </main>
+      </div>
     </>
   );
 }

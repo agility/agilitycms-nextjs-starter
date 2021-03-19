@@ -5,16 +5,16 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
 
-  // links
+  // get links
   const links = header.links;
 
-  // primary button
+  // get primary button
   const primaryButton = header.contentItem.fields.primaryButton;
 
-  // sitename
+  // get sitename
   const siteName = header.contentItem?.fields.siteName || "Website Name";
 
-  // logo
+  // get logo
   const logo = header.contentItem?.fields.logo || null;
 
   // open / close mobile nav
@@ -252,6 +252,7 @@ SiteHeader.getCustomInitialProps = async function ({
     if (console) console.error("Could not load nested sitemap.", error);
   }
 
+  // return clean object...
   return {
     contentItem,
     links,

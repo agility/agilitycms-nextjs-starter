@@ -8,10 +8,13 @@ const SiteFooter = ({ globalData }) => {
   // get footer data
   const { footer } = globalData;
 
+  // get site name
   const siteName = footer?.siteName || "Website Name";
 
+  // get footer logo
   const footerLogo = footer?.footerLogo;
 
+  // get quick links
   const quickLinks = footer?.quickLinks;
 
   // set up date

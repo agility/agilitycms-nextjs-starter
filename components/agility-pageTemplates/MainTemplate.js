@@ -5,7 +5,7 @@ import { getModule } from "components/agility-modules";
 
 const MainTemplate = (props) => {
   return (
-    <div className="">
+    <div>
       <ContentZone name="MainContentZone" {...props} getModule={getModule} />
     </div>
   );

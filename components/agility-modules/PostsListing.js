@@ -1,5 +1,4 @@
 import React from "react";
-import truncate from "truncate-html";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,6 +11,24 @@ const PostsListing = ({ module, customData }) => {
 
   // set href
   let href = "/pages/[...slug]";
+
+  // if there are no posts, display message on frontend
+  if (posts.length <= 0) {
+    return (
+      <div className="mt-44 px-6 flex flex-col items-center justify-center">
+        <h1 className="text-3xl text-center font-bold">
+          We're sorry, there are no posts available yet.
+        </h1>
+        <div className="my-6">
+          <Link href={href} as="/home">
+            <a className="px-4 py-2 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out">
+              Return Home
+            </a>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="my-12 md:my-18 lg:my-20">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Hero = ({ module }) => {
+  // get module fields
   const { fields } = module;
   return (
     <section className="container mx-auto px-6 mb-16 md:mb-6 text-center md:flex md:flex-row-reverse md:items-center">

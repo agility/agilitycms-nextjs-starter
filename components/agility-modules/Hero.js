@@ -21,6 +21,7 @@ const Hero = ({ module }) => {
         <h1 className="text-4xl font-bold mb-12">{fields.title}</h1>
         <Link href="[.../slug]" as={fields.primaryCTA.href}>
           <a
+            title={fields.primaryCTA.text}
             href={fields.primaryCTA.href}
             target={fields.primaryCTA.target}
             className="px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"

@@ -34,11 +34,7 @@ const PostDetails = ({ dynamicPageItem }) => {
       <div className="flex items-center mt-2 mb-4">
         <div>
           <img
-            src={
-              author?.fields.image
-                ? author.fields.image.url
-                : "https://picsum.photos/200"
-            }
+            src={author ? author.fields.image.url : "https://picsum.photos/200"}
             width="60"
             height="60"
             className="rounded-full"
@@ -46,7 +42,7 @@ const PostDetails = ({ dynamicPageItem }) => {
         </div>
         <div className="pl-2">
           <p className="font-medium">
-            {author?.fields?.name ? author.fields.name : "Unknown"}
+            {author ? author.fields.name : "Unknown"}
           </p>
           <p className="text-gray-400 text-sm">Published: {dateStr}</p>
         </div>

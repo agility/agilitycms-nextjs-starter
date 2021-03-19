@@ -27,7 +27,7 @@ const TextBlockWithImage = ({ module }) => {
             </p>
             <h2 className="text-4xl font-bold">{fields.title}</h2>
             <p className="mt-4 mb-12">{fields.content}</p>
-            {fields.primaryButton ? (
+            {fields.primaryButton && (
               <div className="mb-8">
                 <Link href={href} as={fields.primaryButton?.href}>
                   <a
@@ -38,7 +38,7 @@ const TextBlockWithImage = ({ module }) => {
                   </a>
                 </Link>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       ) : (
@@ -50,16 +50,18 @@ const TextBlockWithImage = ({ module }) => {
             </p>
             <h2 className="text-4xl font-bold">{fields.title}</h2>
             <p className="mt-4 mb-12">{fields.content}</p>
-            <div className="mb-8">
-              <Link href={href} as={fields.primaryButton?.href}>
-                <a
-                  title={fields.primaryButton?.text}
-                  className="inline-block mb-8 p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-                >
-                  {fields.primaryButton?.text}
-                </a>
-              </Link>
-            </div>
+            {fields.primaryButton && (
+              <div className="mb-8">
+                <Link href={href} as={fields.primaryButton?.href}>
+                  <a
+                    title={fields.primaryButton?.text}
+                    className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                  >
+                    {fields.primaryButton?.text}
+                  </a>
+                </Link>
+              </div>
+            )}
           </div>
           <div className="order-1 mb-4 h-64 w-full relative  md:h-80 md:flex-1">
             <Image

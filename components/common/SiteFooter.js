@@ -10,9 +10,9 @@ const SiteFooter = ({ globalData }) => {
 
   const siteName = footer?.siteName || "Website Name";
 
-  const footerLogo = footer.footerLogo;
+  const footerLogo = footer?.footerLogo;
 
-  const quickLinks = footer.quickLinks;
+  const quickLinks = footer?.quickLinks;
 
   // set up date
   const date = new Date();
@@ -29,17 +29,19 @@ const SiteFooter = ({ globalData }) => {
       <div className="container mx-auto p-6">
         <Link href="/" as="/">
           <a className="cursor-pointer">
-            <Image
-              src={footerLogo.url}
-              alt={footerLogo.label}
-              width="60"
-              height="60"
-            />
+            {footerLogo && (
+              <Image
+                src={footerLogo.url}
+                alt={footerLogo.label}
+                width="60"
+                height="60"
+              />
+            )}
+            <h3 className="text-2xl font-bold mt-2 mb-6 tracking-wider">
+              {siteName}
+            </h3>
           </a>
         </Link>
-        <h3 className="text-2xl font-bold mt-2 mb-6 tracking-wider">
-          {siteName}
-        </h3>
         <ul className="sm:flex sm:max-w-lg sm:justify-center sm:mx-auto">
           {quickLinks.map((link, index) => (
             <li key={index} className="my-4 sm:my-0 sm:mx-4">
@@ -101,11 +103,8 @@ SiteFooter.getCustomInitialProps = async function ({
 
   //return a clean object...
   return {
-    footerLogo: contentItem.fields.footerLogo,
+    footerLogo: contentItem.fields?.footerLogo || null,
     siteName: contentItem.fields.siteName,
-    facebookURL: contentItem.fields.facebookURL,
-    twitterURL: contentItem.fields.twitterURL,
-    youTubeURL: contentItem.fields.youTubeURL,
     quickLinks: contentItem.fields.quickLinks.map((link) => link.fields.link),
   };
 };

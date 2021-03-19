@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TextBlockWithImage = ({ module }) => {
+  // get module fields
   const { fields } = module;
   // set href
   const href = "[.../slug]";
@@ -26,16 +27,18 @@ const TextBlockWithImage = ({ module }) => {
             </p>
             <h2 className="text-4xl font-bold">{fields.title}</h2>
             <p className="mt-4 mb-12">{fields.content}</p>
-            <div className="mb-8">
-              <Link href={href} as={fields.primaryButton.href}>
-                <a
-                  title={fields.primaryButton.text}
-                  className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-                >
-                  {fields.primaryButton.text}
-                </a>
-              </Link>
-            </div>
+            {fields.primaryButton ? (
+              <div className="mb-8">
+                <Link href={href} as={fields.primaryButton?.href}>
+                  <a
+                    title={fields.primaryButton?.text}
+                    className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                  >
+                    {fields.primaryButton?.text}
+                  </a>
+                </Link>
+              </div>
+            ) : null}
           </div>
         </div>
       ) : (
@@ -48,12 +51,12 @@ const TextBlockWithImage = ({ module }) => {
             <h2 className="text-4xl font-bold">{fields.title}</h2>
             <p className="mt-4 mb-12">{fields.content}</p>
             <div className="mb-8">
-              <Link href={href} as={fields.primaryButton.href}>
+              <Link href={href} as={fields.primaryButton?.href}>
                 <a
-                  title={fields.primaryButton.text}
-                  className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+                  title={fields.primaryButton?.text}
+                  className="inline-block mb-8 p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
                 >
-                  {fields.primaryButton.text}
+                  {fields.primaryButton?.text}
                 </a>
               </Link>
             </div>

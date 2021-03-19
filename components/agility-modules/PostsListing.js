@@ -22,7 +22,7 @@ const PostsListing = ({ module, customData }) => {
       <div className="container mx-auto px-6 md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {posts.map((post, index) => (
           <div className="mb-8" key={index}>
-            <Link href="[.../slug]" as={post.url}>
+            <Link href={href} as={post.url}>
               <a className="hover:cursor-pointer">
                 <Image
                   src={post.imageSrc}

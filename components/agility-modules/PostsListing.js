@@ -80,6 +80,7 @@ PostsListing.getCustomInitialProps = async ({
   channelName,
   languageCode,
 }) => {
+  // set up api
   const api = agility;
 
   try {
@@ -101,32 +102,26 @@ PostsListing.getCustomInitialProps = async ({
       languageCode,
     });
 
-    // get authors
-    let authors = await api.getContentList({
-      referenceName: "authors",
-      languageCode,
-    });
-
     // resolve dynamic urls
     const dynamicUrls = resolvePostUrls(sitemap, rawPosts);
 
     const posts = rawPosts.map((post) => {
-      // get categoryID
+      // categoryID
       const categoryID = post.fields.category?.contentid;
 
       // find category
       const category = categories?.find((c) => c.contentID == categoryID);
 
-      // get date
+      // date
       const date = new Date(post.fields.date).toLocaleDateString();
 
-      // get url
+      // url
       const url = dynamicUrls[post.contentID] || "#";
 
-      // get image src
-      let imageSrc = post.fields.image?.url || null;
+      // post image src
+      let imageSrc = post.fields.image.url;
 
-      // get image alt
+      // post image alt
       let imageAlt = post.fields.image?.label || null;
 
       return {

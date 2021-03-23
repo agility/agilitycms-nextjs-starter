@@ -6,24 +6,6 @@ const TextBlockWithImage = ({ module }) => {
   // get module fields
   const { fields } = module;
 
-  // image position
-  const imagePosition = fields.imagePosition;
-
-  // image
-  const image = fields.image;
-
-  // tagline
-  const tagline = fields.tagline;
-
-  // title
-  const title = fields.title;
-
-  // content
-  const content = fields.content;
-
-  // primary button
-  const primaryButton = fields.primaryButton;
-
   // set up href for internal links
   const href = "/pages/[...slug]";
 
@@ -32,8 +14,8 @@ const TextBlockWithImage = ({ module }) => {
       <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
         <div className="md:w-6/12 flex-shrink-0 relative">
           <Image
-            src={image.url}
-            alt={image.label}
+            src={fields.image.url}
+            alt={fields.image.label}
             width="768"
             height="512"
             className="rounded"
@@ -41,27 +23,27 @@ const TextBlockWithImage = ({ module }) => {
         </div>
         <div
           className={`md:w-6/12 mt-16 md:mt-0 ${
-            imagePosition != "right"
+            fields.imagePosition != "right"
               ? `md:ml-12 lg:ml-16 md:order-last`
               : `md:mr-12 lg:mr-16 md:order-first`
           }`}
         >
           <div className="g:py-8 text-center md:text-left">
-            {tagline && (
+            {fields.tagline && (
               <h5 className="font-bold text-indigo-500 text-sm text-center md:text-left uppercase">
-                {tagline}
+                {fields.tagline}
               </h5>
             )}
             <h2 className="text-4xl md:text-3xl lg:text-5xl font-black tracking-wide text-center mt-4 lg:leading-tight md:text-left">
-              {title}
+              {fields.title}
             </h2>
             <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-500">
-              {content}
+              {fields.content}
             </p>
-            {primaryButton && (
+            {fields.primaryButton && (
               <button className="mt-8 md:mt-8 px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-                <Link href={href} as={primaryButton.href}>
-                  <a>{primaryButton.text}</a>
+                <Link href={href} as={fields.primaryButton.href}>
+                  <a>{fields.primaryButton.text}</a>
                 </Link>
               </button>
             )}

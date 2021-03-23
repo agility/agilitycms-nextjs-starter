@@ -3,10 +3,10 @@ import { renderHTML } from "@agility/nextjs";
 import Image from "next/image";
 
 const PostDetails = ({ dynamicPageItem }) => {
-  // get post fields
+  // post fields
   const post = dynamicPageItem.fields;
 
-  // get category
+  // category
   const category = post.category?.fields.title || "Uncategorized";
 
   // format date

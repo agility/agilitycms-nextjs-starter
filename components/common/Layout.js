@@ -1,13 +1,10 @@
 import { getPageTemplate } from "components/agility-pageTemplates";
 import PreviewBar from "./PreviewBar";
+import SEO from "./SEO";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import LoadingWidget from "./LoadingWidget";
-
 import { useRouter } from "next/router";
-
-import Head from "next/head";
-
 import Error from "next/error";
 
 function Layout(props) {
@@ -38,18 +35,13 @@ function Layout(props) {
 
   return (
     <>
-      <Head>
-        <title>{sitemapNode?.title} - Agility CMS Sample Blog</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content={page.seo.metaDescription} />
-        <meta name="generator" content="Agility CMS" />
-        <meta name="agility_timestamp" content={new Date().toLocaleString()} />
-        {dynamicPageItem?.seo?.ogImage && (
-          <meta property="og:image" content={dynamicPageItem.seo.ogImage} />
-        )}
-      </Head>
+      <SEO
+        title={sitemapNode?.title}
+        description={page.seo.metaDescription}
+        keywords={page.seo.metaKeywords}
+        metaHTML={page.seo.metaHTML}
+      />
       <PreviewBar {...props} />
-
       <div className="flex flex-col min-h-screen">
         <SiteHeader {...props} />
         <main className="flex-grow">

@@ -3,13 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const PostsListing = ({ module, customData }) => {
-  // get module fields
-  const { fields } = module;
-
   // get posts
   const { posts } = customData;
 
-  // set href
+  // set up href for internal links
   let href = "/pages/[...slug]";
 
   // if there are no posts, display message on frontend
@@ -31,35 +28,37 @@ const PostsListing = ({ module, customData }) => {
   }
 
   return (
-    <div className="my-12 md:my-18 lg:my-20">
-      <div className="text-center max-w-2xl m-auto mb-10 px-6">
-        <h1 className="text-4xl font-bold mb-4">{fields.title}</h1>
-        <p>{fields.subtitle}</p>
-      </div>
-      <div className="container mx-auto px-6 md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-        {posts.map((post, index) => (
-          <div className="mb-8" key={index}>
-            <Link href={href} as={post.url}>
-              <a className="hover:cursor-pointer">
-                <Image
-                  src={post.imageSrc}
-                  alt={post.imageAlt}
-                  layout="responsive"
-                  width="1000"
-                  height="1000"
-                  className="rounded-md object-contain"
-                />
-                <p className="text-gray-500 font-medium text-sm my-2">
-                  {post.category ? post.category : "Uncategorized"}
-                </p>
-                <p className="text-xl font-bold">{post.title}</p>
-                <p className="inline-block px-4 py-2 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out">
-                  {fields.readMoreLabel}
-                </p>
+    <div className="relative px-8">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, index) => (
+            <Link href={href} as={post.url} key={index}>
+              <a>
+                <div className="flex-col group mb-8 md:mb-0">
+                  <div className="relative h-64">
+                    <Image
+                      src={post.imageSrc}
+                      alt={post.imageAlt}
+                      className="object-cover object-center rounded-t-lg"
+                      layout="fill"
+                    />
+                  </div>
+                  <div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
+                    <div className="uppercase text-indigo-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-indigo-500 after:w-8">
+                      {post.category}
+                    </div>
+                    <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+                      {post.date}
+                    </div>
+                    <h2 className="text-gray-900 mt-1 font-black text-2xl group-hover:text-indigo-500 transition duration-300">
+                      {post.title}
+                    </h2>
+                  </div>
+                </div>
               </a>
             </Link>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -117,14 +116,11 @@ PostsListing.getCustomInitialProps = async ({
       // get categoryID
       const categoryID = post.fields.category?.contentid;
 
-      // get authorID
-      const authorID = post.fields.author?.contentid;
-
       // find category
       const category = categories?.find((c) => c.contentID == categoryID);
 
-      // find author
-      const author = authors?.find((a) => a.contentID == authorID);
+      // get date
+      const date = new Date(post.fields.date).toLocaleDateString();
 
       // get url
       const url = dynamicUrls[post.contentID] || "#";
@@ -138,9 +134,9 @@ PostsListing.getCustomInitialProps = async ({
       return {
         contentID: post.contentID,
         title: post.fields.title,
+        date,
         url,
-        category: category?.fields.title || null,
-        author: author?.fields.name || null,
+        category: category?.fields.title || "Uncategorized",
         imageSrc,
         imageAlt,
       };

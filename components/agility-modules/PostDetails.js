@@ -9,50 +9,33 @@ const PostDetails = ({ dynamicPageItem }) => {
   // get category
   const category = post.category?.fields.title || "Uncategorized";
 
-  // get author
-  const author = post?.author || "Unknown";
-
-  // set up date string
-  let dateStr = null;
-
-  // try to format date with current languageCode
-  try {
-    dateStr = newDate(post.date).toLocaleDateString(languageCode);
-  } catch (e) {
-    dateStr = new Date(post.date).toLocaleDateString();
-  }
+  // format date
+  const dateStr = new Date(post.date).toLocaleDateString();
 
   return (
-    <div className="max-w-2xl mx-auto my-12 md:my-18 lg:my-20 px-6">
-      <Image
-        src={post.image.url}
-        alt={post.title}
-        width="1000"
-        height="1000"
-        className="rounded-md"
-      />
-      <div className="flex items-center mt-2 mb-8">
-        <div>
-          <img
-            src={author ? author.fields.image.url : "https://picsum.photos/200"}
-            width="50"
-            height="50"
-            className="rounded-md"
+    <div className="relative px-8">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="h-64 md:h-96 relative">
+          <Image
+            src={post.image.url}
+            className="object-cover object-center rounded-lg"
+            layout="fill"
           />
         </div>
-        <div className="pl-2">
-          <p className="font-medium">{author.fields.name}</p>
-          <p className="text-gray-400 text-sm">Published: {dateStr}</p>
+        <div className="max-w-2xl mx-auto mt-4">
+          <div className="uppercase text-indigo-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-indigo-500 after:w-8">
+            {category}
+          </div>
+          <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+            {dateStr}
+          </div>
+          <h1 className="text-4xl font-bold my-6">{post.title}</h1>
+          <div
+            className="prose max-w-full"
+            dangerouslySetInnerHTML={renderHTML(post.content)}
+          />
         </div>
       </div>
-      <p className="text-indigo-700 font-medium text-sm uppercase mb-2">
-        {category}
-      </p>
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-      <div
-        className="prose max-w-full"
-        dangerouslySetInnerHTML={renderHTML(post.content)}
-      />
     </div>
   );
 };

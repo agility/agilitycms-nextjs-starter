@@ -5,18 +5,6 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
 
-  // get links
-  const links = header.links;
-
-  // get primary button
-  const primaryButton = header.contentItem.fields.primaryButton;
-
-  // get sitename
-  const siteName = header.contentItem?.fields.siteName || "Website Name";
-
-  // get logo
-  const logo = header.contentItem?.fields.logo || null;
-
   // open / close mobile nav
   const [open, setOpen] = useState(false);
 
@@ -24,23 +12,31 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
   let href = "/pages/[...slug]";
 
   if (!header) {
-    return <header>No Header</header>;
+    return (
+      <header className="relative p-8 text-center">
+        <p className="text-gray-400 font-bold">No Header Available</p>
+      </header>
+    );
   }
 
   return (
-    <header className="relative container mx-auto bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+    <header className="relative w-full mx-auto bg-white px-8">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           <div className="lg:w-0 lg:flex-1">
             <Link href="/" as="/">
               <a className="flex">
-                {logo && (
+                {header.logo ? (
                   <img
                     className="h-8 w-auto sm:h-10"
-                    src={logo.url}
-                    alt={logo.label}
-                    title={siteName}
+                    src={header.logo.url}
+                    alt={header.logo.label}
+                    title={header.siteName}
                   />
+                ) : (
+                  <h3 className="text-xl font-bold text-black hover:text-indigo-500">
+                    {header.siteName}
+                  </h3>
                 )}
               </a>
             </Link>
@@ -70,7 +66,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             </button>
           </div>
           <nav className="hidden md:flex space-x-10">
-            {links.map((navitem, index) => {
+            {header.links.map((navitem, index) => {
               return (
                 <Link href={href} key={`mobile-${index}`} as={navitem.path}>
                   <a className="text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150">
@@ -80,32 +76,21 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               );
             })}
           </nav>
-          <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
-            {primaryButton && (
+          {header.primaryButton && (
+            <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
               <span className="inline-flex rounded-md shadow-sm">
                 <a
-                  href={primaryButton.href}
-                  target={primaryButton.target}
+                  href={header.primaryButton.href}
+                  target={header.primaryButton.target}
                   className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
                 >
-                  {primaryButton.text}
+                  {header.primaryButton.text}
                 </a>
               </span>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* <!--
-    	Mobile menu, show / hide based on mobile menu state.
-
-    		Entering: "duration-200 ease-out"
-    	From: "opacity-0 scale-95"
-    	To: "opacity-100 scale-100"
-    	Leaving: "duration-100 ease-in"
-    	From: "opacity-100 scale-100"
-    	To: "opacity-0 scale-95"
-    	--> */}
 
       <div
         className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-20"
@@ -116,12 +101,12 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             <div className="pt-5 pb-6 px-5 space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  {logo && (
+                  {header.logo && (
                     <img
                       className="h-8 w-auto sm:h-10"
-                      src={logo.url}
-                      alt={logo.label}
-                      title={siteName}
+                      src={header.logo.url}
+                      alt={lheader.ogo.label}
+                      title={header.siteName}
                     />
                   )}
                 </div>
@@ -152,7 +137,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               </div>
               <div>
                 <nav className="grid gap-y-8">
-                  {links.map((navitem, index) => {
+                  {header.links.map((navitem, index) => {
                     return (
                       <Link key={`nav-${index}`} href={href} as={navitem.path}>
                         <a
@@ -187,13 +172,13 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
 
             <div className="space-y-6 p-2">
               <span className="w-full flex rounded-md shadow-sm">
-                {header.contentItem.fields.primaryCTA && (
+                {header.primaryButton && (
                   <a
-                    href={header.contentItem.fields.primaryCTA.href}
-                    target={header.contentItem.fields.primaryCTA.target}
+                    href={header.primaryButton.href}
+                    target={header.primaryButton.target}
                     className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
                   >
-                    {header.contentItem.fields.primaryCTA.text}
+                    {header.primaryButton.text}
                   </a>
                 )}
               </span>
@@ -210,20 +195,29 @@ SiteHeader.getCustomInitialProps = async function ({
   languageCode,
   channelName,
 }) {
+  // set up api
   const api = agility;
 
+  // set up content item
   let contentItem = null;
+
+  // set up links
   let links = [];
 
+  // try to fetch our site header
   try {
-    //get the site header
-    let contentItemList = await api.getContentList({
+    let header = await api.getContentList({
       referenceName: "siteheader",
       languageCode: languageCode,
     });
 
-    if (contentItemList && contentItemList.length > 0) {
-      contentItem = contentItemList[0];
+    // if we have a header, grab the content item
+    if (header && header.length > 0) {
+      contentItem = header[0];
+
+      console.log(contentItem);
+
+      // else return null
     } else {
       return null;
     }
@@ -254,6 +248,9 @@ SiteHeader.getCustomInitialProps = async function ({
 
   // return clean object...
   return {
+    siteName: contentItem.fields?.siteName,
+    logo: contentItem.fields.logo || null,
+    primaryButton: contentItem.fields.primaryButton || null,
     contentItem,
     links,
   };

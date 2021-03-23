@@ -1,70 +1,78 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 import Image from "next/image";
-
-import { expandLinkedList } from "@agility/nextjs";
+import { FaTwitter, FaInstagram, FaSlack } from "react-icons/fa";
 
 const SiteFooter = ({ globalData }) => {
   // get footer data
   const { footer } = globalData;
 
-  // get site name
-  const siteName = footer?.siteName || "Website Name";
-
-  // get footer logo
-  const footerLogo = footer?.footerLogo;
-
-  // get quick links
-  const quickLinks = footer?.quickLinks;
-
-  // set up date
-  const date = new Date();
-
-  // set href
-  let href = "/pages/[...slug]";
-
-  if (footer == null) {
-    return <footer>No footer</footer>;
+  if (!footer) {
+    return (
+      <footer className="relative p-8 text-center">
+        <p className="text-gray-400 font-bold">No Footer Available</p>
+      </footer>
+    );
   }
 
   return (
-    <footer className="text-center">
-      <div className="container mx-auto p-6">
-        <Link href="/" as="/">
-          <a className="cursor-pointer">
-            {footerLogo && (
-              <Image
-                src={footerLogo.url}
-                alt={footerLogo.label}
-                width="60"
-                height="60"
-              />
-            )}
-            <h3 className="text-2xl font-bold mt-2 mb-6 tracking-wider">
-              {siteName}
-            </h3>
+    <footer className="relative px-8 mt-24 mb-4">
+      <div className="max-w-screen-xl mx-auto md:flex md:items-center">
+        <div className="text-center mb-4 md:mb-0 md:text-left flex-shrink-0 relative">
+          <a
+            href="https://www.agilitycms.com"
+            target="_blank"
+            title="Agility CMS"
+          >
+            <Image
+              src="/assets/agility-logo.png"
+              alt="Agility CMS"
+              width="90"
+              height="24"
+            />
           </a>
-        </Link>
-        <ul className="sm:flex sm:max-w-lg sm:justify-center sm:mx-auto">
-          {quickLinks.map((link, index) => (
-            <li key={index} className="my-4 sm:my-0 sm:mx-4">
-              <Link href={href} as={link.href}>
+        </div>
+        <div className="flex-grow mb-4 md:mb-0">
+          <p className="text-center md:text-left text-gray-400 text-xs md:ml-8 md:max-w-3xl">
+            {footer.footnote}
+          </p>
+        </div>
+        <div className="flex-1-grow">
+          <ul className="flex justify-center md:justify-start">
+            {footer.twitter && (
+              <li>
                 <a
-                  title={link.text}
-                  className="font-bold hover:text-indigo-700"
+                  href={footer.twitter.href}
+                  title={footer.twitter.text}
+                  target={footer.twitter.target}
                 >
-                  {link.text}
+                  <FaTwitter className="text-xl md:ml-8 text-indigo-600 hover:text-indigo-500" />
                 </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="bg-indigo-600 py-4 px-6">
-        <p className="text-white text-xs">
-          &#169; &nbsp;
-          {`Copyright, ${siteName} ${date.getFullYear()}`}
-        </p>
+              </li>
+            )}
+            {footer.instagram && (
+              <li>
+                <a
+                  href={footer.instagram.href}
+                  title={footer.instagram.text}
+                  target={footer.instagram.target}
+                >
+                  <FaInstagram className="text-xl ml-4 text-indigo-600 hover:text-indigo-500" />
+                </a>
+              </li>
+            )}
+            {footer.slack && (
+              <li>
+                <a
+                  href={footer.slack.href}
+                  title={footer.slack.text}
+                  target={footer.slack.target}
+                >
+                  <FaSlack className="text-xl ml-4 text-indigo-600 hover:text-indigo-500" />
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     </footer>
   );
@@ -75,40 +83,38 @@ SiteFooter.getCustomInitialProps = async function ({
   languageCode,
   channelName,
 }) {
+  // set up api
   const api = agility;
 
+  // set up our content item
   let contentItem = null;
 
+  // try to fetch our site footer
   try {
-    //get the site footer
-    let contentItemList = await api.getContentList({
+    let footer = await api.getContentList({
       referenceName: "sitefooter",
       languageCode: languageCode,
     });
 
-    if (contentItemList?.length > 0) {
-      contentItem = contentItemList[0];
+    // if we have a footer, grab the content item
+    if (footer && footer.length > 0) {
+      contentItem = footer[0];
 
-      // resolve quick links
-      contentItem = await expandLinkedList({
-        agility,
-        contentItem,
-        languageCode,
-        fieldName: "quickLinks",
-        sortIDField: "quickLinks_SortIdField",
-      });
+      // else return null
     } else {
       return null;
     }
   } catch (error) {
     if (console) console.error("Could not load global footer item.", error);
+    return null;
   }
 
-  //return a clean object...
+  // return a clean object...
   return {
-    footerLogo: contentItem.fields?.footerLogo || null,
-    siteName: contentItem.fields.siteName,
-    quickLinks: contentItem.fields.quickLinks.map((link) => link.fields.link),
+    footnote: contentItem.fields?.footnote,
+    twitter: contentItem.fields?.twitter,
+    instagram: contentItem.fields?.instagram,
+    slack: contentItem.fields?.slack,
   };
 };
 

@@ -1,6 +1,5 @@
 import RichTextArea from "./RichTextArea";
-import Hero from "./Hero";
-import Metrics from "./Metrics";
+import FeaturedPost from "./FeaturedPost";
 import PostsListing from "./PostsListing";
 import PostDetails from "./PostDetails";
 import TextBlockWithImage from "./TextBlockWithImage";
@@ -9,9 +8,8 @@ import TextBlockWithImage from "./TextBlockWithImage";
  * All of the Agility Module components that are in use in this site.
  */
 const allModules = [
-  { name: "Hero", module: Hero },
-  { name: "Metrics", module: Metrics },
   { name: "TextBlockWithImage", module: TextBlockWithImage },
+  { name: "FeaturedPost", module: FeaturedPost },
   { name: "PostsListing", module: PostsListing },
   { name: "PostDetails", module: PostDetails },
   { name: "RichTextArea", module: RichTextArea },

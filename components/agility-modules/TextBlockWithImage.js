@@ -5,75 +5,69 @@ import Link from "next/link";
 const TextBlockWithImage = ({ module }) => {
   // get module fields
   const { fields } = module;
-  // set href
-  const href = "[.../slug]";
+
+  // image position
+  const imagePosition = fields.imagePosition;
+
+  // image
+  const image = fields.image;
+
+  // tagline
+  const tagline = fields.tagline;
+
+  // title
+  const title = fields.title;
+
+  // content
+  const content = fields.content;
+
+  // primary button
+  const primaryButton = fields.primaryButton;
+
+  // set up href for internal links
+  const href = "/pages/[...slug]";
+
   return (
-    <div className="container mx-auto px-6 my-12 md:my-18 lg:my-20">
-      {fields.imagePosition === "right" ? (
-        // display image on right side
-        <div className="md:flex md:flex-row-reverse md:items-center mb-16">
-          <div className="flex-1 mb-4 h-64 md:h-80 w-full relative">
-            <Image
-              src={fields.image.url}
-              alt={fields.image.label}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-2xl object-contain"
-            />
-          </div>
-          <div className="flex-1 md:pr-14">
-            <p className="text-indigo-700 font-medium text-sm uppercase">
-              {fields.tagline}
+    <div className="relative px-8">
+      <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
+        <div className="md:w-6/12 flex-shrink-0 relative">
+          <Image
+            src={image.url}
+            alt={image.label}
+            width="768"
+            height="512"
+            className="rounded"
+          />
+        </div>
+        <div
+          className={`md:w-6/12 mt-16 md:mt-0 ${
+            imagePosition != "right"
+              ? `md:ml-12 lg:ml-16 md:order-last`
+              : `md:mr-12 lg:mr-16 md:order-first`
+          }`}
+        >
+          <div className="g:py-8 text-center md:text-left">
+            {tagline && (
+              <h5 className="font-bold text-indigo-500 text-sm text-center md:text-left uppercase">
+                {tagline}
+              </h5>
+            )}
+            <h2 className="text-4xl md:text-3xl lg:text-5xl font-black tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+              {title}
+            </h2>
+            <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-500">
+              {content}
             </p>
-            <h2 className="text-4xl font-bold">{fields.title}</h2>
-            <p className="mt-4 mb-12">{fields.content}</p>
-            {fields.primaryButton && (
-              <div className="mb-8">
-                <Link href={href} as={fields.primaryButton?.href}>
-                  <a
-                    title={fields.primaryButton?.text}
-                    className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-                  >
-                    {fields.primaryButton?.text}
-                  </a>
+            {primaryButton && (
+              <button className="mt-8 md:mt-8 px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                <Link href={href} as={primaryButton.href}>
+                  <a>{primaryButton.text}</a>
                 </Link>
-              </div>
+              </button>
             )}
           </div>
         </div>
-      ) : (
-        // display image on left side
-        <div className="flex flex-col md:flex-row mb-16 md:items-center">
-          <div className="order-2 md:flex-1 md:pl-14">
-            <p className="text-indigo-700 font-medium text-sm uppercase">
-              {fields.tagline}
-            </p>
-            <h2 className="text-4xl font-bold">{fields.title}</h2>
-            <p className="mt-4 mb-12">{fields.content}</p>
-            {fields.primaryButton && (
-              <div className="mb-8">
-                <Link href={href} as={fields.primaryButton?.href}>
-                  <a
-                    title={fields.primaryButton?.text}
-                    className="p-4 bg-indigo-700 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
-                  >
-                    {fields.primaryButton?.text}
-                  </a>
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="order-1 mb-4 h-64 w-full relative  md:h-80 md:flex-1">
-            <Image
-              src={fields.image.url}
-              alt={fields.image.label}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-2xl object-contain shadow-sm"
-            />
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

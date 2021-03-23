@@ -5,11 +5,13 @@ const RichTextArea = ({ module }) => {
   // get module fields
   const { fields } = module;
   return (
-    <div className="max-w-3xl mx-auto my-12 md:my-18 lg:my-20 px-6">
-      <div
-        className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full"
-        dangerouslySetInnerHTML={renderHTML(fields.textblob)}
-      />
+    <div className="relative px-8">
+      <div className="max-w-screen-xl mx-auto my-12 md:mt-18 lg:mt-20">
+        <div
+          className="prose max-w-full mx-auto"
+          dangerouslySetInnerHTML={renderHTML(fields.textblob)}
+        />
+      </div>
     </div>
   );
 };

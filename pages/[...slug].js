@@ -57,11 +57,7 @@ export async function getStaticPaths({ locales, defaultLocale }) {
 
 const AgilityPage = (props) => {
   if (handlePreview()) {
-    return (
-      <div className="relative flex flex-col justify-center items-center h-screen">
-        <LoadingWidget message="Activating preview mode..." />
-      </div>
-    );
+    return <LoadingWidget message="Activating preview mode..." />;
   }
 
   return <Layout {...props} />;

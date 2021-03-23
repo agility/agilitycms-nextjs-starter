@@ -8,7 +8,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // open / close mobile nav
   const [open, setOpen] = useState(false);
 
-  // set href
+  // set up href for internal links
   let href = "/pages/[...slug]";
 
   if (!header) {
@@ -204,8 +204,8 @@ SiteHeader.getCustomInitialProps = async function ({
   // set up links
   let links = [];
 
-  // try to fetch our site header
   try {
+    // try to fetch our site header
     let header = await api.getContentList({
       referenceName: "siteheader",
       languageCode: languageCode,
@@ -214,8 +214,6 @@ SiteHeader.getCustomInitialProps = async function ({
     // if we have a header, grab the content item
     if (header && header.length > 0) {
       contentItem = header[0];
-
-      console.log(contentItem);
 
       // else return null
     } else {
@@ -248,10 +246,9 @@ SiteHeader.getCustomInitialProps = async function ({
 
   // return clean object...
   return {
-    siteName: contentItem.fields?.siteName,
+    siteName: contentItem.fields.siteName,
     logo: contentItem.fields.logo || null,
     primaryButton: contentItem.fields.primaryButton || null,
-    contentItem,
     links,
   };
 };

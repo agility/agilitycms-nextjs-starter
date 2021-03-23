@@ -89,8 +89,8 @@ SiteFooter.getCustomInitialProps = async function ({
   // set up our content item
   let contentItem = null;
 
-  // try to fetch our site footer
   try {
+    // try to fetch our site footer
     let footer = await api.getContentList({
       referenceName: "sitefooter",
       languageCode: languageCode,

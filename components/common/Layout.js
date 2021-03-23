@@ -23,6 +23,7 @@ function Layout(props) {
     return <LoadingWidget message="Loading" />;
   }
 
+  // if page not found, throw 404
   if (notFound === true) {
     return <Error statusCode={404} />;
   }

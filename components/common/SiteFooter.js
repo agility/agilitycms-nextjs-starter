@@ -8,14 +8,14 @@ const SiteFooter = ({ globalData }) => {
 
   if (!footer) {
     return (
-      <footer className="relative p-8 text-center">
+      <footer className="relative px-p-8 text-center">
         <p className="text-gray-400 font-bold">No Footer Available</p>
       </footer>
     );
   }
 
   return (
-    <footer className="relative px-8 py-4 mt-8 bg-gray-100">
+    <footer className="relative px-8 py-6 md:py-4 mt-8 bg-gray-100">
       <div className="max-w-screen-xl mx-auto md:flex md:items-center">
         <div className="text-center mb-4 md:mb-0 md:text-left flex-shrink-0 relative">
           <a
@@ -33,7 +33,7 @@ const SiteFooter = ({ globalData }) => {
         </div>
         {footer.footnote && (
           <div className="flex-grow mb-4 md:mb-0">
-            <p className="text-center md:text-left text-gray-400 text-xs md:ml-8 md:max-w-3xl">
+            <p className="text-center md:text-left text-gray-500 text-xs md:ml-8 md:max-w-3xl">
               {footer.footnote}
             </p>
           </div>

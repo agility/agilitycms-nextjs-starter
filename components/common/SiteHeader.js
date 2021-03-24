@@ -34,7 +34,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                     title={header.siteName}
                   />
                 ) : (
-                  <h3 className="text-xl font-bold text-black hover:text-indigo-500 transition duration-300">
+                  <h3 className="text-xl font-bold text-black hover:text-primary-500 transition duration-300">
                     {header.siteName}
                   </h3>
                 )}
@@ -69,7 +69,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             {header.links.map((navitem, index) => {
               return (
                 <Link href={href} key={`mobile-${index}`} as={navitem.path}>
-                  <a className="text-base leading-6 font-medium text-gray-500 hover:text-indigo-500 focus:outline-none focus:text-indigo-500 transition duration-300">
+                  <a className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 focus:outline-none focus:text-primary-500 transition duration-300">
                     {navitem.title}
                   </a>
                 </Link>
@@ -82,7 +82,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 <a
                   href={header.primaryButton.href}
                   target={header.primaryButton.target}
-                  className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-300"
+                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                 >
                   {header.primaryButton.text}
                 </a>
@@ -146,7 +146,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                         >
                           {/* <!-- Heroicon name: view-grid --> */}
                           <svg
-                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                            className="flex-shrink-0 h-6 w-6 text-primary-600"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -176,7 +176,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                   <a
                     href={header.primaryButton.href}
                     target={header.primaryButton.target}
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-300"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                   >
                     {header.primaryButton.text}
                   </a>

@@ -16,7 +16,7 @@ const PostsListing = ({ module, customData }) => {
         <h1 className="text-3xl text-center font-bold">No posts available.</h1>
         <div className="my-10">
           <Link href={href} as="/home">
-            <a className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-300">
+            <a className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary transition duration-300">
               Return Home
             </a>
           </Link>
@@ -26,7 +26,7 @@ const PostsListing = ({ module, customData }) => {
   }
 
   return (
-    <div className="relative px-8">
+    <div className="relative px-8 mb-12">
       <div className="max-w-screen-xl mx-auto">
         <div className="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, index) => (
@@ -42,13 +42,13 @@ const PostsListing = ({ module, customData }) => {
                     />
                   </div>
                   <div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
-                    <div className="uppercase text-indigo-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-indigo-500 after:w-8">
+                    <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-primary-500 after:w-8">
                       {post.category}
                     </div>
                     <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
                       {post.date}
                     </div>
-                    <h2 className="text-gray-900 mt-1 font-black text-2xl group-hover:text-indigo-500 transition duration-300">
+                    <h2 className="text-gray-900 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
                       {post.title}
                     </h2>
                   </div>

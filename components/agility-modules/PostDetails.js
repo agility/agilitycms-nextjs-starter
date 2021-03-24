@@ -23,7 +23,7 @@ const PostDetails = ({ dynamicPageItem }) => {
           />
         </div>
         <div className="max-w-2xl mx-auto mt-4">
-          <div className="uppercase text-indigo-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-indigo-500 after:w-8">
+          <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-primary-500 after:w-8">
             {category}
           </div>
           <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">

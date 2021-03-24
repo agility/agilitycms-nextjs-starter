@@ -30,22 +30,22 @@ const TextBlockWithImage = ({ module }) => {
         >
           <div className="g:py-8 text-center md:text-left">
             {fields.tagline && (
-              <h5 className="font-bold text-indigo-500 text-sm text-center md:text-left uppercase">
+              <h5 className="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
                 {fields.tagline}
               </h5>
             )}
-            <h2 className="text-4xl md:text-3xl lg:text-5xl font-black tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+            <h2 className="text-4xl font-black md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
               {fields.title}
             </h2>
-            <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-500">
+            <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100">
               {fields.content}
             </p>
             {fields.primaryButton && (
-              <button className="mt-8 md:mt-8 px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-                <Link href={href} as={fields.primaryButton.href}>
-                  <a>{fields.primaryButton.text}</a>
-                </Link>
-              </button>
+              <Link href={href} as={fields.primaryButton.href}>
+                <a className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                  {fields.primaryButton.text}
+                </a>
+              </Link>
             )}
           </div>
         </div>

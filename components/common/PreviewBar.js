@@ -49,12 +49,12 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 
 
 	return (
-		<div className="bg-indigo-600"
+		<div className="bg-primary-600"
 			style={{ display: open ? "auto" : "none" }} >
 			<div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between flex-wrap">
 					<div className="w-0 flex-1 flex items-center">
-						<span className="flex p-2 rounded-lg bg-indigo-800">
+						<span className="flex p-2 rounded-lg bg-primary-800">
 							<img src="https://static.agilitycms.com/brand/agility-triangle-yellow.svg" alt="" className="w-5 h-5" />
 						</span>
 						<p className="ml-3 font-medium text-white truncate">
@@ -69,7 +69,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 
 					{ !isDevelopmentMode &&
 						<div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
-							<button onClick={() => sharePreviewLink()} aria-label="Share Preview" title="Share Preview Link" type="button" className="-mr-1 flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 sm:-mr-2 transition ease-in-out duration-150">
+							<button onClick={() => sharePreviewLink()} aria-label="Share Preview" title="Share Preview Link" type="button" className="-mr-1 flex p-2 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 sm:-mr-2 transition ease-in-out duration-150">
 								{/* <!-- Heroicon name: share --> */}
 								<svg className="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -79,7 +79,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 					}
 
 					<div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
-						<button onClick={() => exitPreview()} aria-label="Exit Preview" title={ isDevelopmentMode ? "Hide Preview Bar" : "Exit Preview Mode"} type="button" className="-mr-1 flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 sm:-mr-2 transition ease-in-out duration-150">
+						<button onClick={() => exitPreview()} aria-label="Exit Preview" title={ isDevelopmentMode ? "Hide Preview Bar" : "Exit Preview Mode"} type="button" className="-mr-1 flex p-2 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 sm:-mr-2 transition ease-in-out duration-150">
 							{/* Heroicon name: x  */}
 							<svg className="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />

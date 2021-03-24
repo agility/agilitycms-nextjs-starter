@@ -15,7 +15,7 @@ const SiteFooter = ({ globalData }) => {
   }
 
   return (
-    <footer className="relative px-8 mt-24 mb-4">
+    <footer className="relative px-8 py-4 mt-8 bg-gray-100">
       <div className="max-w-screen-xl mx-auto md:flex md:items-center">
         <div className="text-center mb-4 md:mb-0 md:text-left flex-shrink-0 relative">
           <a
@@ -47,7 +47,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.twitter.text}
                   target={footer.twitter.target}
                 >
-                  <FaTwitter className="text-xl md:ml-8 text-indigo-600 hover:text-indigo-500" />
+                  <FaTwitter className="text-xl md:ml-8 text-primary-600 hover:text-primary-500" />
                 </a>
               </li>
             )}
@@ -58,7 +58,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.instagram.text}
                   target={footer.instagram.target}
                 >
-                  <FaInstagram className="text-xl ml-4 text-indigo-600 hover:text-indigo-500" />
+                  <FaInstagram className="text-xl ml-4 text-primary-600 hover:text-primary-500" />
                 </a>
               </li>
             )}
@@ -69,7 +69,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.slack.text}
                   target={footer.slack.target}
                 >
-                  <FaSlack className="text-xl ml-4 text-indigo-600 hover:text-indigo-500" />
+                  <FaSlack className="text-xl ml-4 text-primary-600 hover:text-primary-500" />
                 </a>
               </li>
             )}

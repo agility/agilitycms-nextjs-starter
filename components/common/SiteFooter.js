@@ -31,11 +31,13 @@ const SiteFooter = ({ globalData }) => {
             />
           </a>
         </div>
-        <div className="flex-grow mb-4 md:mb-0">
-          <p className="text-center md:text-left text-gray-400 text-xs md:ml-8 md:max-w-3xl">
-            {footer.footnote}
-          </p>
-        </div>
+        {footer.footnote && (
+          <div className="flex-grow mb-4 md:mb-0">
+            <p className="text-center md:text-left text-gray-400 text-xs md:ml-8 md:max-w-3xl">
+              {footer.footnote}
+            </p>
+          </div>
+        )}
         <div className="flex-1-grow">
           <ul className="flex justify-center md:justify-start">
             {footer.twitter && (
@@ -111,10 +113,10 @@ SiteFooter.getCustomInitialProps = async function ({
 
   // return a clean object...
   return {
-    footnote: contentItem.fields?.footnote,
-    twitter: contentItem.fields?.twitter,
-    instagram: contentItem.fields?.instagram,
-    slack: contentItem.fields?.slack,
+    footnote: contentItem.fields?.footnote || null,
+    twitter: contentItem.fields?.twitter || null,
+    instagram: contentItem.fields?.instagram || null,
+    slack: contentItem.fields?.slack || null,
   };
 };
 

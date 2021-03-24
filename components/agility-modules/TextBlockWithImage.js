@@ -18,7 +18,7 @@ const TextBlockWithImage = ({ module }) => {
             alt={fields.image.label}
             width="768"
             height="512"
-            className="rounded"
+            className="rounded-lg"
           />
         </div>
         <div

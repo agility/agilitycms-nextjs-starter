@@ -82,7 +82,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 <a
                   href={header.primaryButton.href}
                   target={header.primaryButton.target}
-                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
+                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                 >
                   {header.primaryButton.text}
                 </a>
@@ -176,7 +176,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                   <a
                     href={header.primaryButton.href}
                     target={header.primaryButton.target}
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                   >
                     {header.primaryButton.text}
                   </a>

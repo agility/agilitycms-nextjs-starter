@@ -23,13 +23,14 @@ const PostDetails = ({ dynamicPageItem }) => {
           />
         </div>
         <div className="max-w-2xl mx-auto mt-4">
-          <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-primary-500 after:w-8">
+          <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
             {category}
           </div>
+          <div className="border-b-2 border-primary-500 w-8"></div>
           <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
             {dateStr}
           </div>
-          <h1 className="text-4xl font-bold my-6">{post.title}</h1>
+          <h1 className="font-display text-4xl font-bold my-6">{post.title}</h1>
           <div
             className="prose max-w-full"
             dangerouslySetInnerHTML={renderHTML(post.content)}

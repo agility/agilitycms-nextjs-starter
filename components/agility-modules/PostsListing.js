@@ -42,13 +42,14 @@ const PostsListing = ({ module, customData }) => {
                     />
                   </div>
                   <div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
-                    <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-primary-500 after:w-8">
+                    <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
                       {post.category}
                     </div>
+                    <div className="border-b-2 border-primary-500 w-8"></div>
                     <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
                       {post.date}
                     </div>
-                    <h2 className="text-gray-900 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+                    <h2 className="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
                       {post.title}
                     </h2>
                   </div>

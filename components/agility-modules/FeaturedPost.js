@@ -43,14 +43,15 @@ const FeaturedPost = ({ module }) => {
                 />
               </div>
             </div>
-            <div className="sm:w-1/2 lg:w-1/3 bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0">
-              <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose border-b-2 inline-block border-primary-500 after:w-8">
+            <div className="sm:w-1/2 lg:w-1/3 bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0 relative">
+              <div className="font-display uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content">
                 {featuredPost.fields.category.fields.title}
               </div>
+              <div className="border-b-2 border-primary-500 w-8"></div>
               <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
                 {dateStr}
               </div>
-              <h2 className="text-gray-900 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+              <h2 className="font-display text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
                 {featuredPost.fields.title}
               </h2>
               <p className="text-sm mt-3 leading-loose text-gray-600 font-medium">

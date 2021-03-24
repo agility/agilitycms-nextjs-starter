@@ -34,7 +34,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                     title={header.siteName}
                   />
                 ) : (
-                  <h3 className="text-xl font-bold text-black hover:text-primary-500 transition duration-300">
+                  <h3 className="font-display text-xl font-bold text-secondary-500 hover:text-primary-500 transition duration-300">
                     {header.siteName}
                   </h3>
                 )}
@@ -69,7 +69,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             {header.links.map((navitem, index) => {
               return (
                 <Link href={href} key={`mobile-${index}`} as={navitem.path}>
-                  <a className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 focus:outline-none focus:text-primary-500 transition duration-300">
+                  <a className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 border-transparent border-b-2 hover:border-primary-500 hover:border-b-primary hover:border-b-2 focus:outline-none focus:text-primary-500 transition duration-300">
                     {navitem.title}
                   </a>
                 </Link>
@@ -82,7 +82,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 <a
                   href={header.primaryButton.href}
                   target={header.primaryButton.target}
-                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
+                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                 >
                   {header.primaryButton.text}
                 </a>
@@ -176,7 +176,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                   <a
                     href={header.primaryButton.href}
                     target={header.primaryButton.target}
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
                   >
                     {header.primaryButton.text}
                   </a>

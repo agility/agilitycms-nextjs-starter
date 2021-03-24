@@ -34,7 +34,7 @@ const TextBlockWithImage = ({ module }) => {
                 {fields.tagline}
               </h5>
             )}
-            <h2 className="text-4xl font-black md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+            <h2 className="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
               {fields.title}
             </h2>
             <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100">

@@ -2,6 +2,7 @@ import RichTextArea from "./RichTextArea";
 import FeaturedPost from "./FeaturedPost";
 import PostsListing from "./PostsListing";
 import PostDetails from "./PostDetails";
+import Heading from "./Heading";
 import TextBlockWithImage from "./TextBlockWithImage";
 
 /**
@@ -9,6 +10,7 @@ import TextBlockWithImage from "./TextBlockWithImage";
  */
 const allModules = [
   { name: "TextBlockWithImage", module: TextBlockWithImage },
+  { name: "Heading", module: Heading },
   { name: "FeaturedPost", module: FeaturedPost },
   { name: "PostsListing", module: PostsListing },
   { name: "PostDetails", module: PostDetails },

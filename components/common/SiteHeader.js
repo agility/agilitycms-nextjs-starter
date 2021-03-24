@@ -211,7 +211,7 @@ SiteHeader.getCustomInitialProps = async function ({
       languageCode: languageCode,
     });
 
-    // if we have a header, grab the content item
+    // if we have a header, set as content item
     if (header && header.length > 0) {
       contentItem = header[0];
 

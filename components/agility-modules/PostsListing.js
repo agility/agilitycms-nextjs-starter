@@ -16,7 +16,7 @@ const PostsListing = ({ module, customData }) => {
         <h1 className="text-3xl text-center font-bold">No posts available.</h1>
         <div className="my-10">
           <Link href={href} as="/home">
-            <a className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out">
+            <a className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-300">
               Return Home
             </a>
           </Link>

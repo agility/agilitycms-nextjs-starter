@@ -96,7 +96,7 @@ SiteFooter.getCustomInitialProps = async function ({
       languageCode: languageCode,
     });
 
-    // if we have a footer, grab the content item
+    // if we have a footer, set as content item
     if (footer && footer.length > 0) {
       contentItem = footer[0];
 

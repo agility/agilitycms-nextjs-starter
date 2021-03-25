@@ -53,8 +53,11 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   };
 
   return (
-    <div className="bg-primary-600" style={{ display: open ? "auto" : "none" }}>
-      <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+    <div
+      className="bg-primary-600 relative px-8"
+      style={{ display: open ? "auto" : "none" }}
+    >
+      <div className="max-w-screen-xl mx-auto py-3">
         <div className="flex items-center justify-between flex-wrap">
           <div className="w-0 flex-1 flex items-center">
             <span className="flex p-2 rounded-lg bg-primary-800">

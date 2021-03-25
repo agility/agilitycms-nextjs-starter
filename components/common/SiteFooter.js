@@ -47,7 +47,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.twitter.text}
                   target={footer.twitter.target}
                 >
-                  <FaTwitter className="text-xl md:ml-8 text-primary-600 hover:text-primary-500" />
+                  <FaTwitter className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
                 </a>
               </li>
             )}
@@ -58,7 +58,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.instagram.text}
                   target={footer.instagram.target}
                 >
-                  <FaInstagram className="text-xl ml-4 text-primary-600 hover:text-primary-500" />
+                  <FaInstagram className="text-xl ml-4 text-primary-500 hover:text-primary-700 transition duration-300" />
                 </a>
               </li>
             )}
@@ -69,7 +69,7 @@ const SiteFooter = ({ globalData }) => {
                   title={footer.slack.text}
                   target={footer.slack.target}
                 >
-                  <FaSlack className="text-xl ml-4 text-primary-600 hover:text-primary-500" />
+                  <FaSlack className="text-xl ml-4 text-primary-500 hover:text-primary-700 transition duration-300" />
                 </a>
               </li>
             )}

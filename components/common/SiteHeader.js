@@ -169,10 +169,9 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 </nav>
               </div>
             </div>
-
-            <div className="space-y-6 p-2">
-              <span className="w-full flex rounded-md shadow-sm">
-                {header.primaryButton && (
+            {header.primaryButton && (
+              <div className="space-y-6 p-2">
+                <span className="w-full flex rounded-md shadow-sm">
                   <a
                     href={header.primaryButton.href}
                     target={header.primaryButton.target}
@@ -180,9 +179,9 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                   >
                     {header.primaryButton.text}
                   </a>
-                )}
-              </span>
-            </div>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

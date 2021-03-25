@@ -34,7 +34,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                     title={header.siteName}
                   />
                 ) : (
-                  <h3 className="font-display text-xl font-bold text-secondary-500 hover:text-primary-500 transition duration-300">
+                  <h3 className="z-50 font-display text-xl font-bold text-secondary-500 hover:text-primary-500 transition duration-300">
                     {header.siteName}
                   </h3>
                 )}

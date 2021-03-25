@@ -26,18 +26,12 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
           <div className="lg:w-0 lg:flex-1">
             <Link href="/" as="/">
               <a className="flex">
-                {header.logo ? (
-                  <img
-                    className="h-8 w-auto sm:h-10"
-                    src={header.logo.url}
-                    alt={header.logo.label}
-                    title={header.siteName}
-                  />
-                ) : (
-                  <h3 className="z-50 font-display text-xl font-bold text-secondary-500 hover:text-primary-500 transition duration-300">
-                    {header.siteName}
-                  </h3>
-                )}
+                <img
+                  className="h-8 w-auto sm:h-10"
+                  src={header.logo.url}
+                  alt={header.logo.label}
+                  title={header.logo.siteName}
+                />
               </a>
             </Link>
           </div>
@@ -76,19 +70,6 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               );
             })}
           </nav>
-          {header.primaryButton && (
-            <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
-              <span className="inline-flex rounded-md shadow-sm">
-                <a
-                  href={header.primaryButton.href}
-                  target={header.primaryButton.target}
-                  className="whitespace-nowrap inline-flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
-                >
-                  {header.primaryButton.text}
-                </a>
-              </span>
-            </div>
-          )}
         </div>
       </div>
 
@@ -101,14 +82,12 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             <div className="pt-5 pb-6 px-5 space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  {header.logo && (
-                    <img
-                      className="h-8 w-auto sm:h-10"
-                      src={header.logo.url}
-                      alt={lheader.ogo.label}
-                      title={header.siteName}
-                    />
-                  )}
+                  <img
+                    className="h-8 w-auto sm:h-10"
+                    src={header.logo.url}
+                    alt={header.logo.label}
+                    title={header.siteName}
+                  />
                 </div>
                 <div className="-mr-2">
                   <button
@@ -169,19 +148,6 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 </nav>
               </div>
             </div>
-            {header.primaryButton && (
-              <div className="space-y-6 p-2">
-                <span className="w-full flex rounded-md shadow-sm">
-                  <a
-                    href={header.primaryButton.href}
-                    target={header.primaryButton.target}
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary active:bg-primary-700 transition duration-300"
-                  >
-                    {header.primaryButton.text}
-                  </a>
-                </span>
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -246,8 +212,7 @@ SiteHeader.getCustomInitialProps = async function ({
   // return clean object...
   return {
     siteName: contentItem.fields.siteName,
-    logo: contentItem.fields.logo || null,
-    primaryButton: contentItem.fields.primaryButton || null,
+    logo: contentItem.fields.logo,
     links,
   };
 };

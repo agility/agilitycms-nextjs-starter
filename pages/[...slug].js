@@ -4,7 +4,6 @@ import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node";
 import { handlePreview } from "@agility/nextjs";
 import { getModule } from "components/agility-modules";
 import SiteHeader from "components/common/SiteHeader";
-import SiteFooter from "components/common/SiteFooter";
 import LoadingWidget from "components/common/LoadingWidget";
 
 export async function getStaticProps({
@@ -16,7 +15,6 @@ export async function getStaticProps({
 }) {
   const globalComponents = {
     header: SiteHeader,
-    footer: SiteFooter,
   };
 
   const agilityProps = await getAgilityPageProps({

@@ -1,18 +1,40 @@
 import React from "react";
 import Image from "next/image";
-import { FaTwitter, FaInstagram, FaSlack } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaSlack, FaYoutube } from "react-icons/fa";
 
-const SiteFooter = ({ globalData }) => {
-  // get footer data
-  const { footer } = globalData;
-
-  if (!footer) {
-    return (
-      <footer className="relative px-p-8 text-center">
-        <p className="text-gray-400 font-bold">No Footer Available</p>
-      </footer>
-    );
-  }
+const SiteFooter = () => {
+  // set up Agility CMS Socials
+  const socials = [
+    {
+      title: "Twitter",
+      url: "https://www.twitter.com/agilitycms",
+      icon: (
+        <FaTwitter className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
+      ),
+    },
+    {
+      title: "Instagram",
+      url: "https://www.instagram.com/agilitycms",
+      icon: (
+        <FaInstagram className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
+      ),
+    },
+    {
+      title: "Slack",
+      url:
+        "https://join.slack.com/t/agilitycms-community/shared_invite/zt-99qlv1hw-tpPOJ99V21Y2omtA_uTcJw",
+      icon: (
+        <FaSlack className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
+      ),
+    },
+    {
+      title: "YouTube",
+      url: "https://www.youtube.com/channel/UCzKjErx94RLTbJctcrIgsDQ",
+      icon: (
+        <FaYoutube className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
+      ),
+    },
+  ];
 
   return (
     <footer className="relative px-8 py-6 md:py-4 mt-8 bg-gray-100">
@@ -31,93 +53,52 @@ const SiteFooter = ({ globalData }) => {
             />
           </a>
         </div>
-        {footer.footnote && (
-          <div className="flex-grow mb-4 md:mb-0">
-            <p className="text-center md:text-left text-gray-500 text-xs md:ml-8 md:max-w-3xl">
-              {footer.footnote}
-            </p>
-          </div>
-        )}
+        <div className="flex-grow mb-4 md:mb-0">
+          <p className="text-center md:text-left text-gray-500 text-xs md:ml-8 md:max-w-3xl">
+            Powered by Agility CMS. This website and materials found on it are
+            for demo purposes. You can use this to preview the content you
+            created on your Agility CMS account.{"\u00A0"}
+            <a
+              href="https://www.github.com"
+              title="View on Github"
+              target="_blank"
+              className="text-gray-500 mr-2 border-b border-gray-500"
+            >
+              Github
+            </a>
+            <a
+              href="https://help.agilitycms.com/hc/en-us"
+              title="Help Center"
+              target="_blank"
+              className="text-gray-500 mr-1 border-b border-gray-500"
+            >
+              Help Center
+            </a>
+            {"\u00A0"}
+            <a
+              href="https://agilitycms.com/contact-us/chat-sales"
+              title="Contact Us"
+              target="_blank"
+              className="text-gray-500 border-b border-gray-500"
+            >
+              Contact Us
+            </a>
+          </p>
+        </div>
         <div className="flex-1-grow">
           <ul className="flex justify-center md:justify-start">
-            {footer.twitter && (
-              <li>
-                <a
-                  href={footer.twitter.href}
-                  title={footer.twitter.text}
-                  target={footer.twitter.target}
-                >
-                  <FaTwitter className="text-xl md:ml-8 text-primary-500 hover:text-primary-700 transition duration-300" />
+            {socials.map((social, index) => (
+              <li key={index}>
+                <a href={social.url} title={social.title} target="_blank">
+                  {social.icon}
                 </a>
               </li>
-            )}
-            {footer.instagram && (
-              <li>
-                <a
-                  href={footer.instagram.href}
-                  title={footer.instagram.text}
-                  target={footer.instagram.target}
-                >
-                  <FaInstagram className="text-xl ml-4 text-primary-500 hover:text-primary-700 transition duration-300" />
-                </a>
-              </li>
-            )}
-            {footer.slack && (
-              <li>
-                <a
-                  href={footer.slack.href}
-                  title={footer.slack.text}
-                  target={footer.slack.target}
-                >
-                  <FaSlack className="text-xl ml-4 text-primary-500 hover:text-primary-700 transition duration-300" />
-                </a>
-              </li>
-            )}
+            ))}
           </ul>
         </div>
       </div>
     </footer>
   );
-};
-
-SiteFooter.getCustomInitialProps = async function ({
-  agility,
-  languageCode,
-  channelName,
-}) {
-  // set up api
-  const api = agility;
-
-  // set up our content item
-  let contentItem = null;
-
-  try {
-    // try to fetch our site footer
-    let footer = await api.getContentList({
-      referenceName: "sitefooter",
-      languageCode: languageCode,
-    });
-
-    // if we have a footer, set as content item
-    if (footer && footer.length > 0) {
-      contentItem = footer[0];
-
-      // else return null
-    } else {
-      return null;
-    }
-  } catch (error) {
-    if (console) console.error("Could not load global footer item.", error);
-    return null;
-  }
-
-  // return a clean object...
-  return {
-    footnote: contentItem.fields?.footnote || null,
-    twitter: contentItem.fields?.twitter || null,
-    instagram: contentItem.fields?.instagram || null,
-    slack: contentItem.fields?.slack || null,
-  };
 };
 
 export default SiteFooter;

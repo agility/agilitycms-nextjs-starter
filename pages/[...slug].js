@@ -38,7 +38,7 @@ const handlePreview = () => {
   //do the redirect
   setTimeout(function () {
     window.location.href = previewAPIUrl;
-  }, 5000);
+  }, 100000);
   return true;
 };
 

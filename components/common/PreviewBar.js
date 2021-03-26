@@ -6,6 +6,9 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 
   // if (!isPreview && !isDevelopmentMode) return null;
 
+  console.log(isPreview);
+  console.log(isDevelopmentMode);
+
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
       alert(
@@ -109,7 +112,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </a>
           </div>
         </div>
-        {isDevelopmentMode ? (
+        {isPreview ? (
           <button
             className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
             onClick={() => handleView()}

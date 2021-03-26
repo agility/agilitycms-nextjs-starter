@@ -80,23 +80,23 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             isPreview ? `Preview` : `Live`
           } Mode`}</p>
           <div
-            className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer"
+            className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer z-20"
             onClick={() => setOpen(!open)}
           >
             {open ? <FaChevronUp /> : <FaChevronDown />}
           </div>
           <div
-            className="absolute bg-agility text-white text-sm py-6 px-4 w-64 -right-0 -bottom-32 md:-bottom-24 z-20 rounded-b-lg"
+            className="absolute bg-agility text-white text-sm py-4 px-4 w-64 -right-0 -bottom-28 md:-bottom-20 z-10 rounded-b-lg"
             style={{ display: open ? "block" : "none" }}
           >
-            <p className="mb-4 text-center md:hidden text-gray-200">
+            <p className="mb-4 text-center md:hidden text-gray-200 z-20">
               {`Viewing Content in ${isPreview ? `Preview` : `Live`} Mode`}
             </p>
             <button
               className="bg-gray-200 text-agility p-2 w-full rounded-lg text-sm"
               onClick={() => handleView()}
             >
-              {`View Content in ${isPreview ? `Live` : `Preview`} Mode`}
+              {`View ${isPreview ? `Live` : `Preview`} Mode`}
             </button>
           </div>
         </div>

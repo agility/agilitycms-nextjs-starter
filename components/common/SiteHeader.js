@@ -27,7 +27,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             <Link href="/" as="/">
               <a className="flex">
                 <img
-                  className="h-8 w-auto sm:h-10"
+                  className="h-8 w-auto sm:h-10 z-50"
                   src={header.logo.url}
                   alt={header.logo.label}
                   title={header.logo.siteName}
@@ -80,15 +80,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
         <div className="rounded-lg shadow-lg">
           <div className="rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5 space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <img
-                    className="h-8 w-auto sm:h-10"
-                    src={header.logo.url}
-                    alt={header.logo.label}
-                    title={header.siteName}
-                  />
-                </div>
+              <div className="flex items-center justify-end">
                 <div className="-mr-2">
                   <button
                     onClick={() => setOpen(!open)}

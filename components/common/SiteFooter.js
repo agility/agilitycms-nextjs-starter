@@ -92,7 +92,7 @@ const SiteFooter = () => {
         <div className="flex-1-grow">
           <ul className="flex justify-center md:justify-start">
             {socials.map((social, index) => (
-              <li key={index}>
+              <li key={index} className="mx-4 md:mx-0">
                 <a
                   href={social.url}
                   title={`Follow Agility CMS on ${social.title}`}

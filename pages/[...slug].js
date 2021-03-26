@@ -91,7 +91,10 @@ export async function getStaticPaths({ locales, defaultLocale }) {
 
 const AgilityPage = (props) => {
   if (handlePreview()) {
-    return <LoadingWidget message="Activating preview mode..." />;
+    return;
+    <div className="testing">
+      <LoadingWidget message="Activating preview mode..." />
+    </div>;
   }
 
   return <Layout {...props} />;

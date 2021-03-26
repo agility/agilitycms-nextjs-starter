@@ -6,6 +6,9 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 
   // if (!isPreview && !isDevelopmentMode) return null;
 
+  console.log(isPreview);
+  console.log(isDevelopmentMode);
+
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
       alert(

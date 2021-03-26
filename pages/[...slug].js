@@ -38,7 +38,7 @@ const handlePreview = () => {
   //do the redirect
   setTimeout(function () {
     window.location.href = previewAPIUrl;
-  }, 2000);
+  }, 100000000);
   return true;
 };
 
@@ -92,7 +92,7 @@ export async function getStaticPaths({ locales, defaultLocale }) {
 const AgilityPage = (props) => {
   if (handlePreview()) {
     return (
-      <div className="testing">
+      <div className="block">
         <LoadingWidget message="Activating preview mode..." />
       </div>
     );

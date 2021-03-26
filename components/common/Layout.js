@@ -42,8 +42,8 @@ function Layout(props) {
         keywords={page.seo.metaKeywords}
         metaHTML={page.seo.metaHTML}
       />
-      <PreviewBar {...props} />
       <div className="flex flex-col min-h-screen">
+        <PreviewBar {...props} />
         <SiteHeader {...props} />
         <main className="flex-grow">
           <AgilityPageTemplate {...props} />

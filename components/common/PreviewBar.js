@@ -12,7 +12,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
       alert(
-        "To view your content in Preview Mode, go into your Agility Manager and click `Preview` on a content item."
+        "To view your content in Preview Mode, sign into your Agility Instance and click `Preview` on a content item."
       );
     } else {
       const exit = confirm("Would you like to exit preview mode?");

@@ -2,98 +2,128 @@ import React, { useState } from "react";
 import { FaInfoCircle, FaGithub } from "react-icons/fa";
 
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
 
-  if (!isPreview && !isDevelopmentMode) return null;
+  // if (!isPreview && !isDevelopmentMode) return null;
 
-  const exitPreview = () => {
-    if (!isDevelopmentMode) {
-      const exit = confirm("Would you like to exit Preview Mode?");
-      if (exit === true) {
-        //kick out...
-        window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
-      }
-
-      return exit;
+  const handleView = () => {
+    if (!isDevelopmentMode && !isPreview) {
+      alert(
+        "To view your content in Preview Mode, go into your Agility Manager and click `Preview` on a content item."
+      );
     } else {
-      //if we are dev mode, just hide the panel
-      setOpen(false);
+      const exit = confirm("Would you like to exit preview mode?");
+      if (exit === true) {
+        window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
+      } else return;
     }
   };
 
-  const sharePreviewLink = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      // Process our return data
-      if (xhr.status >= 200 && xhr.status < 300) {
-        // What do when the request is successful
+  // const exitPreview = () => {
+  //   if (!isDevelopmentMode) {
+  //     const exit = confirm("Would you like to exit Preview Mode?");
+  //     if (exit === true) {
+  //       //kick out...
+  //       window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
+  //     }
 
-        const previewKey = xhr.responseText;
-        let baseUrl = window.location.href;
-        if (baseUrl.indexOf("?") != -1)
-          baseUrl = baseUrl.substring(0, baseUrl.indexOf("?"));
-        const previewLink = `${baseUrl}?agilitypreviewkey=${escape(
-          previewKey
-        )}`;
+  //     return exit;
+  //   } else {
+  //     //if we are dev mode, just hide the panel
+  //     setOpen(false);
+  //   }
+  // };
 
-        prompt(
-          "To share this page in preview mode with others, copy the link below:",
-          previewLink
-        );
-      } else {
-        // What do when the request fails
-        alert(
-          "Could not generate Preview Link. This indicates a problem with the API route that generates a Preview Link."
-        );
-      }
-    };
+  // const sharePreviewLink = () => {
+  //   const xhr = new XMLHttpRequest();
+  //   xhr.onload = function () {
+  //     // Process our return data
+  //     if (xhr.status >= 200 && xhr.status < 300) {
+  //       // What do when the request is successful
 
-    // Create and send a GET request
-    xhr.open("GET", "/api/generatePreviewKey");
-    xhr.send();
-  };
+  //       const previewKey = xhr.responseText;
+  //       let baseUrl = window.location.href;
+  //       if (baseUrl.indexOf("?") != -1)
+  //         baseUrl = baseUrl.substring(0, baseUrl.indexOf("?"));
+  //       const previewLink = `${baseUrl}?agilitypreviewkey=${escape(
+  //         previewKey
+  //       )}`;
+
+  //       prompt(
+  //         "To share this page in preview mode with others, copy the link below:",
+  //         previewLink
+  //       );
+  //     } else {
+  //       // What do when the request fails
+  //       alert(
+  //         "Could not generate Preview Link. This indicates a problem with the API route that generates a Preview Link."
+  //       );
+  //     }
+  //   };
+
+  //   // Create and send a GET request
+  //   xhr.open("GET", "/api/generatePreviewKey");
+  //   xhr.send();
+  // };
 
   return (
     <div className="bg-agility relative px-8 py-3 text-white">
-      <div className="max-w-screen-xl mx-auto flex items-center">
-        <span className="p-2 bg-black rounded-lg mr-4">
-          <a
-            href="https://www.agilitycms.com"
-            target="_blank"
-            title="Agility CMS"
-          >
-            <img
-              src="https://static.agilitycms.com/brand/agility-triangle-yellow.svg"
-              alt=""
-              className="w-5 h-5"
-            />
-          </a>
-        </span>
-        <div className="mr-4">
-          <a
-            href="https://help.agilitycms.com/hc/en-us"
-            target="_blank"
-            title="Help Center"
-          >
-            <div className="flex items-center">
-              <FaInfoCircle className="text-2xl mr-2" />
-              <p className="hidden md:block text-sm">Help Center</p>
-            </div>
-          </a>
+      <div className="flex justify-between items-center max-w-screen-xl mx-auto">
+        <div className="flex items-center">
+          <span className="p-2 bg-black rounded-lg mr-4">
+            <a
+              href="https://www.agilitycms.com"
+              target="_blank"
+              title="Agility CMS"
+            >
+              <img
+                src="https://static.agilitycms.com/brand/agility-triangle-yellow.svg"
+                alt=""
+                className="w-5 h-5"
+              />
+            </a>
+          </span>
+          <div className="mr-4">
+            <a
+              href="https://help.agilitycms.com/hc/en-us"
+              target="_blank"
+              title="Help Center"
+            >
+              <div className="flex items-center">
+                <FaInfoCircle className="text-2xl mr-2" />
+                <p className="hidden md:block text-sm">Help Center</p>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://www.github.com"
+              target="_blank"
+              title="View on Github"
+              className="text-2xl"
+            >
+              <div className="flex items-center">
+                <FaGithub className="mr-2" />
+                <p className="hidden md:block text-sm">View on Github</p>
+              </div>
+            </a>
+          </div>
         </div>
-        <div>
-          <a
-            href="https://www.github.com"
-            target="_blank"
-            title="View on Github"
-            className="text-2xl"
+        {isDevelopmentMode && isPreview ? (
+          <button
+            className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
+            onClick={() => handleView()}
           >
-            <div className="flex items-center">
-              <FaGithub className="mr-2" />
-              <p className="hidden md:block text-sm">View on Github</p>
-            </div>
-          </a>
-        </div>
+            Exit Preview Mode
+          </button>
+        ) : (
+          <button
+            className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
+            onClick={() => handleView()}
+          >
+            View Preview Mode
+          </button>
+        )}
       </div>
     </div>
     // <div

@@ -28,7 +28,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   };
 
   return (
-    <div className="bg-agility relative px-8 py-3 text-white">
+    <div className="bg-agility relative px-8 py-3 text-gray-200">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         <div className="flex items-center">
           <span className="p-2 bg-black rounded-lg mr-4">
@@ -39,8 +39,13 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             >
               <img
                 src="https://static.agilitycms.com/brand/agility-triangle-yellow.svg"
-                alt=""
-                className="w-5 h-5"
+                alt="Agility CMS"
+                className="w-5 h-5 block md:hidden"
+              />
+              <img
+                src="/assets/agility-preview-logo.svg"
+                alt="Agility CMS"
+                className="h-5 w-20 hidden md:block"
               />
             </a>
           </span>
@@ -70,47 +75,31 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </a>
           </div>
         </div>
-        {/* <select className="text-black p-2">
-          <option>viewing in preview</option>
-          <option>viewing in live</option>
-        </select> */}
-        <div className="relative">
+        <div className="relative flex items-center">
+          <p className="hidden md:block text-sm mr-4">{`Viewing Content in ${
+            isPreview ? `Preview` : `Live`
+          } Mode`}</p>
           <div
-            className="p-2 bg-black rounded-lg cursor-pointer"
+            className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer"
             onClick={() => setOpen(!open)}
           >
             {open ? <FaChevronUp /> : <FaChevronDown />}
           </div>
           <div
-            className="absolute bg-agility text-white text-sm py-6 px-4 w-64 -right-0 -bottom-30 z-20 rounded-b-lg"
+            className="absolute bg-agility text-white text-sm py-6 px-4 w-64 -right-0 -bottom-32 md:-bottom-24 z-20 rounded-b-lg"
             style={{ display: open ? "block" : "none" }}
           >
-            <p className="mb-4 text-center">
+            <p className="mb-4 text-center md:hidden text-gray-200">
               {`Viewing Content in ${isPreview ? `Preview` : `Live`} Mode`}
             </p>
             <button
-              className="bg-white text-agility p-2 w-full rounded-lg text-sm"
+              className="bg-gray-200 text-agility p-2 w-full rounded-lg text-sm"
               onClick={() => handleView()}
             >
-              {`Switch to ${isPreview ? `Live` : `Preview`} Mode`}
+              {`View Content in ${isPreview ? `Live` : `Preview`} Mode`}
             </button>
           </div>
         </div>
-        {/* {isPreview ? (
-          <button
-            className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
-            onClick={() => handleView()}
-          >
-            Exit Preview Mode
-          </button>
-        ) : (
-          <button
-            className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
-            onClick={() => handleView()}
-          >
-            View Preview Mode
-          </button>
-        )} */}
       </div>
     </div>
   );

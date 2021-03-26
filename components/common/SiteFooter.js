@@ -93,7 +93,11 @@ const SiteFooter = () => {
           <ul className="flex justify-center md:justify-start">
             {socials.map((social, index) => (
               <li key={index}>
-                <a href={social.url} title={social.title} target="_blank">
+                <a
+                  href={social.url}
+                  title={`Follow Agility CMS on ${social.title}`}
+                  target="_blank"
+                >
                   {social.icon}
                 </a>
               </li>

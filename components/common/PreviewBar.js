@@ -1,13 +1,19 @@
-import React from "react";
-import { FaInfoCircle, FaGithub } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaInfoCircle,
+  FaGithub,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 /**
  * This is a preview bar that is enabled by default to handle viewing content in preview & live mode, remove this for production use.
  **/
 
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
-  // handle view function to determine preview / live mode
+  const [open, setOpen] = useState(false);
 
+  // handle view function to determine preview / live mode
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
       alert(
@@ -64,7 +70,33 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </a>
           </div>
         </div>
-        {isPreview ? (
+        {/* <select className="text-black p-2">
+          <option>viewing in preview</option>
+          <option>viewing in live</option>
+        </select> */}
+        <div className="relative">
+          <div
+            className="p-2 bg-black rounded-lg cursor-pointer"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <FaChevronUp /> : <FaChevronDown />}
+          </div>
+          <div
+            className="absolute bg-agility text-white text-sm py-6 px-4 w-64 -right-0 -bottom-30 z-20 rounded-b-lg"
+            style={{ display: open ? "block" : "none" }}
+          >
+            <p className="mb-4 text-center">
+              {`Viewing Content in ${isPreview ? `Preview` : `Live`} Mode`}
+            </p>
+            <button
+              className="bg-white text-agility p-2 w-full rounded-lg text-sm"
+              onClick={() => handleView()}
+            >
+              {`Switch to ${isPreview ? `Live` : `Preview`} Mode`}
+            </button>
+          </div>
+        </div>
+        {/* {isPreview ? (
           <button
             className="bg-white text-agility text-sm p-2 font-medium rounded-lg"
             onClick={() => handleView()}
@@ -78,7 +110,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           >
             View Preview Mode
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import { getPageTemplate } from "components/agility-pageTemplates";
+// import { handlePreview } from "@agility/nextjs";
+import { useRouter } from "next/router";
+import Error from "next/error";
 import PreviewBar from "./PreviewBar";
 import SEO from "./SEO";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import LoadingWidget from "./LoadingWidget";
-import { useRouter } from "next/router";
-import Error from "next/error";
 
 const getParameterByName = (name) => {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -15,7 +16,6 @@ const getParameterByName = (name) => {
     ? ""
     : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
-
 const handlePreview = () => {
   if (!process.browser) {
     //kickout if this is not being executed in the browser
@@ -39,9 +39,11 @@ const handlePreview = () => {
   //do the redirect
   setTimeout(function () {
     window.location.href = previewAPIUrl;
-  }, 100000000);
+  }, 2500);
   return true;
 };
+
+const isPreview = handlePreview();
 
 function Layout(props) {
   const {
@@ -70,10 +72,6 @@ function Layout(props) {
     page.seo.metaDescription = dynamicPageItem.seo.metaDescription;
   }
 
-  if (handlePreview()) {
-    return <LoadingWidget message="Loading Preview" />;
-  }
-
   return (
     <>
       <SEO
@@ -82,13 +80,20 @@ function Layout(props) {
         keywords={page.seo.metaKeywords}
         metaHTML={page.seo.metaHTML}
       />
-      <div className="flex flex-col min-h-screen">
-        <PreviewBar {...props} />
-        <SiteHeader {...props} />
-        <main className="flex-grow">
-          <AgilityPageTemplate {...props} />
-        </main>
-        <SiteFooter {...props} />
+      <div id="site-wrapper">
+        {isPreview && <LoadingWidget message="Loading Preview" />}
+        {!isPreview && (
+          <div id="site">
+            <PreviewBar {...props} />
+            <div className="flex flex-col min-h-screen">
+              <SiteHeader {...props} />
+              <main className="flex-grow">
+                <AgilityPageTemplate {...props} />
+              </main>
+              <SiteFooter {...props} />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

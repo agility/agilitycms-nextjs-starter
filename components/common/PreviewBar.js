@@ -16,9 +16,18 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   // handle view function to determine preview / live mode
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
-      alert(
+      const ok = confirm(
         "To view your content in Preview Mode, sign into your Agility Instance and click `Preview` on a content item."
       );
+      if (ok === true) {
+        window.open("https://login.agilitycms.com/login");
+        setOpen(false);
+      } else {
+        setOpen(false);
+      }
+      // alert(
+      //   "To view your content in Preview Mode, sign into your Agility Instance and click `Preview` on a content item."
+      // );
     } else {
       const exit = confirm("Would you like to exit preview mode?");
       if (exit === true) {

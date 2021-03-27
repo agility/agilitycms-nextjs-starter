@@ -58,7 +58,7 @@ function Layout(props) {
   // initially until getStaticProps() finishes running
   const router = useRouter();
   if (router.isFallback) {
-    return <LoadingWidget message="Loading" />;
+    return <LoadingWidget message="Loading Page" />;
   }
 
   // if page not found, throw 404

@@ -30,9 +30,9 @@ const TextBlockWithImage = ({ module }) => {
         >
           <div className="g:py-8 text-center md:text-left">
             {fields.tagline && (
-              <h5 className="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
+              <span className="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
                 {fields.tagline}
-              </h5>
+              </span>
             )}
             <h2 className="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
               {fields.title}

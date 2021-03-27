@@ -58,7 +58,7 @@ const SiteFooter = () => {
           </a>
         </div>
         <div className="flex-grow mb-4 md:mb-0">
-          <p className="text-center md:text-left text-gray-500 text-xs md:ml-8 md:max-w-3xl">
+          <p className="text-center md:text-left text-gray-600 text-xs md:ml-8 md:max-w-3xl">
             Powered by Agility CMS. This website and materials found on it are
             for demo purposes. You can use this to preview the content you
             created on your Agility CMS account.{"\u00A0"}
@@ -66,7 +66,7 @@ const SiteFooter = () => {
               href="https://www.github.com"
               title="View on Github"
               target="_blank"
-              className="text-gray-500 mr-2 border-b border-gray-500"
+              className="text-gray-600 mr-2 border-b border-gray-600"
             >
               Github
             </a>
@@ -74,7 +74,7 @@ const SiteFooter = () => {
               href="https://help.agilitycms.com/hc/en-us"
               title="Help Center"
               target="_blank"
-              className="text-gray-500 mr-1 border-b border-gray-500"
+              className="text-gray-600 mr-1 border-b border-gray-600"
             >
               Help Center
             </a>
@@ -83,7 +83,7 @@ const SiteFooter = () => {
               href="https://agilitycms.com/contact-us/chat-sales"
               title="Contact Us"
               target="_blank"
-              className="text-gray-500 border-b border-gray-500"
+              className="text-gray-600 border-b border-gray-600"
             >
               Contact Us
             </a>

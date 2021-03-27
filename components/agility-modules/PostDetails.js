@@ -30,7 +30,9 @@ const PostDetails = ({ dynamicPageItem }) => {
           <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
             {dateStr}
           </div>
-          <h1 className="font-display text-4xl font-bold my-6">{post.title}</h1>
+          <h1 className="font-display text-4xl font-bold my-6 text-gray-500">
+            {post.title}
+          </h1>
           <div
             className="prose max-w-full"
             dangerouslySetInnerHTML={renderHTML(post.content)}

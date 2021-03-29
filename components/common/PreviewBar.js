@@ -21,7 +21,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
       );
       if (openManager === true) {
         window.open(
-          `https://manager.agilitycms.com/instance/${process.env.AGILITY_GUID}`
+          `https://manager.agilitycms.com/instance/${process.env.NEXT_PUBLIC_AGILITY_GUID}`
         );
         setOpen(false);
       } else {

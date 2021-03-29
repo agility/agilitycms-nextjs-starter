@@ -13,6 +13,9 @@ import {
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   const [open, setOpen] = useState(false);
 
+  console.log("regular", process.env.AGILITY_GUID);
+  console.log("public", NEXT_PUBLIC_AGILITY_GUID);
+
   // handle view function to determine preview / live mode
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {

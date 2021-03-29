@@ -20,9 +20,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         "To view your content in Preview Mode, sign into your Agility Instance and click `Preview` on a content item."
       );
       if (openManager === true) {
-        window.open(
-          `https://manager.agilitycms.com/instance/${process.env.NEXT_PUBLIC_AGILITY_GUID}`
-        );
+        window.open(`https://login.agilitycms.com/login`);
         setOpen(false);
       } else {
         setOpen(false);

@@ -93,9 +93,13 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         </div>
         <div className="relative flex items-center">
           <p className="hidden md:block text-sm mr-4">
-            Viewing Content in{" "}
-            <span className="text-bold">{isPreview ? `Preview` : `Live`}</span>
-            Mode
+            {isPreview
+              ? `Previewing ${(
+                  <span className="text-bold">Latest</span>
+                )} Changes`
+              : `Viewing ${(
+                  <span className="text-bold">Published</span>
+                )} Content`}
           </p>
           <div
             className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer z-20"
@@ -108,18 +112,13 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             style={{ display: open ? "block" : "none" }}
           >
             <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-              Viewing Content in <span>{isPreview ? `Preview` : `Live`}</span>{" "}
-              Mode
+              {`Viewing Content in ${isPreview ? `Preview` : `Live`} Mode`}
             </p>
             <button
               className="bg-gray-200 text-agility p-2 w-full rounded-lg text-sm"
               onClick={() => handleView()}
             >
-              View{" "}
-              <span className="font-bold">
-                {isPreview ? `Live` : `Preview`}
-              </span>{" "}
-              Mode
+              {`View ${isPreview ? `Live` : `Preview`} Mode`}
             </button>
           </div>
         </div>

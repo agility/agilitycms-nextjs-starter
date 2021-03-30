@@ -92,15 +92,15 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           </div>
         </div>
         <div className="relative flex items-center">
-          <p className="hidden md:block text-sm mr-4">
-            {isPreview
-              ? `Previewing ${(
-                  <span className="text-bold">Latest</span>
-                )} Changes`
-              : `Viewing ${(
-                  <span className="text-bold">Published</span>
-                )} Content`}
-          </p>
+          {isPreview ? (
+            <p className="hidden md:block text-sm mr-4">
+              Previewing <span className="font-bold">Latest</span> Changes
+            </p>
+          ) : (
+            <p className="hidden md:block text-sm mr-4">
+              Viewing <span className="font-bold">Published</span> Content
+            </p>
+          )}
           <div
             className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer z-20"
             onClick={() => setOpen(!open)}

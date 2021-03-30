@@ -1,6 +1,6 @@
 import Layout from "components/common/Layout";
 import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node";
-import { getModule } from "components/agility-modules";
+import { getModule } from "components/agility-pageModules";
 import SiteHeader from "components/common/SiteHeader";
 
 export async function getStaticProps({

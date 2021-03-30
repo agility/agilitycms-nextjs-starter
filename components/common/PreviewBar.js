@@ -12,24 +12,21 @@ import {
 
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   const [open, setOpen] = useState(false);
-
-  console.log("regular", process.env.AGILITY_GUID);
-  console.log("public", process.env.NEXT_PUBLIC_AGILITY_GUID);
-
   // handle view function to determine preview / live mode
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
-      const openManager = confirm(
-        "To view your content in Preview Mode, sign into your Agility Instance and click `Preview` on a content item."
-      );
-      if (openManager === true) {
-        window.open(
-          `https://manager.agilitycms.com/instance/${process.env.NEXT_PUBLIC_AGILITY_GUID}`
-        );
-        setOpen(false);
-      } else {
-        setOpen(false);
-      }
+      const xhr = new XMLHttpRequest();
+
+      xhr.onload = function () {
+        // Process our return data
+        if (xhr.status >= 200 && xhr.status < 300) {
+          // What do when the request is successful
+          console.log("redirect here");
+        }
+      };
+      // Create and send a GET request
+      xhr.open("GET", "/api/generatePreviewKey");
+      xhr.send();
     } else {
       const exit = confirm("Would you like to exit preview mode?");
       if (exit === true) {

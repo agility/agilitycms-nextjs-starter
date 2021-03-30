@@ -12,6 +12,7 @@ import {
 
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   const [open, setOpen] = useState(false);
+
   // handle view function to determine preview / live mode
   const handleView = () => {
     if (!isDevelopmentMode && !isPreview) {
@@ -91,9 +92,11 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           </div>
         </div>
         <div className="relative flex items-center">
-          <p className="hidden md:block text-sm mr-4">{`Viewing Content in ${
-            isPreview ? `Preview` : `Live`
-          } Mode`}</p>
+          <p className="hidden md:block text-sm mr-4">
+            Viewing Content in{" "}
+            <span className="text-bold">{isPreview ? `Preview` : `Live`}</span>
+            Mode
+          </p>
           <div
             className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer z-20"
             onClick={() => setOpen(!open)}
@@ -105,13 +108,18 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             style={{ display: open ? "block" : "none" }}
           >
             <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-              {`Viewing Content in ${isPreview ? `Preview` : `Live`} Mode`}
+              Viewing Content in <span>{isPreview ? `Preview` : `Live`}</span>{" "}
+              Mode
             </p>
             <button
               className="bg-gray-200 text-agility p-2 w-full rounded-lg text-sm"
               onClick={() => handleView()}
             >
-              {`View ${isPreview ? `Live` : `Preview`} Mode`}
+              View{" "}
+              <span className="font-bold">
+                {isPreview ? `Live` : `Preview`}
+              </span>{" "}
+              Mode
             </button>
           </div>
         </div>

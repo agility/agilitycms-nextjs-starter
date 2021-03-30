@@ -94,11 +94,11 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         <div className="relative flex items-center">
           {isPreview ? (
             <p className="hidden md:block text-sm mr-4">
-              Previewing <span className="font-medium">Latest</span> Changes
+              Previewing <span className="font-bold">Latest</span> Changes
             </p>
           ) : (
             <p className="hidden md:block text-sm mr-4">
-              Viewing <span className="font-medium">Published</span> Content
+              Viewing <span className="font-bold">Published</span> Content
             </p>
           )}
           <div

@@ -21,6 +21,13 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         // Process our return data
         if (xhr.status >= 200 && xhr.status < 300) {
           // What do when the request is successful
+          const previewKey = xhr.responseText;
+
+          window.location.replace(
+            `${window.location.pathname}?agilitypreviewkey=${escape(
+              previewKey
+            )}`
+          );
           console.log("redirect here");
         }
       };

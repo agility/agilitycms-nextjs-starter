@@ -36,7 +36,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
       xhr.open("GET", "/api/generatePreviewKey");
       xhr.send();
     } else {
-      const exit = confirm("Would you like to exit preview mode?");
+      const exit = confirm("Would you like to exit Preview Mode?");
       if (exit === true) {
         window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
       } else return;

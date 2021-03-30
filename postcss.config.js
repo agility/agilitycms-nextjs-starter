@@ -1,6 +1,9 @@
+// PostCSS is a software development tool that uses JavaScript-based plugins to automate routine CSS operations.
 module.exports = {
   plugins: {
-    '@tailwindcss/jit': {},
+    // Tailwind CSS (Utility First CSS Framework)
+    "@tailwindcss/jit": {},
+    // Autoprefixer (Use the data based on current browser popularity and property support to apply prefixes for you)
     autoprefixer: {},
   },
-}
+};

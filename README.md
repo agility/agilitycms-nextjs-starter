@@ -74,3 +74,54 @@ The easiest way to deploy a Next.js website to production is to use [Vercel](htt
 <a href="https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjoshua-isaac%2Fagility-nextjs-starter"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
 
 👆 By clicking the button above, you can get this starter repo deployed to Vercel with a Preview Environment within minutes! It will prompt you to enter your `AGILITY_GUID`, `AGILITY_API_FETCH_KEY`, `AGILITY_API_PREVIEW_KEY` and your `AGILITY_SECURITY_KEY`.
+
+## Notes
+
+### How to Register Page Modules
+1. To create a new Page Module, create a new React component within the `/components/agility-pageModules` directory.
+2. All of the Page Modules that are being used within the site need to be imported into the `index` file within the `/components/agility-pageModules` directory and added to the `allModules` array:
+
+```
+import RichTextArea from "./RichTextArea";
+import FeaturedPost from "./FeaturedPost";
+import PostsListing from "./PostsListing";
+import PostDetails from "./PostDetails";
+import Heading from "./Heading";
+import TextBlockWithImage from "./TextBlockWithImage";
+
+const allModules = [
+  { name: "TextBlockWithImage", module: TextBlockWithImage },
+  { name: "Heading", module: Heading },
+  { name: "FeaturedPost", module: FeaturedPost },
+  { name: "PostsListing", module: PostsListing },
+  { name: "PostDetails", module: PostDetails },
+  { name: "RichTextArea", module: RichTextArea },
+];
+```
+
+### How to Register Page Templates
+1. To create a new Page Template, create a new React component within the `/components/agility-pageTemplates` directory.
+2. All of the Page Template that are being used within the site need to be imported into the `index` file within the `/components/agility-pageTemplates` directory and added to the `allTemplates` array:
+
+```
+import MainTemplate from "./MainTemplate";
+
+const allTemplates = [
+  { name: "MainTemplate", template: MainTemplate }
+];
+```
+
+### How to Properly Link to an Internal Page
+To link to internal pages, use the `next/link` component.
+
+```
+import Link from 'next/link';
+
+//where '[...slug]' is the catch-all dynamic page we have (pages/[...slug].js) and '/posts' is the actual real page path for the page
+<Link href="[...slug]" as="/posts">
+  <a>{item.fields.title}</a>
+</Link>
+```
+
+### How to Preview Content
+Since this is a static site, how can editors preview content in real-time as they are making edits within Agility CMS? Vercel supports Previews out of the box! Simply paste the address of your site deployed on Vercel into your Agility Sitemap Configuration (Settings > Sitemaps), and use it as your Preview Deployment.

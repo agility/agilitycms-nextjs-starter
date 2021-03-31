@@ -113,11 +113,11 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           >
             {isPreview ? (
               <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-                Preview Latest Changes
+                Previewing <span className="font-bold">Latest</span> Changes
               </p>
             ) : (
               <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-                View Published Content
+                Viewing <span className="font-bold">Published</span> Content
               </p>
             )}
             <button

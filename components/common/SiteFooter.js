@@ -50,7 +50,7 @@ const SiteFooter = () => {
             title="Agility CMS"
           >
             <Image
-              src="/assets/agility-logo.png"
+              src="/assets/agility-logo.svg"
               alt="Agility CMS"
               width="90"
               height="24"

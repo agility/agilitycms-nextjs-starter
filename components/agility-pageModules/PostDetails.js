@@ -34,7 +34,7 @@ const PostDetails = ({ dynamicPageItem }) => {
             {post.title}
           </h1>
           <div
-            className="prose max-w-full"
+            className="prose max-w-full mb-20"
             dangerouslySetInnerHTML={renderHTML(post.content)}
           />
         </div>

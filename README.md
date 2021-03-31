@@ -73,7 +73,7 @@ The easiest way to deploy a Next.js website to production is to use [Vercel](htt
 
 <a href="https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjoshua-isaac%2Fagility-nextjs-starter"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
 
-👆 By clicking the button above, you can get this starter repo deployed to Vercel with a Preview Environment within minutes! It will prompt you to enter your `AGILITY_GUID`, `AGILITY_API_FETCH_KEY`, `AGILITY_API_PREVIEW_KEY` and your `AGILITY_SECURITY_KEY`.
+By clicking the button above, you can get this starter repo deployed to Vercel with a Preview Environment within minutes! It will prompt you to enter your `AGILITY_GUID`, `AGILITY_API_FETCH_KEY`, `AGILITY_API_PREVIEW_KEY` and your `AGILITY_SECURITY_KEY`.
 
 ## Notes
 

@@ -25,13 +25,16 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
         <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           <div className="lg:w-0 lg:flex-1">
             <Link href="/" as="/">
-              <a className="flex">
+              <a className="flex items-center">
                 <img
-                  className="h-8 w-auto sm:h-10 z-50"
+                  className="h-16 w-auto sm:h-20 z-50"
                   src={header.logo.url}
                   alt={header.logo.label}
                   title={header.logo.siteName}
                 />
+                <p className="font-bold text-xl text-secondary-500 ml-2">
+                  {header.siteName}
+                </p>
               </a>
             </Link>
           </div>

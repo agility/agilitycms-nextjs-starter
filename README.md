@@ -35,9 +35,7 @@ Sign up for the Agility CMS Blog Template
 
 ### Development Mode
 
-When running your site in development mode, you will see the latest content in real-time from the CMS.
-
-To run your site in development mode:
+When running your site in `development` mode, you will see the latest content in real-time from the CMS.
 
 #### yarn
 1. `yarn install`
@@ -56,6 +54,8 @@ To update content locally without restarting your dev server, run `npm run cms-p
 To clear your content cache locally, run `npm run cms-clear`
 
 ### Production Mode
+
+When running your site in `production` mode, you will see the published from the CMS.
 
 #### yarn
 1. `yarn build`

@@ -65,8 +65,8 @@ When running your site in `production` mode, you will see the published from the
 2. `yarn start`
 
 #### npm
-`npm run build`
-`npm run start`
+1. `npm run build`
+2. `npm run start`
 
 ## Deploying Your Site
 The easiest way to deploy a Next.js website to production is to use [Vercel](http://vercel.com/) from the creators of Next.js. Vercel is an all-in-one platform with Global CDN supporting static & Jamstack deployment and Serverless Functions. 

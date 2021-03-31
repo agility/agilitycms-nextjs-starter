@@ -18,5 +18,5 @@ New to Agility CMS? Sign up for a FREE account.
 ### Tailwind CSS
 This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightweight utility-first CSS framework packed with classes that can be composed to build any design, directly in your markup.
 
-### TypeScript
-This starter supports TypeScript out of the box.
+### Typescript
+This starter supports TypeScript out of the box. Simply rename your files with a `.ts` extension to start taking advantage of Typescript concepts such as types and interfaces to describe your data.

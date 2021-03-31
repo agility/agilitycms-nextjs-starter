@@ -81,7 +81,7 @@ function Layout(props) {
         metaHTML={page.seo.metaHTML}
       />
       <div id="site-wrapper">
-        {isPreview && <LoadingWidget message="Loading Preview" />}
+        {isPreview && <LoadingWidget message="Loading Preview Mode" />}
         {!isPreview && (
           <div id="site">
             <PreviewBar {...props} />

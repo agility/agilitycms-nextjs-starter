@@ -181,7 +181,11 @@ module.exports = {
         "monospace",
       ],
     },
-    extend: {},
+    extend: {
+      width: {
+        15.1: "15.1rem",
+      },
+    },
   },
   variants: {
     extend: {},

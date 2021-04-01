@@ -44,7 +44,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   };
 
   return (
-    <div className="bg-agility relative px-8 py-3 text-gray-200">
+    <div className="bg-agility relative px-8 text-gray-200">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         <div className="flex items-center">
           <span className="p-2 rounded-lg mr-4">
@@ -91,7 +91,56 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </a>
           </div>
         </div>
-        <div className="relative flex items-center">
+        <div
+          className={`relative flex items-center ${
+            open ? `bg-white ` : `bg-agility`
+          } py-4`}
+        >
+          {isPreview ? (
+            <p
+              className={`hidden md:block text-sm mr-4 px-2 ${
+                open ? `text-agility` : `text-gray-200`
+              }`}
+            >
+              Previewing <span className="font-bold">Latest</span> Changes
+            </p>
+          ) : (
+            <p className="hidden md:block text-sm mr-4">
+              Viewing <span className="font-bold">Published</span> Content
+            </p>
+          )}
+          <div
+            className="p-2 text-gray-200 rounded-lg cursor-pointer z-20"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? (
+              <FaChevronUp className="text-agility" />
+            ) : (
+              <FaChevronDown className="text-gray-200" />
+            )}
+          </div>
+          <div
+            className="absolute bg-white text-white text-sm py-4 px-4 w-15.1 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl"
+            style={{ display: open ? "block" : "none" }}
+          >
+            {isPreview ? (
+              <p className="mb-4 text-center md:hidden text-agility z-20">
+                Previewing <span className="font-bold">Latest</span> Changes
+              </p>
+            ) : (
+              <p className="mb-4 text-center md:hidden text-agility z-20">
+                Viewing <span className="font-bold">Published</span> Content
+              </p>
+            )}
+            <button
+              className="text-gray-200 bg-agility p-2 w-full rounded-md text-sm"
+              onClick={() => handleView()}
+            >
+              {`View ${isPreview ? `Live` : `Preview`} Mode`}
+            </button>
+          </div>
+        </div>
+        {/* <div className="relative flex items-center">
           {isPreview ? (
             <p className="hidden md:block text-sm mr-4">
               Previewing <span className="font-bold">Latest</span> Changes
@@ -127,7 +176,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
               {`View ${isPreview ? `Live` : `Preview`} Mode`}
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

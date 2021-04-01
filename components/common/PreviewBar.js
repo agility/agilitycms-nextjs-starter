@@ -98,7 +98,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         >
           {isPreview ? (
             <p
-              className={`hidden md:block text-sm mr-4 px-2 font-display ${
+              className={`hidden md:block text-sm px-2 ${
                 open ? `text-agility` : `text-gray-200`
               }`}
             >
@@ -106,7 +106,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </p>
           ) : (
             <p
-              className={`hidden md:block text-sm mr-4 px-2 font-display ${
+              className={`hidden md:block text-sm px-2 ${
                 open ? `text-agility` : `text-gray-200`
               }`}
             >

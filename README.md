@@ -2,9 +2,9 @@
 
 This is sample Next.js starter site that uses Agility CMS and aims to be a foundation for building fully static sites using Next.js and Agility CMS.
 
-Live Website Demo
+[Live Website Demo]()
 
-New to Agility CMS? Sign up for a FREE account.
+[New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
 ## About This Starter
 - Uses our [`@agility/next`](https://github.com/agility/agility-next) package to make getting started with Agility CMS and Next.js easy
@@ -25,7 +25,7 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 This starter supports [TypeScript](https://nextjs.org/docs/basic-features/typescript) out of the box. If you would like to use TypeScript in your project, simply rename your files with a `.ts` extension to start taking advantage of Typescript concepts such as types and interfaces to help describe your data.
 
 ## Getting Started
-Sign up for the Agility CMS Blog Template
+To start using the Agility CMS & Next.js Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
 1. Clone this repository
 2. Run `npm install` or `yarn install`

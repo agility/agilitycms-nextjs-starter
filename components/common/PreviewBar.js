@@ -105,7 +105,11 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
               Previewing <span className="font-bold">Latest</span> Changes
             </p>
           ) : (
-            <p className="hidden md:block text-sm mr-4">
+            <p
+              className={`hidden md:block text-sm mr-4 px-2 ${
+                open ? `text-agility` : `text-gray-200`
+              }`}
+            >
               Viewing <span className="font-bold">Published</span> Content
             </p>
           )}

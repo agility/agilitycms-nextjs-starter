@@ -9,6 +9,36 @@ const TextBlockWithImage = ({ module }) => {
   // set up href for internal links
   const href = "/pages/[...slug]";
 
+  // function to check whether or not the url is absolute
+  const isUrlAbsolute = (url) =>
+    url.indexOf("://") > 0 || url.indexOf("//") === 0;
+
+  // function to generate proper link
+  const generateLink = (url, target, text) => {
+    // if relative link, use next/link
+    if (isUrlAbsolute(url) === false) {
+      return (
+        <Link href={href} as={url} title={text} target={target}>
+          <a className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            {text}
+          </a>
+        </Link>
+      );
+    } else {
+      // else use anchor tag
+      return (
+        <a
+          href={url}
+          title={text}
+          target={target}
+          className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+        >
+          {text}
+        </a>
+      );
+    }
+  };
+
   return (
     <div className="relative px-8">
       <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
@@ -52,13 +82,12 @@ const TextBlockWithImage = ({ module }) => {
             <p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200">
               {fields.content}
             </p>
-            {fields.primaryButton && (
-              <Link href={href} as={fields.primaryButton.href}>
-                <a className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-                  {fields.primaryButton.text}
-                </a>
-              </Link>
-            )}
+            {fields.primaryButton &&
+              generateLink(
+                fields.primaryButton.href,
+                fields.primaryButton.target,
+                fields.primaryButton.text
+              )}
           </div>
         </div>
       </div>

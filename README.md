@@ -7,6 +7,7 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
 ## About This Starter
+
 - Uses our [`@agility/next`](https://github.com/agility/agility-next) package to make getting started with Agility CMS and Next.js easy
 - Connected to a sample Agility CMS Instance for sample content & pages
 - Uses the `getStaticProps` function from Next.js to allow for full SSG (Static Site Generation)
@@ -17,20 +18,23 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 - Provides a functional structure that dynamically routes each page based on the request, loads a Page Templates dynamically, and also dynamically loads and renders appropriate Agility CMS Page Modules (as React components)
 
 ### Tailwind CSS
+
 This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightweight utility-first CSS framework packed with classes that can be composed to build any design, directly in your markup.
 
 It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autoprefixer), a plugin which use the data based on current browser popularity and property support to apply CSS prefixes for you.
 
 ### TypeScript
+
 This starter supports [TypeScript](https://nextjs.org/docs/basic-features/typescript) out of the box. If you would like to use TypeScript in your project, simply rename your files with a `.ts` extension to start taking advantage of Typescript concepts such as types and interfaces to help describe your data.
 
 ## Getting Started
+
 To start using the Agility CMS & Next.js Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
 1. Clone this repository
 2. Run `npm install` or `yarn install`
 3. Rename the `.env.local.example` file to `.env.local`
-4. Retrieve your `GUID`, `API Keys (Preview/Fetch)`, and `Security Key` from Agility CMS
+4. Retrieve your `GUID`, `API Keys (Preview/Fetch)`, and `Security Key` from Agility CMS by going to [Settings > API Keys](https://manager.agilitycms.com/settings/apikeys)
 
 [How to Retrieve your GUID and API Keys from Agility](https://help.agilitycms.com/hc/en-us/articles/360031919212-Retrieving-your-API-Key-s-Guid-and-API-URL-)
 
@@ -41,6 +45,7 @@ To start using the Agility CMS & Next.js Starter, [sign up](https://agilitycms.c
 When running your site in `development` mode, you will see the latest content in real-time from the CMS.
 
 #### yarn
+
 1. `yarn install`
 2. `yarn dev`
 
@@ -49,6 +54,7 @@ To update content locally without restarting your dev server, run `yarn cms-pull
 To clear your content cache locally, run `yarn cms-clear`
 
 #### npm
+
 1. `npm install`
 2. `npm run dev`
 
@@ -61,15 +67,18 @@ To clear your content cache locally, run `npm run cms-clear`
 When running your site in `production` mode, you will see the published from the CMS.
 
 #### yarn
+
 1. `yarn build`
 2. `yarn start`
 
 #### npm
+
 1. `npm run build`
 2. `npm run start`
 
 ## Deploying Your Site
-The easiest way to deploy a Next.js website to production is to use [Vercel](http://vercel.com/) from the creators of Next.js. Vercel is an all-in-one platform with Global CDN supporting static & Jamstack deployment and Serverless Functions. 
+
+The easiest way to deploy a Next.js website to production is to use [Vercel](http://vercel.com/) from the creators of Next.js. Vercel is an all-in-one platform with Global CDN supporting static & Jamstack deployment and Serverless Functions.
 
 <a href="https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjoshua-isaac%2Fagility-nextjs-starter"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
 
@@ -78,6 +87,7 @@ By clicking the button above, you can get this starter repo deployed to Vercel w
 ## Notes
 
 ### How to Register Page Modules
+
 1. To create a new Page Module, create a new React component within the `/components/agility-pageModules` directory.
 2. All of the Page Modules that are being used within the site need to be imported into the `index` file within the `/components/agility-pageModules` directory and added to the `allModules` array:
 
@@ -100,6 +110,7 @@ const allModules = [
 ```
 
 ### How to Register Page Templates
+
 1. To create a new Page Template, create a new React component within the `/components/agility-pageTemplates` directory.
 2. All of the Page Template that are being used within the site need to be imported into the `index` file within the `/components/agility-pageTemplates` directory and added to the `allTemplates` array:
 
@@ -112,6 +123,7 @@ const allTemplates = [
 ```
 
 ### How to Properly Link to an Internal Page
+
 To link to internal pages, use the `next/link` component.
 
 ```
@@ -124,4 +136,5 @@ import Link from 'next/link';
 ```
 
 ### How to Preview Content
+
 Since this is a static site, how can editors preview content in real-time as they are making edits within Agility CMS? Vercel supports Previews out of the box! Simply paste the address of your site deployed on Vercel into your Agility Sitemap Configuration (Settings > Sitemaps), and use it as your Preview Deployment.

@@ -47,7 +47,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
     <div className="bg-agility relative px-8 py-3 text-gray-200">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         <div className="flex items-center">
-          <span className="p-2 bg-black rounded-lg mr-4">
+          <span className="p-2 rounded-lg mr-4">
             <a
               href="https://www.agilitycms.com"
               target="_blank"
@@ -102,7 +102,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </p>
           )}
           <div
-            className="p-2 bg-black text-gray-200 rounded-lg cursor-pointer z-20"
+            className="p-2 text-gray-200 rounded-lg cursor-pointer z-20"
             onClick={() => setOpen(!open)}
           >
             {open ? <FaChevronUp /> : <FaChevronDown />}

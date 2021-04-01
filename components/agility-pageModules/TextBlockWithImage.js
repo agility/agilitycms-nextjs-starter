@@ -13,13 +13,25 @@ const TextBlockWithImage = ({ module }) => {
     <div className="relative px-8">
       <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
         <div className="md:w-6/12 flex-shrink-0 relative">
-          <Image
-            src={fields.image.url}
-            alt={fields.image.label}
-            width="768"
-            height="512"
-            className="rounded-lg object-cover object-center"
-          />
+          {fields.primaryButton ? (
+            <Link href={href} as={fields.primaryButton.href}>
+              <Image
+                src={fields.image.url}
+                alt={fields.image.label}
+                width="768"
+                height="512"
+                className="rounded-lg object-cover object-center cursor-pointer"
+              />
+            </Link>
+          ) : (
+            <Image
+              src={fields.image.url}
+              alt={fields.image.label}
+              width="768"
+              height="512"
+              className="rounded-lg object-cover object-center"
+            />
+          )}
         </div>
         <div
           className={`md:w-6/12 mt-16 md:mt-0 ${

@@ -79,7 +79,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           </div>
           <div>
             <a
-              href="https://www.github.com"
+              href="https://github.com/joshua-isaac/agility-nextjs-starter"
               target="_blank"
               title="View on Github"
               className="text-2xl"
@@ -124,7 +124,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             )}
           </div>
           <div
-            className="absolute bg-white text-white text-sm py-4 px-4 w-15.1 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl max-w-full"
+            className="absolute bg-white text-white text-sm py-4 px-4 w-15.1 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl md:max-w-full"
             style={{ display: open ? "block" : "none" }}
           >
             {isPreview ? (
@@ -144,43 +144,6 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             </button>
           </div>
         </div>
-        {/* <div className="relative flex items-center">
-          {isPreview ? (
-            <p className="hidden md:block text-sm mr-4">
-              Previewing <span className="font-bold">Latest</span> Changes
-            </p>
-          ) : (
-            <p className="hidden md:block text-sm mr-4">
-              Viewing <span className="font-bold">Published</span> Content
-            </p>
-          )}
-          <div
-            className="p-2 text-gray-200 rounded-lg cursor-pointer z-20"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <FaChevronUp /> : <FaChevronDown />}
-          </div>
-          <div
-            className="absolute bg-agility text-white text-sm py-4 px-4 w-64 -right-0 -bottom-28 md:-bottom-20 z-10 rounded-b-lg"
-            style={{ display: open ? "block" : "none" }}
-          >
-            {isPreview ? (
-              <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-                Previewing <span className="font-bold">Latest</span> Changes
-              </p>
-            ) : (
-              <p className="mb-4 text-center md:hidden text-gray-200 z-20">
-                Viewing <span className="font-bold">Published</span> Content
-              </p>
-            )}
-            <button
-              className="bg-gray-200 text-agility p-2 w-full rounded-lg text-sm"
-              onClick={() => handleView()}
-            >
-              {`View ${isPreview ? `Live` : `Preview`} Mode`}
-            </button>
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -79,7 +79,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
           </div>
           <div>
             <a
-              href="https://github.com/joshua-isaac/agility-nextjs-starter"
+              href="https://github.com/agility/agilitycms-nextjs-starter"
               target="_blank"
               title="View on Github"
               className="text-2xl"

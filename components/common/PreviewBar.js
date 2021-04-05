@@ -86,7 +86,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             >
               <div className="flex items-center">
                 <FaGithub className="mr-2" />
-                <p className="hidden md:block text-sm">View on Github</p>
+                <p className="hidden md:block text-sm">View on GitHub</p>
               </div>
             </a>
           </div>

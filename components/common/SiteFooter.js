@@ -63,7 +63,7 @@ const SiteFooter = () => {
             for demo purposes. You can use this to preview the content you
             created on your Agility CMS account.{"\u00A0"}
             <a
-              href="https://www.github.com"
+              href="https://github.com/agility/agilitycms-nextjs-starter"
               title="View on Github"
               target="_blank"
               className="text-gray-600 mr-2 border-b border-gray-600"

@@ -64,11 +64,11 @@ const SiteFooter = () => {
             created on your Agility CMS account.{"\u00A0"}
             <a
               href="https://github.com/agility/agilitycms-nextjs-starter"
-              title="View on Github"
+              title="View on GitHub"
               target="_blank"
               className="text-gray-600 mr-2 border-b border-gray-600"
             >
-              Github
+              GitHub
             </a>
             <a
               href="https://help.agilitycms.com/hc/en-us"

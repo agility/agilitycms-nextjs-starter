@@ -35,6 +35,9 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
       // Create and send a GET request
       xhr.open("GET", "/api/generatePreviewKey");
       xhr.send();
+    } else if (isDevelopment) {
+      alert("You are currently in Development Mode, Live Mode is unavailable.");
+      setOpen(false);
     } else {
       const exit = confirm("Would you like to exit Preview Mode?");
       if (exit === true) {

@@ -29,20 +29,19 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
               previewKey
             )}`
           );
-          console.log("redirect here");
         }
       };
       // Create and send a GET request
       xhr.open("GET", "/api/generatePreviewKey");
       xhr.send();
-    } else if (isDevelopment) {
-      alert("You are currently in Development Mode, Live Mode is unavailable.");
-      setOpen(false);
-    } else {
+    } else if (isDevelopment && isDevelopmentMode) {
       const exit = confirm("Would you like to exit Preview Mode?");
       if (exit === true) {
         window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
       } else return;
+    } else {
+      alert("You are in Development Mode, Live Mode is unavailable.");
+      setOpen(false);
     }
   };
 

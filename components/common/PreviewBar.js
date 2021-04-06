@@ -15,30 +15,34 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
 
   // handle view function to determine preview / live mode
   const handleView = () => {
-    if (!isDevelopmentMode && !isPreview) {
-      const xhr = new XMLHttpRequest();
-
-      xhr.onload = function () {
-        // Process our return data
-        if (xhr.status >= 200 && xhr.status < 300) {
-          // What do when the request is successful
-          const previewKey = xhr.responseText;
-
-          window.location.replace(
-            `${window.location.pathname}?agilitypreviewkey=${escape(
-              previewKey
-            )}`
-          );
-        }
-      };
-      // Create and send a GET request
-      xhr.open("GET", "/api/generatePreviewKey");
-      xhr.send();
+    if (isDevelopmentMode) {
+      alert("You are currently in Development Mode, Live Mode is unavailable.");
     } else {
-      const exit = confirm("Would you like to exit Preview Mode?");
-      if (exit === true) {
-        window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
-      } else return;
+      if (!isDevelopmentMode && !isPreview) {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function () {
+          // Process our return data
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // What do when the request is successful
+            const previewKey = xhr.responseText;
+
+            window.location.replace(
+              `${window.location.pathname}?agilitypreviewkey=${escape(
+                previewKey
+              )}`
+            );
+          }
+        };
+        // Create and send a GET request
+        xhr.open("GET", "/api/generatePreviewKey");
+        xhr.send();
+      } else {
+        const exit = confirm("Would you like to exit Preview Mode?");
+        if (exit === true) {
+          window.location.href = `/api/exitPreview?slug=${window.location.pathname}`;
+        } else return;
+      }
     }
   };
 

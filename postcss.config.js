@@ -2,7 +2,7 @@
 module.exports = {
   plugins: {
     // Tailwind CSS (Utility First CSS Framework)
-    "@tailwindcss/jit": {},
+	tailwindcss: {},
     // Autoprefixer (Use the data based on current browser popularity and property support to apply prefixes for you)
     autoprefixer: {},
   },

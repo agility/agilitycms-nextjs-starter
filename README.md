@@ -138,3 +138,28 @@ import Link from 'next/link';
 ### How to Preview Content
 
 Since this is a static site, how can editors preview content in real-time as they are making edits within Agility CMS? Vercel supports Previews out of the box! Simply paste the address of your site deployed on Vercel into your Agility Sitemap Configuration (Settings > Sitemaps), and use it as your Preview Deployment.
+
+## Resources
+
+### Agility CMS
+- [Official site](https://agilitycms.com)
+- [Documentation](https://help.agilitycms.com/hc/en-us)
+
+### Next.js
+- [Official site](https://nextjs.org/)
+- [Documentation](https://nextjs.org/docs/getting-started)
+
+### Vercel
+- [Official site](https://vercel.com/)
+
+### Tailwind CSS
+- [Official site](http://tailwindcss.com/)
+- [Documentation](http://tailwindcss.com/docs)
+
+### Community
+- [Official Slack](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI)
+- [Blog](https://agilitycms.com/resources/posts)
+- [GitHub](https://github.com/agility)
+- [Forums](https://help.agilitycms.com/hc/en-us/community/topics)
+- [Facebook](https://www.facebook.com/AgilityCMS/)
+- [Twitter](https://twitter.com/AgilityCMS)

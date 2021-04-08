@@ -2,7 +2,7 @@
 
 This is sample Next.js starter site that uses Agility CMS and aims to be a foundation for building fully static sites using Next.js and Agility CMS.
 
-[Live Website Demo]()
+[Live Website Demo](https://agilitycms-nextjs-starter-blog.vercel.app/)
 
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 

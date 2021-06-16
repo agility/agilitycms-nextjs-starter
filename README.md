@@ -76,6 +76,27 @@ When running your site in `production` mode, you will see the published from the
 1. `npm run build`
 2. `npm run start`
 
+## Accessing Content
+Content get's passed to your Agility Page Modules as `props`, but you can also use the built in API to access content via the Sync SDK.
+
+Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, and `getSitemap`.
+
+### getSitemap Parameters
+`channelName`, string, *required* - The contentID of the requested item in this locale.
+`languageCode`, string, *required* - The reference name of the Sitemap in Agility to return.
+
+### getContentItem Parameters
+`contentID`, integer, *required* - The contentID of the requested item in this locale.
+`languageCode`, string, *required* - The locale code you want to retrieve content for.
+`depth`, integer - The maximum level to expand linked content from this item.
+`expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
+
+## getContentList Parameters
+`referenceName`, string, *required* - The unique reference name of the content list you wish to retrieve in the current locale. Reference names must be ALL lowercase.
+`languageCode`, string, *required* - The locale code you want to retrieve content for.
+`depth`, integer - The depth of list items.
+`expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
+
 ## Deploying Your Site
 
 The easiest way to deploy a Next.js website to production is to use [Vercel](http://vercel.com/) from the creators of Next.js. Vercel is an all-in-one platform with Global CDN supporting static & Jamstack deployment and Serverless Functions.

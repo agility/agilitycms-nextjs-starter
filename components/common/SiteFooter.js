@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { FaTwitter, FaInstagram, FaSlack, FaYoutube } from "react-icons/fa";
 
 /**
@@ -49,7 +48,7 @@ const SiteFooter = () => {
             target="_blank"
             title="Agility CMS"
           >
-            <Image
+            <img
               src="/assets/agility-logo.svg"
               alt="Agility CMS"
               width="90"

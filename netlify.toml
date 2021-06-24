@@ -1,2 +1,0 @@
-[context.production.environment]
-NEXT_SERVERLESS = "true"

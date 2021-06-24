@@ -1,13 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { AgilityImage } from "@agility/nextjs"
 
 const PostsListing = ({ module, customData }) => {
   // get posts
   const { posts } = customData;
 
-  // set up href for internal links
-  let href = "/pages/[...slug]";
 
   // if there are no posts, display message on frontend
   if (posts.length <= 0) {
@@ -15,7 +13,7 @@ const PostsListing = ({ module, customData }) => {
       <div className="mt-44 px-6 flex flex-col items-center justify-center">
         <h1 className="text-3xl text-center font-bold">No posts available.</h1>
         <div className="my-10">
-          <Link href={href} as="/home">
+          <Link href={"/"}>
             <a className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary transition duration-300">
               Return Home
             </a>
@@ -30,11 +28,11 @@ const PostsListing = ({ module, customData }) => {
       <div className="max-w-screen-xl mx-auto">
         <div className="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, index) => (
-            <Link href={href} as={post.url} key={index}>
+            <Link href={post.url} key={index}>
               <a>
                 <div className="flex-col group mb-8 md:mb-0">
                   <div className="relative h-64">
-                    <Image
+                    <AgilityImage
                       src={post.imageSrc}
                       alt={post.imageAlt}
                       className="object-cover object-center rounded-t-lg"
@@ -86,7 +84,7 @@ PostsListing.getCustomInitialProps = async ({
 
   try {
     // get sitemap...
-    let sitemap = await api.getSitemap({
+    let sitemap = await api.getSitemapFlat({
       channelName: channelName,
       languageCode,
     });
@@ -95,23 +93,17 @@ PostsListing.getCustomInitialProps = async ({
     let rawPosts = await api.getContentList({
       referenceName: "posts",
       languageCode,
-    });
-
-    // get categories...
-    let categories = await api.getContentList({
-      referenceName: "categories",
-      languageCode,
+	  contentLinkDepth: 2,
+	  depth: 2,
+	  take: 50
     });
 
     // resolve dynamic urls
-    const dynamicUrls = resolvePostUrls(sitemap, rawPosts);
+    const dynamicUrls = resolvePostUrls(sitemap, rawPosts.items);
 
-    const posts = rawPosts.map((post) => {
-      // categoryID
-      const categoryID = post.fields.category?.contentid;
-
-      // find category
-      const category = categories?.find((c) => c.contentID == categoryID);
+    const posts = rawPosts.items.map((post) => {
+      //category
+      const category = post.fields.category?.fields.title || "Uncategorized"
 
       // date
       const date = new Date(post.fields.date).toLocaleDateString();
@@ -130,7 +122,7 @@ PostsListing.getCustomInitialProps = async ({
         title: post.fields.title,
         date,
         url,
-        category: category?.fields.title || "Uncategorized",
+        category,
         imageSrc,
         imageAlt,
       };

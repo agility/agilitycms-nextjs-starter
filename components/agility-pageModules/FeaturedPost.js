@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import truncate from "truncate-html";
+import { AgilityImage } from "@agility/nextjs"
 
 const FeaturedPost = ({ module }) => {
   // get module fields
@@ -21,8 +21,6 @@ const FeaturedPost = ({ module }) => {
     reserveLastWord: true,
   });
 
-  // set up href for internal links
-  const href = "/pages/[...slug]";
 
   // return null if no featured post is selected
   if (!featuredPost) {
@@ -33,10 +31,10 @@ const FeaturedPost = ({ module }) => {
     <div className="relative px-8 mb-8">
       <div className="flex flex-col sm:flex-row max-w-screen-xl mx-auto pt-8 group">
         <div className="sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg relative">
-          <Link href={href} as={`/blog/${featuredPost.fields.slug}`}>
+          <Link href={`/blog/${featuredPost.fields.slug}`}>
             <a className="cursor-pointer">
               <div className="h-64 sm:h-96 relative">
-                <Image
+                <AgilityImage
                   src={featuredPost.fields.image.url}
                   className="object-cover object-center rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
                   layout="fill"
@@ -46,7 +44,7 @@ const FeaturedPost = ({ module }) => {
           </Link>
         </div>
         <div className="sm:w-1/2 lg:w-1/3 bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0 relative">
-          <Link href={href} as={`/blog/${featuredPost.fields.slug}`}>
+          <Link href={`/blog/${featuredPost.fields.slug}`}>
             <a className="cursor-pointer">
               <div className="font-display uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content">
                 {featuredPost.fields.category.fields.title}

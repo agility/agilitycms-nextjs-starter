@@ -150,8 +150,7 @@ To link to internal pages, use the `next/link` component.
 ```
 import Link from 'next/link';
 
-//where '[...slug]' is the catch-all dynamic page we have (pages/[...slug].js) and '/posts' is the actual real page path for the page
-<Link href="[...slug]" as="/posts">
+<Link href="/posts">
   <a>{item.fields.title}</a>
 </Link>
 ```

@@ -8,8 +8,5 @@ module.exports = {
 			`cdn-dev.aglty.io`,
 			`${process.env.AGILITY_GUID}-cdn.agilitycms.cloud`,
 		],
-	},
-	future: {
-		webpack5: true
-	},
+	}
 };

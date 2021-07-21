@@ -13,6 +13,7 @@ import {
 const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
   const [open, setOpen] = useState(false);
 
+
   // handle view function to determine preview / live mode
   const handleView = () => {
     if (isDevelopmentMode) {
@@ -52,7 +53,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
         <div className="flex items-center">
           <span className="p-2 rounded-lg mr-4">
             <a
-              href="https://www.agilitycms.com"
+              href="https://manager.agilitycms.com"
               target="_blank"
               title="Agility CMS"
             >

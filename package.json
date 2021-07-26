@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "name": "agilitycms-nextjs-starter",
-  "version": "0.3.0",
-=======
   "name": "agility-nextjs-blog",
-  "version": "0.2.1",
->>>>>>> main
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "predev": "agility-next sync",

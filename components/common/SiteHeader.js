@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import head from "next/head";
+import { gql } from "@apollo/client";
+import client from "../../lib/apollo-client";
 
 const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
 
+  const { links, siteHeader } = header;
+
   // open / close mobile nav
   const [open, setOpen] = useState(false);
-
 
   if (!header) {
     return (
@@ -27,12 +29,12 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               <a className="flex items-center">
                 <img
                   className="h-14 sm:h-20 w-auto z-50"
-                  src={header.logo.url}
-                  alt={header.logo.label}
-                  title={header.logo.siteName}
+                  src={siteHeader[0].fields.logo.url}
+                  alt={siteHeader[0].fields.logo.label}
+                  title={siteHeader[0].fields.logo.siteName}
                 />
                 <p className="font-bold text-xl text-secondary-500 ml-3 mt-2">
-                  {header.siteName}
+                  {siteHeader[0].fields.siteName}
                 </p>
               </a>
             </Link>
@@ -62,7 +64,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
             </button>
           </div>
           <nav className="hidden md:flex space-x-10">
-            {header.links.map((navitem, index) => {
+            {links.map((navitem, index) => {
               return (
                 <Link href={navitem.path} key={`mobile-${index}`}>
                   <a className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 border-transparent border-b-2 hover:border-primary-500 hover:border-b-primary hover:border-b-2 focus:outline-none focus:text-primary-500 transition duration-300">
@@ -110,7 +112,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               </div>
               <div>
                 <nav className="grid gap-y-8">
-                  {header.links.map((navitem, index) => {
+                  {links.map((navitem, index) => {
                     return (
                       <Link key={`nav-${index}`} href={navitem.path}>
                         <a
@@ -157,31 +159,37 @@ SiteHeader.getCustomInitialProps = async function ({
   // set up api
   const api = agility;
 
-  // set up content item
-  let contentItem = null;
-
   // set up links
   let links = [];
 
+  // set up header
+  let siteHeader;
+
   try {
-    // try to fetch our site header
-    let header = await api.getContentList({
-      referenceName: "siteheader",
-      languageCode: languageCode,
-	  take: 1
+    // get header content item
+    const { data } = await client.query({
+      context: {
+        headers: {
+          apikey: process.env.AGILITY_API_FETCH_KEY,
+        },
+      },
+      query: gql`
+        {
+          siteheader {
+            fields {
+              siteName
+              logo {
+                url
+                label
+              }
+            }
+          }
+        }
+      `,
     });
-
-    // if we have a header, set as content item
-    if (header && header.items && header.items.length > 0) {
-      contentItem = header.items[0];
-
-      // else return null
-    } else {
-      return null;
-    }
+    siteHeader = data.siteheader;
   } catch (error) {
-    if (console) console.error("Could not load site header item.", error);
-    return null;
+    if (console) console.error(error);
   }
 
   try {
@@ -206,9 +214,8 @@ SiteHeader.getCustomInitialProps = async function ({
 
   // return clean object...
   return {
-    siteName: contentItem.fields.siteName,
-    logo: contentItem.fields.logo,
     links,
+    siteHeader,
   };
 };
 

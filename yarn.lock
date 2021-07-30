@@ -19,10 +19,10 @@
     dotenv "^8.2.0"
     proper-lockfile "^4.1.2"
 
-"@agility/nextjs@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-0.2.0.tgz#6e51debc03247e9a40e44700d9795b56f785d7b2"
-  integrity sha512-4whXxNGcnkd0tZt0oLG/rJ+i7wHeLAHlaXEiFp25NusywMtA8dGj6iMxWam8uA5jSHUof2UM0jUtiOsX9riAow==
+"@agility/nextjs@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-0.3.1.tgz#0138c3ea4188f8b7fef33324ffb4604852027e72"
+  integrity sha512-6UVzBfRwM3Qw6k4AJLSqYoSUAEQsevCjIrfpPLMR43VHXHbmbe4ihq6Gj+D4REvjcB7kPLDnjhqWKFA+zwiAjw==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"

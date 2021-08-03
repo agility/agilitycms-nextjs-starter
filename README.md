@@ -101,7 +101,8 @@ Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, a
 ### getContentList Parameters
 - `referenceName`, string, *required* - The unique reference name of the content list you wish to retrieve in the current locale. Reference names must be ALL lowercase.
 - `languageCode`, string, *required* - The locale code you want to retrieve content for.
-- `depth`, integer - The depth of list items.
+- `depth`, integer - The depth of list items (Sync SDK).
+- - `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
 ## Deploying Your Site

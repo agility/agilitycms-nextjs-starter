@@ -83,7 +83,7 @@ When running your site in `production` mode, you will see the published from the
 2. `npm run start`
 
 ## Accessing Content
-Content get's passed to your Agility Page Modules as `props`, but you can also use the built in API to access content via the Sync SDK.
+Content get's passed to your Agility Page Modules as `props`, but you can also use the built in API to access. The API will first try to access the [Sync SDK](https://github.com/agility/agility-sync-sdk) to see if any content is saved locally. If no content is stored locally, the API will fallback to our [REST API](https://agilitydocs.netlify.app/agility-content-fetch-js-sdk/1.1.1/index.html).
 
 Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, and `getSitemap`.
 
@@ -94,7 +94,8 @@ Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, a
 ### getContentItem Parameters
 - `contentID`, integer, *required* - The contentID of the requested item in this locale.
 - `languageCode`, string, *required* - The locale code you want to retrieve content for.
-- `depth`, integer - The maximum level to expand linked content from this item.
+- `depth`, integer - The maximum level to expand linked content from this item (Sync SDK).
+- `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
 ### getContentList Parameters

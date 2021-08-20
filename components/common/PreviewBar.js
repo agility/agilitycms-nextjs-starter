@@ -55,6 +55,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             <a
               href="https://manager.agilitycms.com"
               target="_blank"
+              rel="noreferrer"
               title="Agility CMS"
             >
               <img
@@ -73,6 +74,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             <a
               href="https://help.agilitycms.com/hc/en-us"
               target="_blank"
+              rel="noreferrer"
               title="Help Center"
             >
               <div className="flex items-center">
@@ -85,6 +87,7 @@ const PreviewBar = ({ isPreview, isDevelopmentMode }) => {
             <a
               href="https://github.com/agility/agilitycms-nextjs-starter"
               target="_blank"
+              rel="noreferrer"
               title="View on GitHub"
               className="text-2xl"
             >

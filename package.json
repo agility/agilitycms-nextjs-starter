@@ -1,6 +1,6 @@
 {
-  "name": "agility-nextjs-blog",
-  "version": "0.3.1",
+  "name": "agilitycms-nextjs-starter",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "predev": "agility-next sync",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@agility/content-fetch": "^1.1.1",
     "@agility/content-sync": "^1.0.3",
-    "@agility/nextjs": "^0.3.1",
+    "@agility/nextjs": "^0.4.1",
     "@tailwindcss/typography": "^0.4.1",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",

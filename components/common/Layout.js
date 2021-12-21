@@ -7,18 +7,14 @@ import SEO from "./SEO";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import LoadingWidget from "./LoadingWidget";
+import { Login } from "@agility-mono-example/shared-components";
 
 // set up handle preview
 const isPreview = handlePreview();
 
 function Layout(props) {
-  const {
-    page,
-    sitemapNode,
-    dynamicPageItem,
-    notFound,
-    pageTemplateName,
-  } = props;
+  const { page, sitemapNode, dynamicPageItem, notFound, pageTemplateName } =
+    props;
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
@@ -53,6 +49,7 @@ function Layout(props) {
             <PreviewBar {...props} />
             <div className="flex flex-col min-h-screen">
               <SiteHeader {...props} />
+              <Login />
               <main className="flex-grow">
                 <AgilityPageTemplate {...props} />
               </main>

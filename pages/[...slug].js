@@ -25,13 +25,10 @@ export async function getStaticProps({
     globalComponents,
   });
 
-  if (!agilityProps || agilityProps.notFound) {
+  if (!agilityProps) {
     // We throw to make sure this fails at build time as this is never expected to happen
-    return {
-      notFound: true,
-    };
+    throw new Error(`Page not found`);
   }
-
 
   return {
     // return all props
@@ -45,7 +42,6 @@ export async function getStaticProps({
 
 // Next.js will statically pre-render all the paths from Agility CMS
 export async function getStaticPaths({ locales, defaultLocale }) {
-  
   //get the paths configured in agility
   let agilityPaths = await getAgilityPaths({
     preview: false,
@@ -53,11 +49,8 @@ export async function getStaticPaths({ locales, defaultLocale }) {
     defaultLocale,
   });
 
-    //remove the 404 and 500 page out of the paths to build as part of this slug
-    const filteredPaths = agilityPaths.filter(p => p !== "/404")
-
   return {
-    paths: filteredPaths,
+    paths: agilityPaths,
     fallback: true,
   };
 }

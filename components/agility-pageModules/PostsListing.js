@@ -1,36 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { AgilityImage } from "@agility/nextjs"
-import agility from "@agility/content-fetch"
 
 const PostsListing = ({ module, customData }) => {
-
   // get posts
-  const { posts, totalCount } = customData;
+  const { posts } = customData;
 
-  const [take, setTake] = useState(3)
-  const [skip, setSkip] = useState(3)
-  const [loadedPosts, setLoadedPosts] = useState([])
-  
-
-  const api = agility.getApi({
-    guid: '9977317c-u',
-    apiKey: 'defaultlive.a2d442ba5d704be819ea224c2865880ef8ead951c62420606df7dd3c82c4a95f'
-  })
-
-  const loadMorePosts = async () => {
-    const posts = await api.getContentList({
-      referenceName: 'posts',
-      languageCode: 'en-us',
-      contentLinkDepth: 2,
-      depth: 2,
-      take: take,
-      skip: skip
-    })
-    
-    setLoadedPosts(prevState => [...prevState, ...posts.items])
-    
-  }
 
   // if there are no posts, display message on frontend
   if (posts.length <= 0) {
@@ -80,44 +55,8 @@ const PostsListing = ({ module, customData }) => {
               </a>
             </Link>
           ))}
-          {loadedPosts && loadedPosts.map((post, index) => {
-            return (
-              <Link href={`/blog/${post.fields.slug}`} key={index}>
-              <a>
-                <div className="flex-col group mb-8 md:mb-0">
-                  <div className="relative h-64">
-                    <AgilityImage
-                      src={post.fields.image.url}
-                      alt={post.fields.image.label}
-                      className="object-cover object-center rounded-t-lg"
-                      layout="fill"
-                    />
-                  </div>
-                  <div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
-                    <div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
-                      {post.fields.category.fields.title}
-                    </div>
-                    <div className="border-b-2 border-primary-500 w-8"></div>
-                    <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
-                      {post.fields.date}
-                    </div>
-                    <h2 className="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
-                      {post.fields.title}
-                    </h2>
-                  </div>
-                </div>
-              </a>
-            </Link>
-            )
-          })}
         </div>
       </div>
-      {totalCount - 3 !== loadedPosts.length && (
-        <button onClick={() => {
-          loadMorePosts()
-          setSkip(skip + 3)
-        }}>Load More</button>
-      )}
     </div>
   );
 };
@@ -154,9 +93,9 @@ PostsListing.getCustomInitialProps = async ({
     let rawPosts = await api.getContentList({
       referenceName: "posts",
       languageCode,
-      contentLinkDepth: 2,
-      depth: 2,
-      take: 3
+	  contentLinkDepth: 2,
+	  depth: 2,
+	  take: 50
     });
 
     // resolve dynamic urls
@@ -172,13 +111,11 @@ PostsListing.getCustomInitialProps = async ({
       // url
       const url = dynamicUrls[post.contentID] || "#";
 
-
       // post image src
       let imageSrc = post.fields.image.url;
 
       // post image alt
       let imageAlt = post.fields.image?.label || null;
-
 
       return {
         contentID: post.contentID,
@@ -193,7 +130,6 @@ PostsListing.getCustomInitialProps = async ({
 
     return {
       posts,
-      totalCount: rawPosts.totalCount
     };
   } catch (error) {
     if (console) console.error(error);

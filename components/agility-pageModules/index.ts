@@ -17,7 +17,7 @@ const allModules = [
   { name: "RichTextArea", module: RichTextArea },
 ];
 
-export const getModule = (moduleName) => {
+export const getModule = (moduleName:string ) => {
   if (!moduleName) return null;
   const obj = allModules.find(
     (m) => m.name.toLowerCase() === moduleName.toLowerCase()

@@ -9,6 +9,7 @@ interface ITextBlockWithImage {
 	imagePosition: "left" | "right"
 	image: ImageField
 	primaryButton: URLField
+	highPriority?: string
 }
 
 const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
@@ -47,6 +48,9 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 		}
 	}
 
+	//determine if the image should be high priority
+	const priority = module.fields.highPriority === "true"
+
 	return (
 		<div className="relative px-8">
 			<div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
@@ -59,6 +63,7 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 								width="768"
 								height="512"
 								className="rounded-lg object-cover object-center cursor-pointer aspect-[6/4]"
+								priority={priority}
 							/>
 						</Link>
 					) : (
@@ -68,6 +73,7 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 							width="768"
 							height="512"
 							className="rounded-lg object-cover object-center"
+							priority={priority}
 						/>
 					)}
 				</div>

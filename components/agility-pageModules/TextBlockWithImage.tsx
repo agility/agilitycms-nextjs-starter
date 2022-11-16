@@ -1,33 +1,37 @@
-import React from "react";
-import { AgilityImage, ImageField, Module, URLField } from "@agility/nextjs"
-import Link from "next/link";
+import React from "react"
+import {AgilityImage, ImageField, Module, URLField} from "@agility/nextjs"
+import Link from "next/link"
 
 interface ITextBlockWithImage {
 	title: string
 	content: string
-	tagline?:string
+	tagline?: string
 	imagePosition: "left" | "right"
 	image: ImageField
 	primaryButton: URLField
 }
 
-const TextBlockWithImage: Module<ITextBlockWithImage> = ({ module }) => {
+const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 	// get module fields
-	const { fields } = module;
+	const {fields} = module
 
 	// function to check whether or not the url is absolute
-	const isUrlAbsolute = (url:string) =>
-		url.indexOf("://") > 0 || url.indexOf("//") === 0;
+	const isUrlAbsolute = (url: string) => url.indexOf("://") > 0 || url.indexOf("//") === 0
 
 	// function to generate proper link
-	const generateLink = (url:string, target:string, text:string ) => {
+	const generateLink = (url: string, target: string, text: string) => {
 		// if relative link, use next/link
 		if (isUrlAbsolute(url) === false) {
 			return (
-				<Link href={url} title={text} target={target} className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+				<Link
+					href={url}
+					title={text}
+					target={target}
+					className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+				>
 					{text}
 				</Link>
-			);
+			)
 		} else {
 			// else use anchor tag
 			return (
@@ -39,16 +43,16 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({ module }) => {
 				>
 					{text}
 				</a>
-			);
+			)
 		}
-	};
+	}
 
 	return (
 		<div className="relative px-8">
 			<div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
 				<div className="md:w-6/12 flex-shrink-0 relative ">
 					{fields.primaryButton ? (
-						<Link href={fields.primaryButton.href}>
+						<Link href={fields.primaryButton.href} className="relative">
 							<AgilityImage
 								src={fields.image.url}
 								alt={fields.image.label}
@@ -91,6 +95,6 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({ module }) => {
 			</div>
 		</div>
 	)
-};
+}
 
-export default TextBlockWithImage;
+export default TextBlockWithImage

@@ -7,8 +7,6 @@ const nextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'cdn.aglty.io',
-				port: '443',
-				pathname: '**',
 			},
 		],
 	},

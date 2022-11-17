@@ -27,6 +27,7 @@ const PostDetails: ModuleWithDynamic<any, IPost> = ({ dynamicPageItem, languageC
 						alt={post.image.label}
 						className="object-cover object-center rounded-lg"
 						fill
+						sizes="100vw"
 					/>
 				</div>
 				<div className="max-w-2xl mx-auto mt-4">

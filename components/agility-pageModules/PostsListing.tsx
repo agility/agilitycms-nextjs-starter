@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { AgilityImage, CustomInitPropsArg, ModuleWithInit } from '@agility/nextjs'
 import {DateTime} from "luxon"
+import Image from "next/image";
 
 interface IPostListing {
 	title: string,
@@ -59,8 +60,10 @@ const PostListing: ModuleWithInit<IPostListing, ICustomData> = ({module, customD
 									<AgilityImage
 										src={post.imageSrc}
 										alt={post.imageAlt}
-
 										className="object-cover object-center rounded-t-lg"
+										sizes="(max-width: 768px) 100vw,
+												(max-width: 1200px) 50vw,
+												33vw"
 										fill
 									/>
 								</div>

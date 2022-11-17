@@ -6,7 +6,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'cdn.aglty.io',
+				hostname: '*.aglty.io',
 			},
 		],
 	},

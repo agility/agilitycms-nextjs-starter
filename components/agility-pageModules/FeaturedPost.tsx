@@ -3,6 +3,7 @@ import {DateTime} from "luxon"
 import {stripHtml} from "string-strip-html"
 import {Module, AgilityImage, ContentItem, renderHTML} from "@agility/nextjs"
 import {IPost} from "../../lib/types/IPost"
+import Image from "next/image"
 
 interface IFeaturedPostModule {
 	featuredPost?: ContentItem<IPost>
@@ -32,12 +33,16 @@ const FeaturedPost: Module<IFeaturedPostModule> = ({module}) => {
 				<div className="flex flex-col sm:flex-row max-w-screen-xl mx-auto pt-8 group">
 					<div className="sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg relative">
 						<Link href={`/blog/${featuredPost?.fields.slug}`} className="cursor-pointer">
-							<div className="h-64 sm:h-96 relative">
+							<div className="h-64 sm:h-96 relative" style={{width: "100%"}}>
 								<AgilityImage
 									src={featuredPost.fields.image.url}
 									alt={featuredPost.fields.image.label}
 									className="object-cover object-center rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
+									priority
 									fill
+									sizes="(max-width: 640px) 100vw,
+												50vw"
+
 								/>
 							</div>
 						</Link>

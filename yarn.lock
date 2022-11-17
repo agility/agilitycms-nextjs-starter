@@ -10,10 +10,10 @@
     axios "^0.21.1"
     axios-cache-adapter "^2.4.1"
 
-"@agility/nextjs@13.0.0-rc1":
-  version "13.0.0-rc1"
-  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-13.0.0-rc1.tgz#6e198089f507484d2224b962d36cb7ed26b8b7da"
-  integrity sha512-ZdApDmMxBiorvjPfKxS7uszsLn2zRp6G3fV9Y6in5clnoUg/1r+EJ0M8OVmZVLTlLiDB+EvEqxCNie+y0z7IGw==
+"@agility/nextjs@13.0.0-rc2":
+  version "13.0.0-rc2"
+  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-13.0.0-rc2.tgz#7a9b8b59c69380d1aa86d00371b9e2c39aaba177"
+  integrity sha512-YpOSAkjc0mQtsTN+LKCJejl9FLNdEq/PPJiA4T52oZuR+2oXFE26byZhDJvK9voImSEeffxdO0mnfFog17ZyWA==
 
 "@babel/runtime-corejs3@^7.10.2":
   version "7.20.1"

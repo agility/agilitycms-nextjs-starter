@@ -6,22 +6,30 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
+## 📢 UPDATED FOR NEXT.JS 13 📢
+- We have updated this starter for Next.js 13.  It is using a pre-release version of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs/v/13.0.0-rc2) npm package specialized for the new version.
+
 ### One Step Create and Deploy to Vercel
 
 Click below to create this project in Agility CMS and deploy it automatically to Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/agility/agilitycms-nextjs-starter&project-name=agilitycms-nextjs-starter&repository-name=agilitycms-nextjs-starter&developer-id=oac_Dnqk9CoC6rZ18k9nVR9KresV&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&production-deploy-hook=cms-deploy-hook&demo-title=Website%20Blog%20with%20Agility%20CMS%20and%20Next.js&demo-description=Next.js%20is%20the%20most%20flexible%20and%20powerful%20framework%20for%20building%20websites%20on%20the%20Jamstack%2C%20and%20we%27ve%20unlocked%20that%20power%20with%20Agility%20CMS%20in%20this%20starter%20template.%0A%0AThis%20project%20is%20an%20example%20blog%2C%20but%20that%27s%20just%20the%20beginning.%20The%20code%20itself%20takes%20advantage%20of%20powerful%20tools%20such%20Tailwind%20CSS%2C%20a%20simple%20and%20lightweight%20utility-first%20CSS%20framework%2C%20and%20next%2Fimage%20for%20automatic%20image%20optimization.&demo-url=https%3A%2F%2Fagilitycms-nextjs-starter-blog.vercel.app%2F&demo-image=https%3A%2F%2Fstatic.agilitycms.com%2FAttachments%2FNewItems%2Fnext-js-starter-screenshot.jpg%3Fw%3D600%26q%3D60&external-id=%7B%22githubRepo%22%3A%22github.com%2Fagility%2Fagilitycms-nextjs-starter%22%7D)
 
+
+
 ## About This Starter
 
-- Uses our [`@agility/next`](https://github.com/agility/agility-next) package to make getting started with Agility CMS and Next.js easy
+- Uses our [`@agility/nextjs`](https://www.npmjs.com/package/@agility/nextjs) package to make getting started with Agility CMS and Next.js easy
+- Support for Next.js 13 and React 18
 - Connected to a sample Agility CMS Instance for sample content & pages
 - Uses the `getStaticProps` function from Next.js to allow for full SSG (Static Site Generation)
-- Supports [`next/image`](https://nextjs.org/docs/api-reference/next/image) for image optimization
+- Supports [`next/image`](https://nextjs.org/docs/api-reference/next/image) for image optimization using the `<AgilityImage />` component or the next.js `<Image />` component.
 - Supports full [Page Management](https://help.agilitycms.com/hc/en-us/articles/360055805831)
 - Supports Preview Mode
-- Uses `revalidate` tag with Vercel to enable [ISR (Incremental Static Regeneration)](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) builds
+- Supports the `@next/font` package
+- Uses the `revalidate` and `fallback` properties to enable [ISR (Incremental Static Regeneration)](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) builds
 - Provides a functional structure that dynamically routes each page based on the request, loads a Page Templates dynamically, and also dynamically loads and renders appropriate Agility CMS Page Modules (as React components)
+- Supports component level data fetching.
 
 ### Tailwind CSS
 
@@ -31,7 +39,7 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ### TypeScript
 
-This starter supports [TypeScript](https://nextjs.org/docs/basic-features/typescript) out of the box. If you would like to use TypeScript in your project, simply rename your files with a `.ts` extension to start taking advantage of Typescript concepts such as types and interfaces to help describe your data.
+This starter is written in TypeScript, with ESLint.
 
 ## Getting Started
 
@@ -55,22 +63,16 @@ When running your site in `development` mode, you will see the latest content in
 1. `yarn install`
 2. `yarn dev`
 
-To update content locally without restarting your dev server, run `yarn cms-pull`
-
-To clear your content cache locally, run `yarn cms-clear`
+This will launch the site in development mode, using your preview API key to pull in the latest content from Agility.
 
 #### npm
 
 1. `npm install`
 2. `npm run dev`
 
-To update content locally without restarting your dev server, run `npm run cms-pull`
-
-To clear your content cache locally, run `npm run cms-clear`
-
 ### Production Mode
 
-When running your site in `production` mode, you will see the published from the CMS.
+When running your site in `production` mode, you will see the published content from Agility.
 
 #### yarn
 
@@ -83,9 +85,9 @@ When running your site in `production` mode, you will see the published from the
 2. `npm run start`
 
 ## Accessing Content
-Content get's passed to your Agility Page Modules as `props`, but you can also use the built in API to access. The API will first try to access the [Sync SDK](https://github.com/agility/agility-sync-sdk) to see if any content is saved locally. If no content is stored locally, the API will fallback to our [REST API](https://agilitydocs.netlify.app/agility-content-fetch-js-sdk/1.1.1/index.html).
+Content get's passed to your Agility Page Modules as `props`, but you can also use the [REST API](https://agilitydocs.netlify.app/agility-content-fetch-js-sdk/1.1.1/index.html) or GraphQL to access content.
 
-Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, and `getSitemap`.
+Some common calls to the SDK include: `getContentItem`, `getContentList`, and `getSitemap`.
 
 ### getSitemap Parameters
 - `channelName`, string, *required* - The contentID of the requested item in this locale.
@@ -94,15 +96,13 @@ Some common calls to the Sync SDK include: `getContentItem`, `getContentList`, a
 ### getContentItem Parameters
 - `contentID`, integer, *required* - The contentID of the requested item in this locale.
 - `languageCode`, string, *required* - The locale code you want to retrieve content for.
-- `depth`, integer - The maximum level to expand linked content from this item (Sync SDK).
-- `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
+- `contentLinkDepth` - The maximum level to expand linked content from this item
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
 ### getContentList Parameters
 - `referenceName`, string, *required* - The unique reference name of the content list you wish to retrieve in the current locale. Reference names must be ALL lowercase.
 - `languageCode`, string, *required* - The locale code you want to retrieve content for.
-- `depth`, integer - The depth of list items (Sync SDK).
-- - `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
+- `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
 ## Deploying Your Site

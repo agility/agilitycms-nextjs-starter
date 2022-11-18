@@ -1,4 +1,4 @@
-/* 
+/*
 || Global styles & custom css can be written here.
 */
 
@@ -11,6 +11,7 @@
 /* Import tailwind utility styles */
 @tailwind utilities;
 
+/*
 .prose h1,
 .prose h2,
 .prose h3,
@@ -19,4 +20,4 @@
 .prose h6,
 .prose blockquote {
   color: #243e63;
-}
+} */

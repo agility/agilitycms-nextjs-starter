@@ -1,8 +1,8 @@
 import React from "react";
 import { ContentZone } from "@agility/nextjs";
-import { getModule } from "components/agility-pageModules";
+import { getModule } from "../agility-pageModules";
 
-const MainTemplate = (props) => {
+const MainTemplate = (props:any) => {
   return (
     <ContentZone name="MainContentZone" {...props} getModule={getModule} />
   );

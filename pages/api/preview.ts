@@ -3,7 +3,9 @@ import { validatePreview, getDynamicPageURL } from "@agility/nextjs/node";
 // A simple example for testing it manually from your browser.
 // If this is located at pages/api/preview.js, then
 // open /api/preview from your browser.
-export default async (req, res) => {
+import { NextApiRequest, NextApiResponse } from "next"
+
+const apiCall = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	//validate our preview key, also validate the requested page to preview exists
 	const validationResp = await validatePreview({
@@ -34,3 +36,5 @@ export default async (req, res) => {
 	res.end()
 
 }
+
+export default apiCall

@@ -1,6 +1,6 @@
 {
-	"name": "test-next-13",
-	"version": "0.1.0",
+	"name": "agility-next-starter",
+	"version": "13.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -28,7 +28,7 @@
 	},
 	"devDependencies": {
 		"@agility/content-fetch": "^1.1.5",
-		"@agility/nextjs": "13.0.0-rc2",
+		"@agility/nextjs": "^13.0.1",
 		"@tailwindcss/typography": "^0.5.8",
 		"@types/luxon": "^3.1.0",
 		"@types/nprogress": "^0.2.0",

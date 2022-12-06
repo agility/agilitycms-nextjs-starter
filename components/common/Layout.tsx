@@ -1,5 +1,5 @@
 import {getPageTemplate} from "../agility-pageTemplates"
-import {handlePreview} from "@agility/nextjs"
+import {AgilityPageProps, handlePreview} from "@agility/nextjs"
 import {useRouter} from "next/router"
 import Error from "next/error"
 import PreviewBar from "./PreviewBar"
@@ -19,7 +19,7 @@ interface Props {
 	isDevelopmentMode: boolean
 }
 
-function Layout(props: Props) {
+function Layout(props: AgilityPageProps) {
 	const {page, sitemapNode, dynamicPageItem, notFound, pageTemplateName, isDevelopmentMode, isPreview} = props
 
 	const [isPreviewRequested, setisPreviewRequested] = useState(false)
@@ -41,7 +41,7 @@ function Layout(props: Props) {
 		return <Error statusCode={404} />
 	}
 
-	const AgilityPageTemplate = getPageTemplate(pageTemplateName)
+	const AgilityPageTemplate = getPageTemplate(pageTemplateName || "")
 
 	if (dynamicPageItem?.seo?.metaDescription) {
 		page.seo.metaDescription = dynamicPageItem.seo.metaDescription

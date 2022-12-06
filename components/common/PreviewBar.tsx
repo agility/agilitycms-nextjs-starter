@@ -3,8 +3,8 @@ import React, {useState} from "react"
 import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp} from "react-icons/fa"
 
 interface Props {
-	isPreview: boolean
-	isDevelopmentMode: boolean
+	isPreview: boolean | undefined
+	isDevelopmentMode: boolean | undefined
 }
 
 /**

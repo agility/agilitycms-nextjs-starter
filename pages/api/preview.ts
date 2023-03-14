@@ -20,9 +20,9 @@ const apiCall = async (req: NextApiRequest, res: NextApiResponse) => {
 	let previewUrl = req.query.slug;
 
 	//TODO: these kinds of dynamic links should work by default (even outside of preview)
-	if(req.query.ContentID) {
-		const dynamicPath = await getDynamicPageURL({contentID: req.query.ContentID, preview: true, slug: req.query.slug});
-		if(dynamicPath) {
+	if (req.query.ContentID) {
+		const dynamicPath = await getDynamicPageURL({ contentID: req.query.ContentID, preview: true, slug: req.query.slug });
+		if (dynamicPath) {
 			previewUrl = dynamicPath;
 		}
 	}
@@ -31,8 +31,15 @@ const apiCall = async (req: NextApiRequest, res: NextApiResponse) => {
 	res.setPreviewData({})
 
 	// Redirect to the slug
-	//Add a dummy querystring to the location header - since Netlify will keep the QS for the incoming request by default
-	res.writeHead(307, { Location: `${previewUrl}?preview=1` })
+	//Add an extra querystring to the location header - since Netlify will keep the QS for the incoming request by default
+	let url = `${previewUrl}`
+	if (url.includes("?")) {
+		url = `${url}&preview=1`
+	} else {
+		url = `${url}?preview=1`
+	}
+
+	res.writeHead(307, { Location: url })
 	res.end()
 
 }

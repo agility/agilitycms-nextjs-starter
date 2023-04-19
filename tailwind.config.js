@@ -10,17 +10,22 @@ module.exports = {
 	theme: {
 		container: {
 			screens: {
+				sm: "1200px",
+				md: "1200px",
+				lg: "1200px",
+				xl: "1200px",
 			},
 		},
 		fontFamily: {
-			sans: ['Avenir Next Cyr', ...fontFamily.sans],
+			sans: ['var(--font-inter)', ...fontFamily.sans],
 		},
 		extend: {
-
+			width: {
+				15.1: "15.1rem",
+			},
 			colors: {
 				transparent: "transparent",
 				agility: "#222",
-				darkgray:"#0d333f",
 				gray: {
 					lightest: "#fff",
 					100: "#f7fafc",
@@ -34,15 +39,15 @@ module.exports = {
 					900: "#1a202c",
 				},
 				primary: {
-					100: "#dcfce7",
-					200: "#bbf7d0",
-					300: "#86efac",
-					400: "#4ade80",
-					500: "#0a8543",
-					600: "#16a34a",
-					700: "#086d37",
-					800: "#166534",
-					900: "#14532d",
+					100: "#a273ff",
+					200: "#935bff",
+					300: "#8344ff",
+					400: "#742cff",
+					500: "#6415FF",
+					600: "#5a13e6",
+					700: "#5011cc",
+					800: "#460fb3",
+					900: "#3c0d99",
 				},
 				secondary: {
 					100: "#7c8ba1",

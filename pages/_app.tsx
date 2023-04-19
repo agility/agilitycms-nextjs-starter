@@ -1,10 +1,14 @@
 import Router from "next/router"
-
+import { Inter } from "@next/font/google"
 import nprogress from "nprogress"
 import "../styles/nprogress.min.css"
 import "../styles/globals.css"
 
 
+const inter = Inter({
+	subsets: ["latin"],
+	variable: "--font-inter",
+})
 
 import type {AppProps} from "next/app"
 import { useEffect, useState } from "react"
@@ -37,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [])
 
 	return (
-		<main>
+		<main className={`${inter.variable} font-sans`}>
 			<Component {...pageProps} />
 		</main>
 	)

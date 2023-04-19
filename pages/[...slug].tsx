@@ -2,7 +2,6 @@ import Layout from "components/common/Layout"
 import {getAgilityPageProps, getAgilityPaths} from "@agility/nextjs/node"
 import {getModule} from "components/agility-pageModules"
 import SiteHeader from "components/common/SiteHeader"
-import StickyHeader from "components/common/StickyHeader"
 
 import {GetStaticProps, GetStaticPaths} from "next"
 import { AgilityPageProps, ComponentWithInit } from "@agility/nextjs"
@@ -13,7 +12,6 @@ export const getStaticProps: GetStaticProps<AgilityPageProps> = async ({preview,
 	// place all global here
 	const globalComponents = {
 		header: SiteHeader as ComponentWithInit<{}>,
-		banner: StickyHeader as ComponentWithInit<{}>,
 	}
 
 	const agilityProps = await getAgilityPageProps({

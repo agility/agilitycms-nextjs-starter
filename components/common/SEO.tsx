@@ -17,7 +17,7 @@ const SEO = ({ title, description, keywords, ogImage, metaHTML }:Props) => {
     additionalHeaderMarkup = ReactHtmlParser(metaHTML);
   }
 
-  const strTitle = `${title} | My Travel Blog`
+  const strTitle = `${title} | Quickbooks Demo`
 
   return (
     <Head>

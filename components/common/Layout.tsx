@@ -8,6 +8,7 @@ import SiteHeader from "./SiteHeader"
 import SiteFooter from "./SiteFooter"
 import LoadingWidget from "./LoadingWidget"
 import {useEffect, useState} from "react"
+import StickyHeader from "./StickyHeader"
 
 interface Props {
 	page: any
@@ -55,19 +56,19 @@ function Layout(props: AgilityPageProps) {
 				keywords={page.seo.metaKeywords}
 				metaHTML={page.seo.metaHTML}
 			/>
-			<div id="site-wrapper">
+			<div id="site-wrapperX">
 				{isPreviewRequested && <LoadingWidget message="Loading Preview Mode" />}
 				{!isPreviewRequested && (
 					<div id="site">
-						<PreviewBar {...{isDevelopmentMode, isPreview}} />
-						<div className="flex flex-col min-h-screen">
-							<SiteHeader {...props} />
-							<main className="flex-grow">
-								{AgilityPageTemplate && <AgilityPageTemplate {...props} />}
-								{!AgilityPageTemplate && <div>The template {pageTemplateName} could not be found.</div>}
-							</main>
-							<SiteFooter />
+						{/* <PreviewBar {...{isDevelopmentMode, isPreview}} /> */}
+
+						<StickyHeader {...props} />
+						<SiteHeader {...props} />
+						<div className="bg-white">
+							{AgilityPageTemplate && <AgilityPageTemplate {...props} />}
+							{!AgilityPageTemplate && <div>The template {pageTemplateName} could not be found.</div>}
 						</div>
+						<SiteFooter />
 					</div>
 				)}
 			</div>

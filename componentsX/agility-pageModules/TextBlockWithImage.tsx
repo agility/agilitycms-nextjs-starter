@@ -1,7 +1,6 @@
 import React from "react"
-import {ImageField, Module, URLField} from "@agility/nextjs"
+import {AgilityImage, ImageField, Module, URLField} from "@agility/nextjs"
 import Link from "next/link"
-import Image, {ImageLoader} from "next/image"
 
 interface ITextBlockWithImage {
 	title: string
@@ -58,17 +57,17 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 				<div className="md:w-6/12 flex-shrink-0 relative ">
 					{fields.primaryButton ? (
 						<Link href={fields.primaryButton.href} className="relative">
-							<Image
+							<AgilityImage
 								src={fields.image.url}
 								alt={fields.image.label}
 								width="768"
 								height="512"
-								className="rounded-lg object-cover object-center"
+								className="rounded-lg object-cover object-center cursor-pointer aspect-[6/4]"
 								priority={priority}
 							/>
 						</Link>
 					) : (
-						<Image
+						<AgilityImage
 							src={fields.image.url}
 							alt={fields.image.label}
 							width="768"
@@ -76,7 +75,6 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 							className="rounded-lg object-cover object-center"
 							priority={priority}
 						/>
-
 					)}
 				</div>
 				<div

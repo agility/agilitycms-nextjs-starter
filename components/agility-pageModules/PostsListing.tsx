@@ -1,39 +1,28 @@
-import React from "react";
-import Link from "next/link";
-import { AgilityImage, CustomInitPropsArg, ModuleWithInit } from '@agility/nextjs'
-import {DateTime} from "luxon"
-import Image from "next/image";
+import React from "react"
+import Link from "next/link"
+import Image from "next/image"
+
+import {getPostListing} from "lib/cms-content/getPostListing"
+import useAgilityContext from "lib/cms-content/useAgilityContext"
 
 interface IPostListing {
-	title: string,
-	subtitle: string,
-	preHeader: string,
+	title: string
+	subtitle: string
+	preHeader: string
 }
 
-interface IPost {
-	contentID: Number,
-	title: string,
-	url: string,
-	date: string
-	category: string,
-	author: string,
-	description: string,
-	imageSrc: string,
-	imageAlt: string
+interface Props {
+	module: IPostListing
 }
 
-interface ICustomData {
-	posts: IPost[]
-}
+const PostListing = async ({module}: Props) => {
+	const {channelName, locale} = useAgilityContext()
 
-const PostListing: ModuleWithInit<IPostListing, ICustomData> = ({module, customData}) => {
 	// get posts
-	const {posts} = customData
-
-
+	const {posts} = await getPostListing({channelName, locale})
 
 	// if there are no posts, display message on frontend
-	if (! posts || posts.length <= 0) {
+	if (!posts || posts.length <= 0) {
 		return (
 			<div className="mt-44 px-6 flex flex-col items-center justify-center">
 				<h1 className="text-3xl text-center font-bold">No posts available.</h1>
@@ -57,7 +46,7 @@ const PostListing: ModuleWithInit<IPostListing, ICustomData> = ({module, customD
 						<Link href={post.url} key={index}>
 							<div className="flex-col group mb-8 md:mb-0">
 								<div className="relative h-64">
-									<AgilityImage
+									<Image
 										src={post.imageSrc}
 										alt={post.imageAlt}
 										className="object-cover object-center rounded-t-lg"
@@ -84,81 +73,6 @@ const PostListing: ModuleWithInit<IPostListing, ICustomData> = ({module, customD
 			</div>
 		</div>
 	)
-}
-
-// function to resole post urls
-const resolvePostUrls = function (sitemap:any, posts:any) {
-	let dynamicUrls:any = {};
-	posts.forEach((post:any) => {
-		Object.keys(sitemap).forEach((path) => {
-			if (sitemap[path].contentID === post.contentID) {
-				dynamicUrls[post.contentID] = path;
-			}
-		});
-	});
-	return dynamicUrls;
-};
-
-
-
-PostListing.getCustomInitialProps = async ({ agility, channelName, languageCode }:CustomInitPropsArg) => {
-
-	// set up api
-	const api = agility
-
-	try {
-		// get sitemap...
-		let sitemap = await api.getSitemapFlat({
-			channelName: channelName,
-			languageCode,
-		})
-
-		// get posts...
-		let rawPosts = await api.getContentList({
-			referenceName: "posts",
-			languageCode,
-			contentLinkDepth: 2,
-			depth: 2,
-			take: 50,
-		})
-
-		// resolve dynamic urls
-		const dynamicUrls = resolvePostUrls(sitemap, rawPosts.items)
-
-		const posts:IPost[] = rawPosts.items.map((post:any) => {
-			//category
-			const category = post.fields.category?.fields.title || "Uncategorized"
-
-			// date
-			const date = DateTime.fromJSDate(new Date(post.fields.date)).toFormat("LLL. dd, yyyy")
-
-			// url
-			const url = dynamicUrls[post.contentID] || "#"
-
-			// post image src
-			let imageSrc = post.fields.image.url
-
-			// post image alt
-			let imageAlt = post.fields.image?.label || null
-
-			return {
-				contentID: post.contentID,
-				title: post.fields.title,
-				date,
-				url,
-				category,
-				imageSrc,
-				imageAlt,
-			}
-		})
-
-		return {
-			posts
-		}
-	} catch (error) {
-
-		throw new Error(`Error loading data for PostListing: ${error}`)
-	}
 }
 
 export default PostListing

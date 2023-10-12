@@ -1,5 +1,5 @@
 import React from "react";
-
+import Head from "next/head";
 import ReactHtmlParser from 'html-react-parser';
 
 interface Props {
@@ -20,18 +20,18 @@ const SEO = ({ title, description, keywords, ogImage, metaHTML }:Props) => {
   const strTitle = `${title} | My Travel Blog`
 
   return (
-		<>
-			<title>{strTitle}</title>
-			<meta name="generator" content="Agility CMS" />
-			<meta name="agility_timestamp" content={new Date().toLocaleString()} />
-			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			<meta name="description" content={description} />
-			<meta name="keywords" content={keywords} />
+    <Head>
+      <title>{strTitle}</title>
+      <meta name="generator" content="Agility CMS" />
+      <meta name="agility_timestamp" content={new Date().toLocaleString()} />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
 
-			{ogImage && <meta property="og:image" content={ogImage} />}
-			{additionalHeaderMarkup}
-		</>
-	)
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      {additionalHeaderMarkup}
+    </Head>
+  );
 };
 
 export default SEO;

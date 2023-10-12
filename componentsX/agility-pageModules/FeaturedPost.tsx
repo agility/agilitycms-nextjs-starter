@@ -34,7 +34,7 @@ const FeaturedPost: Module<IFeaturedPostModule> = ({module}) => {
 					<div className="sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg relative">
 						<Link href={`/blog/${featuredPost?.fields.slug}`} className="cursor-pointer">
 							<div className="h-64 sm:h-96 relative" style={{width: "100%"}}>
-								<Image
+								<AgilityImage
 									src={featuredPost.fields.image.url}
 									alt={featuredPost.fields.image.label}
 									className="object-cover object-center rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"

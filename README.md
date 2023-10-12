@@ -7,15 +7,14 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
 ## 📢 UPDATED FOR NEXT.JS 13 📢
-- We have updated this starter for Next.js 13.  It is using a pre-release version of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs/v/13.0.0-rc2) npm package specialized for the new version.
+
+- We have updated this starter for Next.js 13. It is using a pre-release version of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs/v/13.0.0-rc2) npm package specialized for the new version.
 
 ### One Step Create and Deploy to Vercel
 
 Click below to create this project in Agility CMS and deploy it automatically to Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/agility/agilitycms-nextjs-starter&project-name=agilitycms-nextjs-starter&repository-name=agilitycms-nextjs-starter&developer-id=oac_Dnqk9CoC6rZ18k9nVR9KresV&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&production-deploy-hook=cms-deploy-hook&demo-title=Website%20Blog%20with%20Agility%20CMS%20and%20Next.js&demo-description=Next.js%20is%20the%20most%20flexible%20and%20powerful%20framework%20for%20building%20websites%20on%20the%20Jamstack%2C%20and%20we%27ve%20unlocked%20that%20power%20with%20Agility%20CMS%20in%20this%20starter%20template.%0A%0AThis%20project%20is%20an%20example%20blog%2C%20but%20that%27s%20just%20the%20beginning.%20The%20code%20itself%20takes%20advantage%20of%20powerful%20tools%20such%20Tailwind%20CSS%2C%20a%20simple%20and%20lightweight%20utility-first%20CSS%20framework%2C%20and%20next%2Fimage%20for%20automatic%20image%20optimization.&demo-url=https%3A%2F%2Fagilitycms-nextjs-starter-blog.vercel.app%2F&demo-image=https%3A%2F%2Fstatic.agilitycms.com%2FAttachments%2FNewItems%2Fnext-js-starter-screenshot.jpg%3Fw%3D600%26q%3D60&external-id=%7B%22githubRepo%22%3A%22github.com%2Fagility%2Fagilitycms-nextjs-starter%22%7D)
-
-
 
 ## About This Starter
 
@@ -26,7 +25,7 @@ Click below to create this project in Agility CMS and deploy it automatically to
 - Supports [`next/image`](https://nextjs.org/docs/api-reference/next/image) for image optimization using the `<AgilityImage />` component or the next.js `<Image />` component.
 - Supports full [Page Management](https://help.agilitycms.com/hc/en-us/articles/360055805831)
 - Supports Preview Mode
-- Supports the `@next/font` package
+- Supports the `next/font` package
 - Uses the `revalidate` and `fallback` properties to enable [ISR (Incremental Static Regeneration)](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) builds
 - Provides a functional structure that dynamically routes each page based on the request, loads a Page Templates dynamically, and also dynamically loads and renders appropriate Agility CMS Page Modules (as React components)
 - Supports component level data fetching.
@@ -85,23 +84,27 @@ When running your site in `production` mode, you will see the published content 
 2. `npm run start`
 
 ## Accessing Content
+
 Content get's passed to your Agility Page Modules as `props`, but you can also use the [REST API](https://agilitydocs.netlify.app/agility-content-fetch-js-sdk/1.1.1/index.html) or GraphQL to access content.
 
 Some common calls to the SDK include: `getContentItem`, `getContentList`, and `getSitemap`.
 
 ### getSitemap Parameters
-- `channelName`, string, *required* - The contentID of the requested item in this locale.
-- `languageCode`, string, *required* - The reference name of the Sitemap in Agility to return.
+
+- `channelName`, string, _required_ - The contentID of the requested item in this locale.
+- `languageCode`, string, _required_ - The reference name of the Sitemap in Agility to return.
 
 ### getContentItem Parameters
-- `contentID`, integer, *required* - The contentID of the requested item in this locale.
-- `languageCode`, string, *required* - The locale code you want to retrieve content for.
+
+- `contentID`, integer, _required_ - The contentID of the requested item in this locale.
+- `languageCode`, string, _required_ - The locale code you want to retrieve content for.
 - `contentLinkDepth` - The maximum level to expand linked content from this item
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
 ### getContentList Parameters
-- `referenceName`, string, *required* - The unique reference name of the content list you wish to retrieve in the current locale. Reference names must be ALL lowercase.
-- `languageCode`, string, *required* - The locale code you want to retrieve content for.
+
+- `referenceName`, string, _required_ - The unique reference name of the content list you wish to retrieve in the current locale. Reference names must be ALL lowercase.
+- `languageCode`, string, _required_ - The locale code you want to retrieve content for.
 - `contentLinkDepth` - The maximum level to expand linked content from this item (REST API).
 - `expandAllContentLinks`, boolean - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
 
@@ -170,21 +173,26 @@ Since this is a static site, how can editors preview content in real-time as the
 ## Resources
 
 ### Agility CMS
+
 - [Official site](https://agilitycms.com)
 - [Documentation](https://help.agilitycms.com/hc/en-us)
 
 ### Next.js
+
 - [Official site](https://nextjs.org/)
 - [Documentation](https://nextjs.org/docs/getting-started)
 
 ### Vercel
+
 - [Official site](https://vercel.com/)
 
 ### Tailwind CSS
+
 - [Official site](http://tailwindcss.com/)
 - [Documentation](http://tailwindcss.com/docs)
 
 ### Community
+
 - [Official Slack](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI)
 - [Blog](https://agilitycms.com/resources/posts)
 - [GitHub](https://github.com/agility)
@@ -193,4 +201,5 @@ Since this is a static site, how can editors preview content in real-time as the
 - [Twitter](https://twitter.com/AgilityCMS)
 
 ## Feedback and Questions
+
 If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-nextjs-starter/issues) on this repo, join our [Community Slack Channel](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI) or create a post on the [Agility Developer Community](https://help.agilitycms.com/hc/en-us/community/topics).

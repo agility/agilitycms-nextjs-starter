@@ -1,17 +1,27 @@
-"use client"
-
 import React, {useState} from "react"
 import Link from "next/link"
+import head from "next/head"
 import Image from "next/image"
-import {ICustomData} from "app/layout"
+import {AgilityImage, ComponentWithInit, ContentItem, CustomInitPropsArg, ImageField} from "@agility/nextjs"
 
-interface Props {
-	header: ICustomData | null
+
+interface ILink {
+	title: string
+	path: string
 }
 
-const SiteHeader = ({header}: Props) => {
+interface ICustomData {
+	siteName: string
+	logo: ImageField
+	links: ILink[]
+}
+
+const SiteHeader: ComponentWithInit<ICustomData | null> = ({globalData, sitemapNode, page}) => {
 	// open / close mobile nav
 	const [open, setOpen] = useState(false)
+
+	// get header data
+	const header: ICustomData = globalData ? globalData["header"] : null
 
 	if (!header) {
 		return (
@@ -20,14 +30,13 @@ const SiteHeader = ({header}: Props) => {
 			</header>
 		)
 	}
-
 	return (
 		<header className="relative w-full mx-auto bg-white px-8">
 			<div className="max-w-screen-xl mx-auto">
 				<div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
 					<div className="lg:w-0 lg:flex-1">
 						<Link href="/" className="flex items-center">
-							<Image
+							<AgilityImage
 								className="h-14 sm:h-20 w-auto z-50"
 								src={header.logo.url}
 								alt={header.logo.label}
@@ -138,6 +147,70 @@ const SiteHeader = ({header}: Props) => {
 			</div>
 		</header>
 	)
+}
+
+interface IHeader {
+	siteName: string
+	logo: ImageField
+}
+
+SiteHeader.getCustomInitialProps = async function ({agility, languageCode, channelName}: CustomInitPropsArg) {
+	// set up api
+	const api = agility
+
+	// set up content item
+	let contentItem: ContentItem<IHeader> | null = null
+
+	// set up links
+	let links = []
+
+	try {
+		// try to fetch our site header
+		let header = await api.getContentList({
+			referenceName: "siteheader",
+			languageCode: languageCode,
+			take: 1,
+		})
+
+		// if we have a header, set as content item
+		if (header && header.items && header.items.length > 0) {
+			contentItem = header.items[0]
+		}
+
+		if (!contentItem) {
+			return null
+		}
+	} catch (error) {
+		if (console) console.error("Could not load site header item.", error)
+		return null
+	}
+
+	try {
+		// get the nested sitemap
+		let sitemap = await api.getSitemapNested({
+			channelName: channelName,
+			languageCode: languageCode,
+		})
+
+		// grab the top level links that are visible on menu
+		links = sitemap
+			.filter((node: any) => node.visible.menu)
+			.map((node: any) => {
+				return {
+					title: node.menuText || node.title,
+					path: node.path,
+				}
+			})
+	} catch (error) {
+		if (console) console.error("Could not load nested sitemap.", error)
+	}
+
+	// return clean object...
+	return {
+		siteName: contentItem.fields.siteName,
+		logo: contentItem.fields.logo,
+		links,
+	} as ICustomData
 }
 
 export default SiteHeader

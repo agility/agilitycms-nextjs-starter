@@ -1,25 +1,25 @@
-import React from "react";
+import React from "react"
 
-import ReactHtmlParser from 'html-react-parser';
+import ReactHtmlParser from "html-react-parser"
 
 interface Props {
 	title: string
-	description: string
-	keywords: string
-	ogImage?: string
-	metaHTML?: string
+	description?: string | undefined
+	keywords?: string | undefined
+	ogImage?: string | undefined
+	metaHTML?: string | undefined
 }
 
-const SEO = ({ title, description, keywords, ogImage, metaHTML }:Props) => {
-  // setup and parse additional header markup
-  let additionalHeaderMarkup = null;
-  if (metaHTML) {
-    additionalHeaderMarkup = ReactHtmlParser(metaHTML);
-  }
+const SEO = ({title, description, keywords, ogImage, metaHTML}: Props) => {
+	// setup and parse additional header markup
+	let additionalHeaderMarkup = null
+	if (metaHTML) {
+		additionalHeaderMarkup = ReactHtmlParser(metaHTML)
+	}
 
-  const strTitle = `${title} | My Travel Blog`
+	const strTitle = `${title} | My Travel Blog`
 
-  return (
+	return (
 		<>
 			<title>{strTitle}</title>
 			<meta name="generator" content="Agility CMS" />
@@ -32,6 +32,6 @@ const SEO = ({ title, description, keywords, ogImage, metaHTML }:Props) => {
 			{additionalHeaderMarkup}
 		</>
 	)
-};
+}
 
-export default SEO;
+export default SEO

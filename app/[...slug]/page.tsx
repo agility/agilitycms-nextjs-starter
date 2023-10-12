@@ -1,5 +1,5 @@
-import {getAgilityPage} from "/lib/cms-content/getAgilityPage"
-import {getPageTemplate} from "/components/agility-pageTemplates"
+import {getPageTemplate} from "components/agility-layouts"
+import {getAgilityPage} from "lib/cms-content/getAgilityPage"
 
 export const revalidate = 10 // revalidate this page every 10 seconds
 

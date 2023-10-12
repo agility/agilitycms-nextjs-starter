@@ -1,7 +1,5 @@
-import SEO from "/components/common/SEO"
-import {getAgilityPage, GetPageProps} from "/lib/cms-content/getAgilityPage"
-
-//export const revalidate = 10 // revalidate this page every 10 seconds
+import SEO from "components/common/SEO"
+import {getAgilityPage, GetPageProps} from "lib/cms-content/getAgilityPage"
 
 export default async function Head(props: GetPageProps) {
 	const agilityPage = await getAgilityPage(props)
@@ -10,9 +8,9 @@ export default async function Head(props: GetPageProps) {
 		<>
 			<SEO
 				title={agilityPage.sitemapNode?.title}
-				description={agilityPage.page.seo?.metaDescription}
-				keywords={agilityPage.page.seo?.metaKeywords}
-				metaHTML={agilityPage.page.seo?.metaHTML}
+				description={agilityPage.page?.seo?.metaDescription}
+				keywords={agilityPage.page?.seo?.metaKeywords}
+				metaHTML={agilityPage.page?.seo?.metaHTML}
 			/>
 		</>
 	)

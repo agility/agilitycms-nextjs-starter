@@ -1,5 +1,7 @@
 import { DateTime } from "luxon"
 import getAgilitySDK from "./getAgilitySDK"
+import { ContentList } from "@agility/content-fetch"
+import { ImageField } from "@agility/nextjs"
 
 export interface IPostMin {
 
@@ -8,38 +10,39 @@ export interface IPostMin {
 	date: string
 	url: string
 	category: string
-	imageSrc: string
-	imageAlt: string
-
-
+	image: ImageField
 }
 
 interface LoadPostsProp {
-	channelName: string
+	sitemap: string
 	locale: string
+	skip: number
+	take: number
 }
 
-export const getPostListing = async ({ channelName, locale }: LoadPostsProp) => {
+export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsProp) => {
 	const api = getAgilitySDK()
+
+	//TODO: we are ignoring skip and take for now...
+
 
 	try {
 		// get sitemap...
-		let sitemap = await api.getSitemapFlat({
-			channelName: channelName,
+		let sitemapNodes = await api.getSitemapFlat({
+			channelName: sitemap,
 			languageCode: locale,
 		})
 
 		// get posts...
-		let rawPosts = await api.getContentList({
+		let rawPosts: ContentList = await api.getContentList({
 			referenceName: "posts",
 			languageCode: locale,
 			contentLinkDepth: 2,
-			depth: 2,
 			take: 50,
 		})
 
 		// resolve dynamic urls
-		const dynamicUrls = resolvePostUrls(sitemap, rawPosts.items)
+		const dynamicUrls = resolvePostUrls(sitemapNodes, rawPosts.items)
 
 		const posts: IPostMin[] = rawPosts.items.map((post: any) => {
 			//category
@@ -63,8 +66,7 @@ export const getPostListing = async ({ channelName, locale }: LoadPostsProp) => 
 				date,
 				url,
 				category,
-				imageSrc,
-				imageAlt,
+				image: post.fields.image
 			}
 		})
 

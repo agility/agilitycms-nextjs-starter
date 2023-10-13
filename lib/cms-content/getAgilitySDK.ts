@@ -1,26 +1,23 @@
 import "server-only";
-import agility from '@agility/content-fetch'
+import agility, { ApiClientInstance } from '@agility/content-fetch'
 
 
-let sdk: any = null
+
 
 const getAgilitySDK = () => {
 
-	if (!sdk) {
+	//TODO: get the preview data
+	const isPreview = false
 
-		//TODO: get the preview data
-		const isPreview = false
+	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY
 
-		const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY
+	return agility.getApi({
+		guid: process.env.AGILITY_GUID,
+		apiKey,
+		isPreview
+	});
 
-		sdk = agility.getApi({
-			guid: process.env.AGILITY_GUID,
-			apiKey,
-			isPreview
-		});
-	}
 
-	return sdk
 
 }
 

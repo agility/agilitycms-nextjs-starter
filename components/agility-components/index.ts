@@ -1,6 +1,6 @@
 import RichTextArea from "./RichTextArea";
 import FeaturedPost from "./FeaturedPost";
-import PostsListing from "./PostsListing";
+import PostsListing from "./PostsListing/PostsListing.server";
 import PostDetails from "./PostDetails";
 import Heading from "./Heading";
 import TextBlockWithImage from "./TextBlockWithImage";

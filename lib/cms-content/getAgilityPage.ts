@@ -4,23 +4,18 @@ import { getAgilityPageProps } from "@agility/nextjs/node";
 import { cache } from "react";
 
 
-export interface GetPageProps {
+export interface PageProps {
 	params: { slug: string[] }
 	searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 
-
-export const getAgilityPage = async ({ params }: GetPageProps) => {
-
-
+export const getAgilityPage = async ({ params }: PageProps) => {
 
 	//TODO: get the preview data
 	const preview = false
 
 	if (!params.slug) params.slug = [""]
-
-	console.log("Fetching Page", params, preview)
 
 	const agilityPage = await getAgilityPageProps({ params, preview, getModule })
 	return agilityPage

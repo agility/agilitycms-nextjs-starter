@@ -29,7 +29,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "lib/image-loaders/agility-loader.js"
   ],
   "exclude": [
     "node_modules"

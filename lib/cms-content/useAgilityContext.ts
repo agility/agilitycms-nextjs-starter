@@ -1,5 +1,8 @@
 
-const useAgilityContext = () => {
+
+
+
+export const getAgilityContext = () => {
 
 	const isDevelopmentMode = process.env.NODE_ENV === "development"
 
@@ -8,10 +11,12 @@ const useAgilityContext = () => {
 
 	return {
 		locale: "en-us",
-		channelName: "website",
+		sitemap: "website",
 		isPreview,
 		isDevelopmentMode
 	}
 }
 
-export default useAgilityContext
+export const useAgilityContext = () => {
+	return getAgilityContext()
+}

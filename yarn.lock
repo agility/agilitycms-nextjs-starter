@@ -9,10 +9,10 @@
   dependencies:
     axios "^0.27.2"
 
-"@agility/nextjs@13.5.0-rc1":
-  version "13.5.0-rc1"
-  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-13.5.0-rc1.tgz#73641badf6ed6988368dcfa55e3f88825551b7e7"
-  integrity sha512-T0NbdLcf0S6CwtYMRsA7VKejZ7CgrfQ0sLwiy2b4aq41Po+rWxUQt77kSi3AFT362NKdQ7h296+yuDcObWNpFQ==
+"@agility/nextjs@^13.5.0-rc2":
+  version "13.5.0-rc2"
+  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-13.5.0-rc2.tgz#2d7c65c32f0e4cb989177ea76f69e21f2768acb3"
+  integrity sha512-0tg+GfY+WAp4g0NEBKBrswqjAQOltkohnLi5yDgkhJIMRYzfGi6Te8GsBIMtTYbbC0NTj8148eIsSdsO0BySWA==
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"

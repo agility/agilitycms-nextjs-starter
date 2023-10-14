@@ -1,13 +1,17 @@
 
 
-
+import { draftMode } from 'next/headers'
 
 export const getAgilityContext = () => {
 
+	const { isEnabled } = draftMode()
+
 	const isDevelopmentMode = process.env.NODE_ENV === "development"
 
-	//TODO: get the preview data
-	const isPreview = false || isDevelopmentMode
+	//determine whether it's preview or dev mode
+	const isPreview = isEnabled || isDevelopmentMode
+
+	console.log("mode", { isPreview, isDevelopmentMode })
 
 	return {
 		locale: "en-us",

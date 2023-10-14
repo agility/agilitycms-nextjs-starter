@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import React, {useState} from "react"
-import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp} from "react-icons/fa"
+import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp, FaSpinner, FaSyncAlt} from "react-icons/fa"
 
 interface Props {
 	isPreview: boolean | undefined
@@ -14,6 +14,7 @@ interface Props {
  **/
 const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 	const [open, setOpen] = useState(false)
+	const [isPreviewRequested, setisPreviewRequested] = useState(false)
 
 	// handle view function to determine preview / live mode
 	const handleView = () => {
@@ -21,24 +22,20 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 			alert("You are currently in Development Mode, Live Mode is unavailable.")
 		} else {
 			if (!isDevelopmentMode && !isPreview) {
-				const xhr = new XMLHttpRequest()
-
-				xhr.onload = function () {
-					// Process our return data
-					if (xhr.status >= 200 && xhr.status < 300) {
-						// What do when the request is successful
-						const previewKey = xhr.responseText
-
-						window.location.replace(`${window.location.pathname}?agilitypreviewkey=${escape(previewKey)}`)
-					}
-				}
-				// Create and send a GET request
-				xhr.open("GET", "/api/generatePreviewKey")
-				xhr.send()
+				setisPreviewRequested(true)
+				fetch("/api/preview/generate-key")
+					.then((response) => response.text())
+					.then((previewKey) => {
+						window.location.replace(`${window.location.pathname}?agilitypreviewkey=${encodeURIComponent(previewKey)}`)
+					})
+					.catch((error) => {
+						console.error("Error generating preview key", error)
+						setisPreviewRequested(false)
+					})
 			} else {
 				const exit = confirm("Would you like to exit Preview Mode?")
 				if (exit === true) {
-					window.location.href = `/api/exitPreview?slug=${window.location.pathname}`
+					window.location.href = `/api/preview/exit?slug=${encodeURIComponent(window.location.pathname)}`
 				} else return
 			}
 		}
@@ -49,7 +46,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 			<div className="flex justify-between items-center max-w-screen-xl mx-auto">
 				<div className="flex items-center">
 					<span className="p-2 rounded-lg mr-4">
-						<a href="https://manager.agilitycms.com" target="_blank" rel="noreferrer" title="Agility CMS">
+						<a href="https://app.agilitycms.com" target="_blank" rel="noreferrer" title="Agility CMS">
 							{/* We use the built-in nextjs Image component here since this is referencing an SVG */}
 							<Image
 								src="/assets/agility-logo-triangle.svg"
@@ -116,7 +113,13 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 								Viewing <span className="font-bold">Published</span> Content
 							</p>
 						)}
-						<button className="text-gray-200 bg-agility p-2 w-full rounded-md text-sm" onClick={() => handleView()}>
+						<button
+							className="text-gray-200 bg-agility p-2 w-full rounded-md text-sm disabled:bg-gray-700 flex gap-2 items-center justify-center"
+							onClick={() => handleView()}
+							aria-disabled={isPreviewRequested}
+							disabled={isPreviewRequested}
+						>
+							{isPreviewRequested && <FaSpinner className="animate-spin" />}
 							{`View ${isPreview ? `Live` : `Preview`} Mode`}
 						</button>
 					</div>

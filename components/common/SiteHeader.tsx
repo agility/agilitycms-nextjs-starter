@@ -1,9 +1,11 @@
 "use client"
 
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import Image from "next/image"
 import {IHeaderData} from "lib/cms-content/getHeaderContent"
+import {AgilityImage, handlePreview} from "@agility/nextjs"
+import LoadingWidget from "./LoadingWidget"
 
 interface Props {
 	header: IHeaderData | null
@@ -12,6 +14,18 @@ interface Props {
 const SiteHeader = ({header}: Props) => {
 	// open / close mobile nav
 	const [open, setOpen] = useState(false)
+
+	//check for preview mode...
+	const [isPreviewRequested, setisPreviewRequested] = useState(false)
+	useEffect(() => {
+		if (handlePreview(null)) {
+			setisPreviewRequested(true)
+		}
+	}, [])
+
+	if (isPreviewRequested) {
+		return <LoadingWidget message="Initializing preview mode..." />
+	}
 
 	if (!header) {
 		return (
@@ -27,8 +41,8 @@ const SiteHeader = ({header}: Props) => {
 				<div className="flex justify-between items-center py-6 md:justify-start md:space-x-10 w-full">
 					<div className="md:w-0 md:flex-1">
 						<Link href="/" className="flex items-center">
-							<Image
-								className="h-14 sm:h-20 w-auto z-50"
+							<AgilityImage
+								className="h-14 sm:h-20 w-auto"
 								src={header.logo.url}
 								alt={header.logo.label}
 								width={header.logo.height}
@@ -80,8 +94,21 @@ const SiteHeader = ({header}: Props) => {
 				<div className="rounded-lg shadow-lg">
 					<div className="rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50">
 						<div className="pt-5 pb-6 px-5 space-y-6">
-							<div className="flex items-center justify-end">
-								<div className="-mr-2">
+							<div className="flex items-center justify-between ">
+								<div>
+									<Link href="/" className="flex items-center">
+										<AgilityImage
+											className="h-14 sm:h-20 w-auto"
+											src={header.logo.url}
+											alt={header.logo.label}
+											width={header.logo.height}
+											height={header.logo.width}
+											fill={false}
+										/>
+										<p className="font-bold text-xl text-secondary-500 ml-3 mt-2">{header.siteName}</p>
+									</Link>
+								</div>
+								<div className="">
 									<button
 										onClick={() => setOpen(!open)}
 										aria-label="Toggle Menu"
@@ -102,7 +129,7 @@ const SiteHeader = ({header}: Props) => {
 								</div>
 							</div>
 							<div>
-								<nav className="grid gap-y-8">
+								<nav className="grid gap-y-8 ">
 									{header.links.map((navitem, index) => {
 										return (
 											<Link

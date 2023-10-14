@@ -2,6 +2,7 @@ import "server-only";
 import { AgilityPageProps } from "@agility/nextjs";
 import { getAgilityPageProps } from "@agility/nextjs/node";
 import { cache } from "react";
+import { getAgilityContext } from "./useAgilityContext";
 
 
 export interface PageProps {
@@ -12,11 +13,13 @@ export interface PageProps {
 
 export const getAgilityPage = async ({ params }: PageProps) => {
 
-	//TODO: get the preview data
-	const preview = false
+	const { isPreview, locale, sitemap } = getAgilityContext()
+
+	const preview = isPreview
 
 	if (!params.slug) params.slug = [""]
 
+	console.log("get props", { preview, locale, params })
 	const agilityPage = await getAgilityPageProps({ params, preview, getModule })
 	return agilityPage
 }

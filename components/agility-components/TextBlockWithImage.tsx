@@ -1,5 +1,5 @@
 import React from "react"
-import {AgilityImage, ImageField, Module, URLField} from "@agility/nextjs"
+import {AgilityPic, ImageField, Module, URLField} from "@agility/nextjs"
 import Link from "next/link"
 
 interface ITextBlockWithImage {
@@ -57,23 +57,33 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 				<div className="md:w-6/12 flex-shrink-0 relative ">
 					{fields.primaryButton ? (
 						<Link href={fields.primaryButton.href} className="relative">
-							<AgilityImage
-								src={fields.image.url}
-								alt={fields.image.label}
-								width="768"
-								height="512"
-								className="rounded-lg object-cover object-center cursor-pointer aspect-[6/4]"
+							<AgilityPic
+								image={fields.image}
+								className="rounded-lg object-cover object-center"
 								priority={priority}
+								fallbackWidth={600}
+								sources={[
+									//screen at least than 640, it's 1/2 of the screen, so the same size as the prev breakpoint
+									{media: "(min-width: 1280px)", width: 800},
+									{media: "(min-width: 640px)", width: 640},
+									//screen less than 640, full width of screen
+									{media: "(max-width: 639px)", width: 640},
+								]}
 							/>
 						</Link>
 					) : (
-						<AgilityImage
-							src={fields.image.url}
-							alt={fields.image.label}
-							width="768"
-							height="512"
+						<AgilityPic
+							image={fields.image}
 							className="rounded-lg object-cover object-center"
 							priority={priority}
+							fallbackWidth={600}
+							sources={[
+								//screen at least than 640, it's 1/2 of the screen, so the same size as the prev breakpoint
+								{media: "(min-width: 1280px)", width: 800},
+								{media: "(min-width: 640px)", width: 640},
+								//screen less than 640, full width of screen
+								{media: "(max-width: 639px)", width: 640},
+							]}
 						/>
 					)}
 				</div>

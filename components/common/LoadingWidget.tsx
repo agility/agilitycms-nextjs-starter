@@ -5,7 +5,7 @@ interface Props {
 
 const Widget = ({message}: Props) => {
 	return (
-		<section id="loading-widget" className="flex flex-col items-center justify-center h-screen">
+		<section className="flex flex-col items-center justify-center h-screen">
 			<CgSpinner className="animate-spin text-2xl mb-2" />
 			<p>{message}</p>
 		</section>

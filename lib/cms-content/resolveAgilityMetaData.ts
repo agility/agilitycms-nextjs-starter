@@ -94,7 +94,7 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	//#endregion
 
 	const metaData: Metadata = {
-		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}}`,
+		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}`,
 		description: agilityData.page?.seo?.metaDescription,
 		keywords: agilityData.page?.seo?.metaKeywords,
 		openGraph: {

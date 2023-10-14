@@ -78,12 +78,16 @@ const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
 	}
 
 	// return clean object...
+
+	const d = new Date()
+
+
 	return {
-		siteName: contentItem.fields.siteName,
+		siteName: `${contentItem.fields.siteName}-${d.getFullYear()}.${d.getMonth()}.${d.getDate()}.${d.getHours()}.${d.getMinutes()}.${d.getSeconds()}`,
 		logo: contentItem.fields.logo,
 		links,
 	} as IHeaderData
 }
 
-export const revalidate = 3600 // revalidate the data at most every 30 seconds
+export const revalidate = 10 // revalidate the data at most every 30 seconds
 export const getHeaderContent = cache(getHeaderContent_notCached)

@@ -4,7 +4,6 @@ import React, {useState} from "react"
 import Link from "next/link"
 import Image from "next/image"
 import {IHeaderData} from "lib/cms-content/getHeaderContent"
-import {AgilityImage} from "components/common/AgilityPic"
 
 interface Props {
 	header: IHeaderData | null

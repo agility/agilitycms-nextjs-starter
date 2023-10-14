@@ -9,12 +9,8 @@ export async function GET(request: NextRequest) {
 	const locale = searchParams.get('locale')
 	const sitemap = searchParams.get('sitemap')
 
-	//HACK: we are just outputting a lot of posts here for now...
-	//normally you would use skip and take to do paging on a large list.
 	const skip = Number(searchParams.get('skip'))
 	const take = Number(searchParams.get('take'))
-
-	console.log({ skip, take, locale, sitemap })
 
 	if (!locale || !sitemap
 		|| isNaN(skip) || skip < 1
@@ -24,7 +20,10 @@ export async function GET(request: NextRequest) {
 		});
 	}
 
+	//HACK: we are just outputting a lot of posts here for now, so we are IGNORING the skip and take vals...
+	//normally you would use skip and take to do paging on a large list.
 	const postsRes = await getPostListing({ sitemap: sitemap, locale, skip: 0, take: 50 })
+
 
 	//HACK adjust the ids so our keys don't overlap
 	postsRes.posts = postsRes.posts.map((post, index) => {

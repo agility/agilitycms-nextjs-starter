@@ -50,6 +50,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 				<div className="flex items-center">
 					<span className="p-2 rounded-lg mr-4">
 						<a href="https://manager.agilitycms.com" target="_blank" rel="noreferrer" title="Agility CMS">
+							{/* We use the built-in nextjs Image component here since this is referencing an SVG */}
 							<Image
 								src="/assets/agility-logo-triangle.svg"
 								alt="Agility CMS"

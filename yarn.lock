@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@agility/content-fetch@2.0.0-rc17":
-  version "2.0.0-rc17"
-  resolved "https://registry.yarnpkg.com/@agility/content-fetch/-/content-fetch-2.0.0-rc17.tgz#f7842e07288bf370414889cf43958449fc425f7a"
-  integrity sha512-eR8amSjkPCMz0ClmcAjVP58uqbHZdHzIzMGB6iAR/uh49FDwJsQ/D/5AaSGuQCMGfCzF443rYmxl1o2XgSJJ0w==
+"@agility/content-fetch@2.0.0-rc18":
+  version "2.0.0-rc18"
+  resolved "https://registry.yarnpkg.com/@agility/content-fetch/-/content-fetch-2.0.0-rc18.tgz#4e3b2fac885d09c91de152c39d04f40e42a58c53"
+  integrity sha512-SAmNprUzA7K2bKSEso/PAs+YJo4V72QxjNUMyNzAwZOJJlk3qf4Mg/crFAL09PP5DSC+dkJ7bsy9POCfMzMSEw==
   dependencies:
     axios "^0.27.2"
 

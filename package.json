@@ -26,7 +26,7 @@
 		"typescript": "4.9.3"
 	},
 	"devDependencies": {
-		"@agility/content-fetch": "2.0.0-rc17",
+		"@agility/content-fetch": "2.0.0-rc18",
 		"@agility/nextjs": "13.5.0-rc1",
 		"@tailwindcss/typography": "^0.5.8",
 		"@types/luxon": "^3.1.0",

@@ -6,6 +6,7 @@ import {getAgilityContext} from "lib/cms-content/useAgilityContext"
 import {Metadata, ResolvingMetadata} from "next"
 import Head from "next/head"
 import ReactHtmlParser from "html-react-parser"
+import {resolveAgilityMetaData} from "lib/cms-content/resolveAgilityMetaData"
 
 export const revalidate = 10 // revalidate this page every 10 seconds
 
@@ -20,18 +21,7 @@ export async function generateMetadata(
 	const {locale, sitemap, isDevelopmentMode, isPreview} = getAgilityContext()
 	const agilityData = await getAgilityPage({params})
 
-	const header = await getHeaderContent({locale, sitemap})
-
-	const previousOGImages = (await parent).openGraph?.images || []
-
-	return {
-		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}}`,
-		description: agilityData.page?.seo?.metaDescription,
-		keywords: agilityData.page?.seo?.metaKeywords,
-		openGraph: {
-			images: previousOGImages,
-		},
-	}
+	return await resolveAgilityMetaData({agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent})
 }
 
 export default async function Page({params, searchParams}: PageProps) {

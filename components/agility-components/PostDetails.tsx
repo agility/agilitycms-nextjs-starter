@@ -1,5 +1,5 @@
 import React from "react"
-import {ContentItem, ImageField, ModuleWithDynamic, renderHTML} from "@agility/nextjs"
+import {AgilityPic, ContentItem, ImageField, ModuleWithDynamic, renderHTML} from "@agility/nextjs"
 import {IPost} from "../../lib/types/IPost"
 import Image from "next/image"
 
@@ -26,22 +26,19 @@ const PostDetails: ModuleWithDynamic<any, IPost> = ({dynamicPageItem, languageCo
 
 	return (
 		<>
-			{post.image && (
-				//add the image as the opengraph to the head - we can't use the generateMetadata here because this is a sub-component
-				// eslint-disable-next-line @next/next/no-head-element
-				<head>
-					<meta key="og:image" property="og:image" content={`${post.image.url}?format=auto&w=1200`} />
-				</head>
-			)}
 			<div className="relative px-8">
 				<div className="max-w-screen-xl mx-auto">
-					<div className="h-64 md:h-96 relative">
-						<Image
-							src={post.image.url}
+					<div className="h-64 md:h-96  lg:h-[480px] relative overflow-hidden rounded-lg">
+						<AgilityPic
+							image={post.image}
 							alt={post.image.label}
-							className="object-cover object-center rounded-lg"
-							fill
-							sizes="100vw"
+							className="w-full"
+							fallbackWidth={800}
+							sources={[
+								{media: "(min-width: 1280px)", width: 1200},
+								{media: "(min-width: 640px)", width: 800},
+								{media: "(max-width: 639px)", width: 640},
+							]}
 						/>
 					</div>
 					<div className="max-w-2xl mx-auto mt-4">

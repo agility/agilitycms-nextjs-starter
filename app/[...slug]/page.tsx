@@ -26,6 +26,7 @@ export async function generateMetadata(
 
 export default async function Page({params, searchParams}: PageProps) {
 	const agilityData = await getAgilityPage({params})
+	const {locale, sitemap} = getAgilityContext()
 
 	if (!agilityData.page) return null
 
@@ -37,6 +38,8 @@ export default async function Page({params, searchParams}: PageProps) {
 	if (metaHTML) {
 		additionalHeaderMarkup = ReactHtmlParser(metaHTML)
 	}
+
+	const header = await getHeaderContent({sitemap, locale})
 
 	return (
 		<>

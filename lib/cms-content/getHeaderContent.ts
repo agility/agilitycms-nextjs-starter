@@ -23,10 +23,10 @@ interface Props {
 	sitemap: string
 }
 
-export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 
+const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
 
-	console.log("get header content")
+	console.log("get header content", locale, sitemap)
 
 	const api = getAgilitySDK()
 
@@ -83,4 +83,7 @@ export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 		logo: contentItem.fields.logo,
 		links,
 	} as IHeaderData
-})
+}
+
+export const revalidate = 3600 // revalidate the data at most every 30 seconds
+export const getHeaderContent = cache(getHeaderContent_notCached)

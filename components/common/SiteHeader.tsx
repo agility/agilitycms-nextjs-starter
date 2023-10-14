@@ -24,8 +24,8 @@ const SiteHeader = ({header}: Props) => {
 	return (
 		<header className="relative w-full mx-auto bg-white px-8">
 			<div className="max-w-screen-xl mx-auto">
-				<div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-					<div className="lg:w-0 lg:flex-1">
+				<div className="flex justify-between items-center py-6 md:justify-start md:space-x-10 w-full">
+					<div className="md:w-0 md:flex-1">
 						<Link href="/" className="flex items-center">
 							<Image
 								className="h-14 sm:h-20 w-auto z-50"

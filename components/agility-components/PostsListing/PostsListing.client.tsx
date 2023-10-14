@@ -18,13 +18,11 @@ const PostListingClient = ({posts, locale, sitemap}: Props) => {
 	const [items, setItems] = useState(posts)
 
 	const fetchPosts = async () => {
-		console.log("fetching more...", items.length)
 		const morePosts = await fetch(
 			`/api/get-post-listing?locale=${locale}&sitemap=${sitemap}&skip=${items.length}&take=10`
 		)
 		if (morePosts.ok) {
 			const morePostsJson = await morePosts.json()
-			//console.log("items now", [...items, ...morePostsJson])
 
 			setItems((prev) => {
 				return [...prev, ...morePostsJson]
@@ -34,7 +32,6 @@ const PostListingClient = ({posts, locale, sitemap}: Props) => {
 			console.error("error fetching more posts", morePosts.status, morePosts.statusText)
 			setHasMore(false)
 		}
-		console.log("done fetching...")
 	}
 
 	return (

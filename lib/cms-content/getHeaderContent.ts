@@ -26,8 +26,6 @@ interface Props {
 
 const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
 
-	console.log("get header content", locale, sitemap)
-
 	const api = getAgilitySDK()
 
 	// set up content item
@@ -78,12 +76,8 @@ const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
 	}
 
 	// return clean object...
-
-	const d = new Date()
-
-
 	return {
-		siteName: `${contentItem.fields.siteName}-${d.getFullYear()}.${d.getMonth()}.${d.getDate()}.${d.getHours()}.${d.getMinutes()}.${d.getSeconds()}`,
+		siteName: contentItem.fields.siteName,
 		logo: contentItem.fields.logo,
 		links,
 	} as IHeaderData

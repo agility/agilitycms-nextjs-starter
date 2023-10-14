@@ -11,8 +11,6 @@ export const getAgilityContext = () => {
 	//determine whether it's preview or dev mode
 	const isPreview = isEnabled || isDevelopmentMode
 
-	console.log("mode", { isPreview, isDevelopmentMode })
-
 	return {
 		locale: "en-us",
 		sitemap: "website",

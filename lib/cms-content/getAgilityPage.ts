@@ -19,7 +19,6 @@ export const getAgilityPage = async ({ params }: PageProps) => {
 
 	if (!params.slug) params.slug = [""]
 
-	console.log("get props", { preview, locale, params })
 	const agilityPage = await getAgilityPageProps({ params, preview, getModule })
 	return agilityPage
 }

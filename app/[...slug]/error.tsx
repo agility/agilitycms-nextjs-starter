@@ -11,11 +11,19 @@ export default function Error({error, reset}: {error: Error; reset: () => void})
 		console.error(error)
 	}, [error])
 
+	let message = `An unexpected error has occurred.`
+	let title = `Error`
+	if (error.message === "404") {
+		message = `The page you were looking for could not be found.`
+		title = `Page not found`
+	}
+
 	return (
-		<div>
-			<h1>This is the error page.</h1>
-			<p>Something went wrong!</p>
-			<button onClick={() => reset()}>Start over</button>
-		</div>
+		<section className="relative px-8">
+			<div className="max-w-2xl mx-auto my-12 md:mt-18 lg:mt-20 prose prose-sm lg:prose-lg xl:prose-xl">
+				<h1>{title}</h1>
+				<p>{message}</p>
+			</div>
+		</section>
 	)
 }

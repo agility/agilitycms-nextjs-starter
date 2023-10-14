@@ -23,8 +23,23 @@ interface Props {
 	sitemap: string
 }
 
+/**
+ * Revalidate the header content every 10 seconds
+ */
+export const revalidate = 10
 
-const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
+/**
+ * Get the site header content from the main `siteheader` content item,
+ * as well as the nested sitemap for our navigation links.
+ *
+ * Most solutions use nested linked content lists for navigation, but for simplicity, we are using the sitemap here.
+ *
+ * The header content is cached for 10 seconds using react's `cache` function
+ *
+ * @param {Props} { locale, sitemap }
+ * @return {*}
+ */
+export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 
 	const api = getAgilitySDK()
 
@@ -81,7 +96,7 @@ const getHeaderContent_notCached = async ({ locale, sitemap }: Props) => {
 		logo: contentItem.fields.logo,
 		links,
 	} as IHeaderData
-}
+})
 
-export const revalidate = 10 // revalidate the data at most every 30 seconds
-export const getHeaderContent = cache(getHeaderContent_notCached)
+
+

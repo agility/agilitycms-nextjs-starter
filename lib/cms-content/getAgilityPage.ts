@@ -11,7 +11,8 @@ export interface PageProps {
 }
 
 
-export const getAgilityPage = async ({ params }: PageProps) => {
+
+export const getAgilityPage = cache(async ({ params }: PageProps) => {
 
 	const { isPreview, locale, sitemap } = getAgilityContext()
 
@@ -19,12 +20,7 @@ export const getAgilityPage = async ({ params }: PageProps) => {
 
 	if (!params.slug) params.slug = [""]
 
-	const agilityPage = await getAgilityPageProps({ params, preview, getModule })
-	return agilityPage
-}
+	return await getAgilityPageProps({ params, preview, locale })
 
+})
 
-
-const getModule = (name: string) => {
-	return null
-}

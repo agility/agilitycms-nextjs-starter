@@ -2,15 +2,13 @@ import LoadingWidget from "components/common/LoadingWidget"
 import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
 import SiteHeader from "components/common/SiteHeader"
-import getAgilitySDK from "lib/cms-content/getAgilitySDK"
 import {useAgilityContext} from "lib/cms-content/useAgilityContext"
 
-import {ContentItem, ImageField} from "@agility/nextjs"
 import {Inter} from "next/font/google"
 
 import "/styles/globals.css"
 import "/styles/nprogress.min.css"
-import {IHeaderData, getHeaderContent} from "lib/cms-content/getHeaderContent"
+import {getHeaderContent} from "lib/cms-content/getHeaderContent"
 
 const inter = Inter({
 	subsets: ["latin"],

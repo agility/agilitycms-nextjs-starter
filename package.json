@@ -12,6 +12,7 @@
 		"@types/node": "18.11.9",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.9",
+		"classnames": "^2.3.2",
 		"eslint": "8.27.0",
 		"eslint-config-next": "13.0.3",
 		"html-react-parser": "^3.0.4",
@@ -27,7 +28,7 @@
 	},
 	"devDependencies": {
 		"@agility/content-fetch": "2.0.0-rc18",
-		"@agility/nextjs": "^13.5.0-rc2",
+		"@agility/nextjs": "13.5.0-rc4",
 		"@tailwindcss/typography": "^0.5.8",
 		"@types/luxon": "^3.1.0",
 		"@types/nprogress": "^0.2.0",

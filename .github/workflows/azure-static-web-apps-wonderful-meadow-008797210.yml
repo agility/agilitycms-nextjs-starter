@@ -32,6 +32,11 @@ jobs:
           api_location: "/api" # Api source code path - optional
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          AGILITY_GUID: ${{ vars.AGILITY_GUID }}
+          AGILITY_API_FETCH_KEY: ${{ secrets.AGILITY_API_FETCH_KEY }}
+          AGILITY_LOCALES: ${{ vars.AGILITY_LOCALES }}
+          AGILITY_SITEMAP: ${{ vars.AGILITY_SITEMAP }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

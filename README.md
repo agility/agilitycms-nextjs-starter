@@ -28,8 +28,6 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightweight utility-first CSS framework packed with classes that can be composed to build any design, directly in your markup.
 
-It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autoprefixer), a plugin which use the data based on current browser popularity and property support to apply CSS prefixes for you.
-
 ### TypeScript
 
 This starter is written in TypeScript, with ESLint.

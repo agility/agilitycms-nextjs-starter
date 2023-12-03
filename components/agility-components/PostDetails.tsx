@@ -49,8 +49,6 @@ const PostDetails: ModuleWithDynamic<any, IPost> = ({dynamicPageItem, languageCo
 			: undefined,
 	}
 
-	console.log("post jsonld: ", JSON.stringify(jsonLd, null, 2))
-
 	return (
 		<>
 			{/* Add JSON-LD to as a script */}

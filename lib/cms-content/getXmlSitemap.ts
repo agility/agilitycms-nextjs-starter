@@ -41,7 +41,6 @@ export const getXmlSitemap = async ({ baseUrl, locale, sitemap }: Props): Promis
 
 		})
 
-		//console.log("nodes", nodes)
 
 	} catch (error) {
 		console.error("Error getting sitemap xml", error)

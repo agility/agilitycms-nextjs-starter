@@ -21,11 +21,40 @@ const PostDetails: ModuleWithDynamic<any, IPost> = ({dynamicPageItem, languageCo
 	// category
 	const category = post.category?.fields.title || "Uncategorized"
 
-	// format date
-	const dateStr = DateTime.fromJSDate(new Date(post.date)).toFormat("LLL. dd, yyyy")
+	// format dates - note that all Agility date/times are in EST (Eastern Time Zone) by default...
+	const publishDate = DateTime.fromJSDate(new Date(post.date)).setZone("est")
+	const modDate = DateTime.fromJSDate(new Date(dynamicPageItem.properties.modified)).setZone("est")
+	const dateStr = publishDate.toFormat("LLL. dd, yyyy")
+
+	/*
+	 * Structured Data
+	 * for this post, we will use the NewsArticle schema described here:
+	 * https://developers.google.com/search/docs/appearance/structured-data/article
+	 */
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "NewsArticle",
+		headline: post.title,
+		image: post.image ? [post.image.url] : undefined,
+		datePublished: publishDate.toISO(),
+		dateModified: modDate.toISO(),
+		author: post.author
+			? [
+					{
+						"@type": "Person",
+						name: post.author.fields.name,
+					},
+			  ]
+			: undefined,
+	}
 
 	return (
 		<>
+			{/* Add JSON-LD to as a script */}
+			<script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}} />
+			{/* ... */}
+
 			<div className="relative px-8">
 				<div className="max-w-screen-xl mx-auto">
 					<div className="h-64 md:h-96  lg:h-[480px] relative overflow-hidden rounded-lg">

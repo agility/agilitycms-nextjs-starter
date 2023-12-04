@@ -1,13 +1,12 @@
 import "server-only";
 import agility, { ApiClientInstance } from '@agility/content-fetch'
-
+import { draftMode } from 'next/headers'
 
 
 
 const getAgilitySDK = () => {
 
-	//TODO: get the preview data
-	const isPreview = false
+	const isPreview = draftMode().isEnabled
 
 	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY
 

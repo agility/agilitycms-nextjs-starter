@@ -1,6 +1,11 @@
 import { ContentItem, ImageField } from "@agility/nextjs"
-import getAgilitySDK from "./getAgilitySDK"
-import { cache } from "react"
+
+import getAgilitySDK from "../cms/getAgilitySDK"
+import { unstable_cache } from "next/cache"
+import { getAgilityContext } from "../cms/useAgilityContext"
+import { cacheConfig } from "../cms/cacheConfig"
+import { getContentList } from "lib/cms/getContentList"
+
 
 interface ILink {
 	title: string
@@ -24,22 +29,18 @@ interface Props {
 }
 
 /**
- * Revalidate the header content every 10 seconds
- */
-export const revalidate = 10
-
-/**
  * Get the site header content from the main `siteheader` content item,
  * as well as the nested sitemap for our navigation links.
  *
  * Most solutions use nested linked content lists for navigation, but for simplicity, we are using the sitemap here.
  *
- * The header content is cached for 10 seconds using react's `cache` function
  *
  * @param {Props} { locale, sitemap }
  * @return {*}
  */
-export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
+export const getHeaderContent = async ({ locale, sitemap }: Props) => {
+
+	const { isPreview } = getAgilityContext()
 
 	const api = getAgilitySDK()
 
@@ -51,7 +52,7 @@ export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 
 	try {
 		// try to fetch our site header
-		let header = await api.getContentList({
+		let header = await getContentList({
 			referenceName: "siteheader",
 			languageCode: locale,
 			take: 1,
@@ -81,11 +82,15 @@ export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 		links = nodes
 			.filter((node: any) => node.visible.menu)
 			.map((node: any) => {
+
+				const path = node.path
+
 				return {
 					title: node.menuText || node.title,
-					path: node.path,
+					path: path === "/home" ? "/" : path,
 				}
 			})
+
 	} catch (error) {
 		if (console) console.error("Could not load nested sitemap.", error)
 	}
@@ -96,7 +101,7 @@ export const getHeaderContent = cache(async ({ locale, sitemap }: Props) => {
 		logo: contentItem.fields.logo,
 		links,
 	} as IHeaderData
-})
+}
 
 
 

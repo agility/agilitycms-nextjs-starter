@@ -1,6 +1,16 @@
 import React from "react"
-import {AgilityPic, ImageField, Module, URLField} from "@agility/nextjs"
+import {
+	AgilityPic,
+	ContentItem,
+	ImageField,
+	Module,
+	URLField,
+	UnloadedModule,
+	UnloadedModuleProps,
+} from "@agility/nextjs"
 import Link from "next/link"
+import getAgilitySDK from "lib/cms/getAgilitySDK"
+import {getContentItem} from "lib/cms/getContentItem"
 
 interface ITextBlockWithImage {
 	title: string
@@ -12,9 +22,16 @@ interface ITextBlockWithImage {
 	highPriority?: string
 }
 
-const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
-	// get module fields
-	const {fields} = module
+/**
+ * Text Block With Image.  This is "unloaded" since we have set the depth property to 0 when fetching the page.
+ * @param param0
+ * @returns
+ */
+const TextBlockWithImage = async ({module, languageCode}: UnloadedModuleProps) => {
+	const {fields, contentID} = await getContentItem<ITextBlockWithImage>({
+		contentID: module.contentid,
+		languageCode,
+	})
 
 	// function to check whether or not the url is absolute
 	const isUrlAbsolute = (url: string) => url.indexOf("://") > 0 || url.indexOf("//") === 0
@@ -25,6 +42,7 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 		if (isUrlAbsolute(url) === false) {
 			return (
 				<Link
+					data-agility-field="primaryButton"
 					href={url}
 					title={text}
 					target={target}
@@ -37,6 +55,7 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 			// else use anchor tag
 			return (
 				<a
+					data-agility-field="primaryButton"
 					href={url}
 					title={text}
 					target={target}
@@ -49,12 +68,12 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 	}
 
 	//determine if the image should be high priority
-	const priority = module.fields.highPriority === "true"
+	const priority = fields.highPriority === "true"
 
 	return (
-		<div className="relative px-8">
+		<div className="relative px-8" data-agility-component={contentID}>
 			<div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
-				<div className="md:w-6/12 flex-shrink-0 relative ">
+				<div className="md:w-6/12 flex-shrink-0 relative " data-agility-field="image">
 					{fields.primaryButton ? (
 						<Link href={fields.primaryButton.href} className="relative">
 							<AgilityPic
@@ -94,14 +113,23 @@ const TextBlockWithImage: Module<ITextBlockWithImage> = ({module}) => {
 				>
 					<div className="g:py-8 text-center md:text-left">
 						{fields.tagline && (
-							<span className="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
+							<div
+								data-agility-field="tagline"
+								className="font-bold text-primary-500 text-sm text-center md:text-left uppercase py-1"
+							>
 								{fields.tagline}
-							</span>
+							</div>
 						)}
-						<h2 className="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+						<h2
+							data-agility-field="title"
+							className="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left"
+						>
 							{fields.title}
 						</h2>
-						<p className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200">
+						<p
+							data-agility-field="content"
+							className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200"
+						>
 							{fields.content}
 						</p>
 						{fields.primaryButton &&

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: "standalone", //this is only for next.js on Azure Static Web Apps...
+	//output: "standalone", //this is only for next.js on Azure Static Web Apps...
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {

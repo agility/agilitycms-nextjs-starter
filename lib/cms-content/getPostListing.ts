@@ -1,7 +1,8 @@
 import { DateTime } from "luxon"
-import getAgilitySDK from "./getAgilitySDK"
+import getAgilitySDK from "../cms/getAgilitySDK"
 import { ContentList } from "@agility/content-fetch"
 import { ImageField } from "@agility/nextjs"
+import { getContentList } from "lib/cms/getContentList"
 
 export interface IPostMin {
 
@@ -34,7 +35,7 @@ export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsP
 		})
 
 		// get posts...
-		let rawPosts: ContentList = await api.getContentList({
+		let rawPosts: ContentList = await getContentList({
 			referenceName: "posts",
 			languageCode: locale,
 			contentLinkDepth: 2,

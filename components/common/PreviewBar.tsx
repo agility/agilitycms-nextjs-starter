@@ -42,7 +42,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 	}
 
 	return (
-		<div className="bg-agility relative px-8 text-gray-200">
+		<div className="bg-agility relative px-8 text-gray-200" data-agility-previewbar>
 			<div className="flex justify-between items-center max-w-screen-xl mx-auto">
 				<div className="flex items-center">
 					<span className="p-2 rounded-lg mr-4">
@@ -65,16 +65,16 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 						</a>
 					</span>
 					<div className="mr-4">
-						<a href="https://help.agilitycms.com/hc/en-us" target="_blank" rel="noreferrer" title="Help Center">
+						<a href="https://agilitycms.com/docs" target="_blank" rel="noreferrer" title="Help Center">
 							<div className="flex items-center">
 								<FaInfoCircle className="text-2xl mr-2" />
-								<p className="hidden md:block text-sm">Help Center</p>
+								<p className="hidden md:block text-sm">Agility Docs</p>
 							</div>
 						</a>
 					</div>
 					<div>
 						<a
-							href="https://github.com/agility/agilitycms-nextjs-starter"
+							href="https://github.com/agility/next-14-caching"
 							target="_blank"
 							rel="noreferrer"
 							title="View on GitHub"

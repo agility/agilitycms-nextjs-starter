@@ -1,5 +1,5 @@
 import { ContentList } from "@agility/content-fetch"
-import getAgilitySDK from "lib/cms-content/getAgilitySDK"
+import getAgilitySDK from "lib/cms/getAgilitySDK"
 import { getPostListing } from "lib/cms-content/getPostListing"
 import { NextRequest, NextResponse } from "next/server"
 

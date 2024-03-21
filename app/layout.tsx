@@ -7,7 +7,6 @@ import {useAgilityContext} from "lib/cms/useAgilityContext"
 import {Inter} from "next/font/google"
 
 import "/styles/globals.css"
-import "/styles/nprogress.min.css"
 
 import {getHeaderContent} from "lib/cms-content/getHeaderContent"
 

@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from "next"
 import { getHeaderContent } from "./getHeaderContent"
 import getAgilitySDK from "../cms/getAgilitySDK"
 import ReactHtmlParser from "html-react-parser"
+import { getContentItem } from "lib/cms/getContentItem"
 
 interface Props {
 	agilityData: AgilityPageProps
@@ -16,8 +17,6 @@ interface Props {
 
 export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
 
-	const agilitySDK = getAgilitySDK()
-
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
 
@@ -27,7 +26,7 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 
 		//get the content item for this dynamic layout/page
 		try {
-			const contentItem: ContentItem = await agilitySDK.getContentItem({
+			const contentItem: ContentItem = await getContentItem({
 				contentID: agilityData.sitemapNode.contentID,
 				languageCode: locale
 			})

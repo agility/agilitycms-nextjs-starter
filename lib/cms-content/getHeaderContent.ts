@@ -5,6 +5,7 @@ import { unstable_cache } from "next/cache"
 import { getAgilityContext } from "../cms/useAgilityContext"
 import { cacheConfig } from "../cms/cacheConfig"
 import { getContentList } from "lib/cms/getContentList"
+import { getSitemapNested } from "lib/cms/getSitemapNested"
 
 
 interface ILink {
@@ -40,9 +41,6 @@ interface Props {
  */
 export const getHeaderContent = async ({ locale, sitemap }: Props) => {
 
-	const { isPreview } = getAgilityContext()
-
-	const api = getAgilitySDK()
 
 	// set up content item
 	let contentItem: ContentItem<IHeader> | null = null
@@ -73,7 +71,7 @@ export const getHeaderContent = async ({ locale, sitemap }: Props) => {
 
 	try {
 		// get the nested sitemap
-		let nodes = await api.getSitemapNested({
+		let nodes = await getSitemapNested({
 			channelName: sitemap,
 			languageCode: locale,
 		})

@@ -8,6 +8,11 @@ export interface PageProps {
 }
 
 
+/**
+ * Get an page/layout with caching information added.
+ * @param param0
+ * @returns
+ */
 export const getAgilityPage = async ({ params }: PageProps) => {
 
 	const { isPreview: preview, locale } = getAgilityContext()

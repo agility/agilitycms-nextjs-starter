@@ -3,6 +3,7 @@ import getAgilitySDK from "../cms/getAgilitySDK"
 import { ContentList } from "@agility/content-fetch"
 import { ImageField } from "@agility/nextjs"
 import { getContentList } from "lib/cms/getContentList"
+import { getSitemapFlat } from "lib/cms/getSitemapFlat"
 
 export interface IPostMin {
 
@@ -22,14 +23,14 @@ interface LoadPostsProp {
 }
 
 export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsProp) => {
-	const api = getAgilitySDK()
 
-	//TODO: we are ignoring skip and take for now...
+
+	//HACK: we are ignoring skip and take for now just to show how to use the CMS data
 
 
 	try {
 		// get sitemap...
-		let sitemapNodes = await api.getSitemapFlat({
+		let sitemapNodes = await getSitemapFlat({
 			channelName: sitemap,
 			languageCode: locale,
 		})

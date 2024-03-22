@@ -34,7 +34,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
 			//page change
 			const pageTag = `agility-page-${data.pageID}-${data.languageCode}`
 			revalidateTag(pageTag)
-			console.log("Revalidating page tag", pageTag)
+
+
+			//also revalidate the sitemaps
+			const sitemapTagFlat = `agility-sitemap-flat-${data.languageCode}`
+			const sitemapTagNested = `agility-sitemap-nested-${data.languageCode}`
+			revalidateTag(sitemapTagFlat)
+			revalidateTag(sitemapTagNested)
+
+			console.log("Revalidating page and sitemap tags", pageTag, sitemapTagFlat, sitemapTagNested)
 		}
 	}
 

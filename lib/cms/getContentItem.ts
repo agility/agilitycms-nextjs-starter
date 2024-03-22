@@ -3,9 +3,13 @@ import getAgilitySDK from "lib/cms/getAgilitySDK"
 import { cacheConfig } from "lib/cms/cacheConfig"
 import { ContentItem } from "@agility/content-fetch"
 
+/**
+ * Get a content item with caching information added.
+ * @param params
+ * @returns
+ */
 export const getContentItem = async <T>(params: ContentItemRequestParams) => {
 
-	// get module fields
 	const agilitySDK = getAgilitySDK()
 
 	agilitySDK.config.fetchConfig = {

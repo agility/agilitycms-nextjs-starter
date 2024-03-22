@@ -29,7 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 			const listTag = `agility-content-${data.contentID}-${data.languageCode}`
 			revalidateTag(itemTag)
 			revalidateTag(listTag)
-			console.log("Revalidating content tags", itemTag, listTag)
+			console.log("Revalidating content tags:", itemTag, listTag)
 		} else if (data.pageID !== undefined && data.pageID > 0) {
 			//page change
 			const pageTag = `agility-page-${data.pageID}-${data.languageCode}`
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 			revalidateTag(sitemapTagFlat)
 			revalidateTag(sitemapTagNested)
 
-			console.log("Revalidating page and sitemap tags", pageTag, sitemapTagFlat, sitemapTagNested)
+			console.log("Revalidating page and sitemap tags:", pageTag, sitemapTagFlat, sitemapTagNested)
 		}
 	}
 

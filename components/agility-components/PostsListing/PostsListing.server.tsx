@@ -2,8 +2,10 @@ import React from "react"
 import Link from "next/link"
 
 import {getPostListing} from "lib/cms-content/getPostListing"
-import {useAgilityContext} from "lib/cms-content/useAgilityContext"
+import {useAgilityContext} from "lib/cms/useAgilityContext"
 import PostListingClient from "./PostsListing.client"
+import {getContentItem} from "lib/cms/getContentItem"
+import {UnloadedModuleProps} from "@agility/nextjs"
 
 interface IPostListing {
 	title: string
@@ -11,11 +13,7 @@ interface IPostListing {
 	preHeader: string
 }
 
-interface Props {
-	module: IPostListing
-}
-
-const PostListing = async ({module}: Props) => {
+const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 	const {sitemap, locale} = useAgilityContext()
 
 	// get posts

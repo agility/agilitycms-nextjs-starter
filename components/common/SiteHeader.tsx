@@ -2,7 +2,6 @@
 
 import React, {useEffect, useState} from "react"
 import Link from "next/link"
-import Image from "next/image"
 import {IHeaderData} from "lib/cms-content/getHeaderContent"
 import {AgilityImage, handlePreview} from "@agility/nextjs"
 import LoadingWidget from "./LoadingWidget"

@@ -2,8 +2,9 @@ import { AgilityPageProps, ImageField } from "@agility/nextjs"
 import { ContentItem } from "@agility/content-fetch"
 import { Metadata, ResolvingMetadata } from "next"
 import { getHeaderContent } from "./getHeaderContent"
-import getAgilitySDK from "./getAgilitySDK"
+import getAgilitySDK from "../cms/getAgilitySDK"
 import ReactHtmlParser from "html-react-parser"
+import { getContentItem } from "lib/cms/getContentItem"
 
 interface Props {
 	agilityData: AgilityPageProps
@@ -16,7 +17,6 @@ interface Props {
 
 export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
 
-	const agilitySDK = getAgilitySDK()
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
 
@@ -26,7 +26,7 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 
 		//get the content item for this dynamic layout/page
 		try {
-			const contentItem: ContentItem = await agilitySDK.getContentItem({
+			const contentItem: ContentItem = await getContentItem({
 				contentID: agilityData.sitemapNode.contentID,
 				languageCode: locale
 			})
@@ -55,6 +55,7 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	let metaHTML = agilityData.page?.seo?.metaHTML
 
 	let otherMetaData: { [name: string]: string } = {}
+
 
 	if (metaHTML) {
 		const additionalHeaderMarkup = ReactHtmlParser(metaHTML)
@@ -93,13 +94,17 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	}
 	//#endregion
 
+
+
 	const metaData: Metadata = {
+		metadataBase: new URL('https://preview-tests-nov-2023.vercel.app'),
 		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}`,
 		description: agilityData.page?.seo?.metaDescription,
 		keywords: agilityData.page?.seo?.metaKeywords,
 		openGraph: {
 			images: ogImages,
 		},
+
 		generator: `Agility CMS`,
 		other: otherMetaData
 

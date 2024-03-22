@@ -6,9 +6,33 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
-## 📢 UPDATED FOR NEXT.JS 13.5 📢
+## 📢 UPDATED FOR NEXT.JS 14 📢
 
-- We have updated this starter for Next.js 13. It is using a pre-release version of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
+- We have updated this starter for Next.js 13. It is built on top of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
+
+### Caching
+
+There are 2 new env var settings that are used to control caching.
+
+- `AGILITY_FETCH_CACHE_DURATION`
+
+  - this setting sets the number of seconds that content items retrieved using the Agility Fetch SDK will be cached as objects.
+  - Works best to use this with on-demand invalidation. If your hosting environment doesn't support this, set it to `0` to disable caching, or set it to a low value, like `10` seconds.
+
+- `AGILITY_PATH_REVALIDATE_DURATION`
+  - this value controls the `revalidate` export that will tell next.js how long to cache a particular path segment. Set this to a longer value if you are using on-demand revalidation, and a lower value if not, and if your users expect content changes to be reflected earlier.
+
+Agility will NOT cache anything in preview mode :)
+
+#### On Demand Revalidation
+
+- If you are hosting your site on an environment that supports Next.js on-demand revalidation, then you should be using the `AGILITY_FETCH_CACHE_DURATION` value and actively caching items returned from the SDK.
+- the revalidation endpoint example is located at `app/api/revalidate/route.ts` and will revalidate the items based on the tags that are used to cache those object.
+- The `lib/cms-content` has examples of how to retrieve content while specifying the cache tags for it.
+
+## Changes
+
+This starter now relies on component based data-fetching.
 
 ## About This Starter
 

@@ -25,11 +25,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
 		//revalidate the correct tags based on what changed
 		if (data.referenceName) {
 			//content item change
-			revalidateTag(`agility-content-${data.referenceName}-${data.languageCode}`)
-			revalidateTag(`agility-content-${data.contentID}-${data.languageCode}`)
+			const itemTag = `agility-content-${data.referenceName}-${data.languageCode}`
+			const listTag = `agility-content-${data.contentID}-${data.languageCode}`
+			revalidateTag(itemTag)
+			revalidateTag(listTag)
+			console.log("Revalidating content tags", itemTag, listTag)
 		} else if (data.pageID !== undefined && data.pageID > 0) {
 			//page change
-			revalidateTag(`agility-page-${data.pageID}-${data.languageCode}`)
+			const pageTag = `agility-page-${data.pageID}-${data.languageCode}`
+			revalidateTag(pageTag)
+			console.log("Revalidating page tag", pageTag)
 		}
 	}
 

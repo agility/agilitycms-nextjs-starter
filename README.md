@@ -8,7 +8,7 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 ## 📢 UPDATED FOR NEXT.JS 14 📢
 
-- We have updated this starter for Next.js 13. It is built on top of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
+- We have updated this starter for Next.js 14. It is built on top of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
 
 ### Caching
 

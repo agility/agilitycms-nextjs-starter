@@ -13,11 +13,33 @@ interface IPostListing {
 	preHeader: string
 }
 
+export interface GetNextPostsProps {
+	skip: number
+	take: number
+}
+
 const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 	const {sitemap, locale} = useAgilityContext()
 
-	// get posts
+	// get posts for the initial page load
 	const {posts} = await getPostListing({sitemap, locale, take: 10, skip: 0})
+
+	// get next posts for infinite scroll
+	const getNextPosts = async ({skip, take}: GetNextPostsProps) => {
+		"use server"
+
+		//HACK: we are just outputting a lot of posts here for now, so we are IGNORING the skip and take vals...
+		//normally you would use skip and take to do paging on a large list.
+		const postsRes = await getPostListing({sitemap: sitemap, locale, skip: 0, take: 50})
+
+		//HACK adjust the ids so our keys don't overlap
+		postsRes.posts = postsRes.posts.map((post, index) => {
+			post.contentID = index + Number(skip)
+			return post
+		})
+
+		return postsRes.posts
+	}
 
 	// if there are no posts, display message on frontend
 	if (!posts || posts.length <= 0) {
@@ -36,7 +58,7 @@ const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 		)
 	}
 
-	return <PostListingClient {...{posts, sitemap, locale}} />
+	return <PostListingClient {...{posts, sitemap, locale, getNextPosts}} />
 }
 
 export default PostListing

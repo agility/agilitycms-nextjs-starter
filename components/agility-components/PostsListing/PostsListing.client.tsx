@@ -6,30 +6,30 @@ import Image from "next/image"
 import {IPostMin} from "lib/cms-content/getPostListing"
 import InfiniteScroll from "react-infinite-scroll-component"
 import {AgilityPic} from "@agility/nextjs"
+import {GetNextPostsProps} from "./PostsListing.server"
 
 interface Props {
 	posts: IPostMin[]
 	locale: string
 	sitemap: string
+	getNextPosts: ({skip, take}: GetNextPostsProps) => Promise<IPostMin[]>
 }
 
-const PostListingClient = ({posts, locale, sitemap}: Props) => {
+const PostListingClient = ({posts, locale, sitemap, getNextPosts}: Props) => {
 	const [hasMore, setHasMore] = useState(true)
 	const [items, setItems] = useState(posts)
 
 	const fetchPosts = async () => {
-		const morePosts = await fetch(
-			`/api/get-post-listing?locale=${locale}&sitemap=${sitemap}&skip=${items.length}&take=10`
-		)
-		if (morePosts.ok) {
-			const morePostsJson = await morePosts.json()
+		try {
+			//call the server action declared in the server component to get the next page of posts...
+			const morePosts = await getNextPosts({skip: items.length, take: 10})
 
 			setItems((prev) => {
-				return [...prev, ...morePostsJson]
+				return [...prev, ...morePosts]
 			})
-			setHasMore(morePostsJson.length > 0)
-		} else {
-			console.error("error fetching more posts", morePosts.status, morePosts.statusText)
+			setHasMore(morePosts.length > 0)
+		} catch (error) {
+			console.error("error fetching more posts", error)
 			setHasMore(false)
 		}
 	}

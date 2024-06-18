@@ -56,14 +56,6 @@ const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 			}
 			return phantomPosts
 		}
-
-		//HACK adjust the ids so our keys don't overlap
-		postsRes.posts = postsRes.posts.map((post, index) => {
-			post.contentID = index + Number(skip)
-			return post
-		})
-
-		return postsRes.posts
 	}
 
 	// if there are no posts, display message on frontend

@@ -50,23 +50,34 @@ const PostListingClient = ({posts, locale, sitemap, getNextPosts}: Props) => {
 							<Link href={post.url} key={post.contentID}>
 								<div className="flex-col group mb-8 md:mb-0">
 									<div className="relative h-64 w-full overflow-clip">
-										<AgilityPic
-											image={post.image}
-											className="object-cover object-center rounded-t-lg w-full"
-											fallbackWidth={800}
-											sources={[
-												//screen at least than 1280, it's 1/3 of the screen
-												{
-													media: "(min-width: 1280px)",
-													width: 480,
-												},
+										{post.image.url.includes("https://placehold.co/") ? (
+											//*** special case for placeholder images ***
+											// eslint-disable-next-line @next/next/no-img-element
+											<img
+												src={post.image.url}
+												alt={post.image.label}
+												className="object-cover object-center rounded-t-lg w-full"
+											/>
+										) : (
+											//*** normal case ***
+											<AgilityPic
+												image={post.image}
+												className="object-cover object-center rounded-t-lg w-full"
+												fallbackWidth={800}
+												sources={[
+													//screen at least than 1280, it's 1/3 of the screen
+													{
+														media: "(min-width: 1280px)",
+														width: 480,
+													},
 
-												//screen at least than 640, it's 1/2 of the screen
-												{media: "(min-width: 640px)", width: 640},
-												//screen less than 640, full width of screen
-												{media: "(max-width: 639px)", width: 640},
-											]}
-										/>
+													//screen at least than 640, it's 1/2 of the screen
+													{media: "(min-width: 640px)", width: 640},
+													//screen less than 640, full width of screen
+													{media: "(max-width: 639px)", width: 640},
+												]}
+											/>
+										)}
 									</div>
 									<div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
 										<div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">

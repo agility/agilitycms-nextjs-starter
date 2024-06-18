@@ -22,10 +22,12 @@ interface LoadPostsProp {
 	take: number
 }
 
+/**
+ * Get a list of posts and resolve the URLs for each post from the sitemap.
+ * @param param0
+ * @returns
+ */
 export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsProp) => {
-
-
-	//HACK: we are ignoring skip and take for now just to show how to use the CMS data
 
 
 	try {
@@ -40,7 +42,8 @@ export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsP
 			referenceName: "posts",
 			languageCode: locale,
 			contentLinkDepth: 2,
-			take: 50,
+			take,
+			skip
 		})
 
 		// resolve dynamic urls

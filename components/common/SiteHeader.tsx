@@ -1,10 +1,9 @@
 "use client"
 
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import Link from "next/link"
 import {IHeaderData} from "lib/cms-content/getHeaderContent"
-import {AgilityImage, handlePreview} from "@agility/nextjs"
-import LoadingWidget from "./LoadingWidget"
+import {AgilityImage} from "@agility/nextjs"
 
 interface Props {
 	header: IHeaderData | null
@@ -13,18 +12,6 @@ interface Props {
 const SiteHeader = ({header}: Props) => {
 	// open / close mobile nav
 	const [open, setOpen] = useState(false)
-
-	//check for preview mode...
-	const [isPreviewRequested, setisPreviewRequested] = useState(false)
-	useEffect(() => {
-		if (handlePreview(null)) {
-			setisPreviewRequested(true)
-		}
-	}, [])
-
-	if (isPreviewRequested) {
-		return <LoadingWidget message="Initializing preview mode..." />
-	}
 
 	if (!header) {
 		return (

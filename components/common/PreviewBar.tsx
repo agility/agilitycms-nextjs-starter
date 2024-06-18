@@ -7,12 +7,13 @@ import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp, FaSpinner, FaSyncAlt
 interface Props {
 	isPreview: boolean | undefined
 	isDevelopmentMode: boolean | undefined
+	startPreviewMode: (pathname: string) => Promise<void>
 }
 
 /**
  * This is a preview bar that is enabled by default to handle viewing content in preview & live mode, remove this for production use.
  **/
-const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
+const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => {
 	const [open, setOpen] = useState(false)
 	const [isPreviewRequested, setisPreviewRequested] = useState(false)
 
@@ -23,13 +24,17 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 		} else {
 			if (!isDevelopmentMode && !isPreview) {
 				setisPreviewRequested(true)
-				fetch("/api/preview/generate-key")
-					.then((response) => response.text())
-					.then((previewKey) => {
-						window.location.replace(`${window.location.pathname}?agilitypreviewkey=${encodeURIComponent(previewKey)}`)
+
+				// start preview mode
+				startPreviewMode(window.location.pathname)
+					.then(() => {
+						console.log("Preview Mode Started")
 					})
 					.catch((error) => {
 						console.error("Error generating preview key", error)
+					})
+					.finally(() => {
+						setOpen(false)
 						setisPreviewRequested(false)
 					})
 			} else {
@@ -74,7 +79,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode}: Props) => {
 					</div>
 					<div>
 						<a
-							href="https://github.com/agility/next-14-caching"
+							href="https://github.com/agility/agilitycms-nextjs-starter"
 							target="_blank"
 							rel="noreferrer"
 							title="View on GitHub"

@@ -28,9 +28,9 @@ const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 	// get next posts for infinite scroll
 	const getNextPosts = async ({skip, take}: GetNextPostsProps) => {
 		"use server"
-		console.log("get POsts", {sitemap, locale, skip, take})
+
 		const postsRes = await getPostListing({sitemap: sitemap, locale, skip, take})
-		console.log("postsRes", postsRes)
+
 		if (postsRes.posts.length > 0) {
 			return postsRes.posts
 		} else {

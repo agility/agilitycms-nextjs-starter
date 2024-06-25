@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, res: NextResponse) {
 
 	//TODO: these kinds of dynamic links should work by default (even outside of preview)
 	if (ContentID) {
-		const dynamicPath = await getDynamicPageURL({ contentID: ContentID, preview: true, slug });
+		const dynamicPath = await getDynamicPageURL({ contentID: Number(ContentID), preview: true, slug: slug || undefined });
 		if (dynamicPath) {
 			previewUrl = dynamicPath;
 		}

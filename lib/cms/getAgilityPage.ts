@@ -9,7 +9,7 @@ export interface PageProps {
 
 
 /**
- * Get an page/layout with caching information added.
+ * Get a page with caching information added.
  * @param param0
  * @returns
  */

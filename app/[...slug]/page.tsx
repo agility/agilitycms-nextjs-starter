@@ -1,4 +1,4 @@
-import {getPageTemplate} from "components/agility-layouts"
+import {getPageTemplate} from "components/agility-pages"
 import {PageProps, getAgilityPage} from "lib/cms/getAgilityPage"
 import {getAgilityContext} from "lib/cms/useAgilityContext"
 

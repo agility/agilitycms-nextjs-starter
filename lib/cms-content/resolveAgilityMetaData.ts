@@ -20,11 +20,11 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
 
-	//#region *** resolve open graph stuff from dynamic pages/layouts ***
+	//#region *** resolve open graph stuff from dynamic pages ***
 	if (agilityData.sitemapNode.contentID !== undefined
 		&& agilityData.sitemapNode.contentID > 0) {
 
-		//get the content item for this dynamic layout/page
+		//get the content item for this dynamic page
 		try {
 			const contentItem: ContentItem = await getContentItem({
 				contentID: agilityData.sitemapNode.contentID,
@@ -42,11 +42,11 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 					})
 				}
 			} else {
-				//TODO: handle other dynamic pages/layouts types here!
+				//TODO: handle other dynamic pages types here!
 			}
 
 		} catch (error) {
-			console.warn("Could not resolve open graph meta data from dynamic page/layout contentID:", agilityData.sitemapNode.contentID, error)
+			console.warn("Could not resolve open graph meta data from dynamic page contentID:", agilityData.sitemapNode.contentID, error)
 		}
 	}
 	//#endregion

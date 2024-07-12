@@ -26,7 +26,7 @@
 		"react-dom": "18.2.0",
 		"react-icons": "^4.11.0",
 		"react-infinite-scroll-component": "^6.1.0",
-		"string-strip-html": "^12.0.0",
+		"string-strip-html": "^13.4.8",
 		"typescript": "4.9.3"
 	},
 	"devDependencies": {

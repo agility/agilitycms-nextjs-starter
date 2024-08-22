@@ -24,10 +24,8 @@ export async function middleware(request: NextRequest) {
 		const locale = request.nextUrl.searchParams.get("lang")
 		const slug = request.nextUrl.pathname
 
-		console.log("redirect to preview mode", { agilityPreviewKey, locale, slug })
-
 		//valid preview key: we need to redirect to the correct url for preview
-		let redirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/preview?locale=${locale}&contentID=${contentIDStr}&slug=${encodeURIComponent(slug)}&agilitypreviewkey=${encodeURIComponent(agilityPreviewKey)}`
+		let redirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/preview?locale=${locale}&ContentID=${contentIDStr}&slug=${encodeURIComponent(slug)}&agilitypreviewkey=${encodeURIComponent(agilityPreviewKey)}`
 
 		return NextResponse.rewrite(redirectUrl)
 
@@ -37,7 +35,7 @@ export async function middleware(request: NextRequest) {
 
 		//we need to redirect to the correct url for preview
 		const slug = request.nextUrl.pathname
-		let redirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/preview/exit?locale=${locale}&slug=${encodeURIComponent(slug)}`
+		let redirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/preview/exit?locale=${locale}&ContentID=${contentIDStr}&slug=${encodeURIComponent(slug)}`
 
 		return NextResponse.redirect(redirectUrl)
 	} else if (contentIDStr) {
@@ -45,17 +43,25 @@ export async function middleware(request: NextRequest) {
 		if (!isNaN(contentID) && contentID > 0) {
 			//*** this is a dynamic page request ***
 
-			//get the slug for this page based on the sitemap and redirect there
-			const redirectUrl = await getDynamicPageURL({ contentID, preview: true, slug: "" })
-			if (redirectUrl) {
-				return NextResponse.redirect(redirectUrl)
-			}
+			let dynredirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/dynamic-redirect?ContentID=${contentID}`
+			return NextResponse.rewrite(dynredirectUrl)
+
 		}
 	}
+}
 
 
 
+export const config = {
 
-
-
+	matcher: [
+		/*
+		 * Match all request paths except for the ones starting with:
+		 * - api (API routes)
+		 * - _next/static (static files)
+		 * - _next/image (image optimization files)
+		 * - favicon.ico (favicon file)
+		 */
+		'/((?!api|_next/static|_next/image|favicon.ico).*)',
+	],
 }

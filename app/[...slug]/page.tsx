@@ -1,6 +1,7 @@
 import {getPageTemplate} from "components/agility-pages"
 import {PageProps, getAgilityPage} from "lib/cms/getAgilityPage"
 import {getAgilityContext} from "lib/cms/useAgilityContext"
+import agilitySDK from "@agility/content-fetch"
 
 import {Metadata, ResolvingMetadata} from "next"
 
@@ -8,10 +9,60 @@ import {resolveAgilityMetaData} from "lib/cms-content/resolveAgilityMetaData"
 import NotFound from "./not-found"
 import InlineError from "components/common/InlineError"
 import {cacheConfig} from "lib/cms/cacheConfig"
+import {SitemapNode} from "lib/types/SitemapNode"
 
 export const revalidate = cacheConfig.pathRevalidateDuration
 export const runtime = "nodejs"
 export const dynamic = "force-static"
+
+/**
+ * Generate the list of pages that we want to generate a build time.
+ * @returns
+ */
+export async function generateStaticParams() {
+	const isDevelopmentMode = process.env.NODE_ENV === "development"
+	const isPreview = isDevelopmentMode
+
+	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY
+
+	const agilityClient = agilitySDK.getApi({
+		guid: process.env.AGILITY_GUID,
+		apiKey,
+		isPreview,
+	})
+
+	const languageCode = process.env.AGILITY_LOCALES || "en-us"
+
+	agilityClient.config.fetchConfig = {
+		next: {
+			tags: [`agility-sitemap-flat-${languageCode}`],
+			revalidate: cacheConfig.cacheDuration,
+		},
+	}
+
+	//get the flat sitemap and generate the paths
+	// *** NOTE: YOU CAN CUSTOMIZE THIS TO GENERATE ONLY THE PAGES YOU WANT ***
+	const sitemap: {[path: string]: SitemapNode} = await agilityClient.getSitemapFlat({
+		channelName: process.env.AGILITY_SITEMAP || "website",
+		languageCode,
+	})
+
+	const paths = Object.values(sitemap)
+		.filter((node, index) => {
+			//skip folders, redirects, and the home page
+			if (node.redirect !== null || node.isFolder === true || index === 0) return false
+			return true
+		})
+		.map((node) => {
+			return {
+				slug: node.path.split("/").slice(1),
+			}
+		})
+
+	console.log("Pre-rendering", paths.length, "static paths.")
+
+	return paths
+}
 
 /**
  * Generate metadata for this page

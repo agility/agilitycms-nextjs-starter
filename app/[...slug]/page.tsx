@@ -17,7 +17,6 @@ export const dynamic = "force-static"
 
 /**
  * Generate the list of pages that we want to generate a build time.
- * @returns
  */
 export async function generateStaticParams() {
 	const isDevelopmentMode = process.env.NODE_ENV === "development"

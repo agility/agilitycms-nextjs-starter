@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, res: NextResponse) {
 
 	//locale is also passed in the querystring on preview requests
 	const locale = searchParams.get("lang")
-	const slug = request.nextUrl.pathname
+	const slug = searchParams.get("slug") || "/"
 
 	const ContentID = searchParams.get('ContentID')
 

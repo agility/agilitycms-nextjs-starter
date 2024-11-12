@@ -17,12 +17,9 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 	const [open, setOpen] = useState(false)
 	const [isPreviewRequested, setisPreviewRequested] = useState(false)
 
-
-	// console.log("PreviewBar", isPreview, isDevelopmentMode)
 	// handle view function to determine preview / live mode
 	const handleView = () => {
 
-		console.log('Handle Preview', isDevelopmentMode, isPreview)
 		if (isDevelopmentMode) {
 			alert("You are currently in Development Mode, Live Mode is unavailable.")
 		} else {

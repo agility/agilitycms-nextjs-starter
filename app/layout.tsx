@@ -1,5 +1,4 @@
-import {  draftMode } from "next/headers"
-import LoadingWidget from "components/common/LoadingWidget"
+import { draftMode } from "next/headers"
 import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
 import SiteHeader from "components/common/SiteHeader"
@@ -12,7 +11,6 @@ import "/styles/globals.css"
 
 import { getHeaderContent } from "lib/cms-content/getHeaderContent"
 import { redirect } from "next/navigation"
-import { NextRequest } from "next/server"
 import Script from "next/script"
 
 const inter = Inter({
@@ -32,8 +30,7 @@ export default async function RootLayout({
     "use server";
 
     //turn on draft/preview mode
-    const { enable } = await draftMode()
-    enable()
+    (await draftMode()).enable()
 
     // Redirect to the same page
     let url = `${pathname}`

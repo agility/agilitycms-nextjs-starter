@@ -11,8 +11,7 @@ export async function GET(request: NextRequest) {
 	const ContentID = searchParams.get('ContentID');
 
 	//disable draft/preview mode
-	const { disable} = await draftMode()
-	disable()
+	(await draftMode()).disable()
 
 	let url = new URL(slug || '', request.nextUrl.origin).toString();
 

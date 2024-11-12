@@ -10,7 +10,7 @@
 		"lint": "next lint"
 	},
 	"engines": {
-		"node": "18.x"
+		"node": ">=18.0.0"
 	},
 	"dependencies": {
 		"@types/node": "18.11.9",
@@ -21,8 +21,8 @@
 		"eslint-config-next": "13.0.3",
 		"html-react-parser": "^3.0.4",
 		"luxon": "^3.1.0",
-		"next": "^14.1.4",
-		"react": "18.2.0",
+		"next": "^15.0.3",
+		"react": "^18.3.1",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.11.0",
 		"react-infinite-scroll-component": "^6.1.0",

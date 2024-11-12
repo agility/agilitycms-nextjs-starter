@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import React, {useState} from "react"
-import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp, FaSpinner, FaSyncAlt} from "react-icons/fa"
+import {FaInfoCircle, FaGithub, FaChevronDown, FaChevronUp, FaSpinner} from "react-icons/fa"
 
 interface Props {
 	isPreview: boolean | undefined
@@ -17,8 +17,12 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 	const [open, setOpen] = useState(false)
 	const [isPreviewRequested, setisPreviewRequested] = useState(false)
 
+
+	// console.log("PreviewBar", isPreview, isDevelopmentMode)
 	// handle view function to determine preview / live mode
 	const handleView = () => {
+
+		console.log('Handle Preview', isDevelopmentMode, isPreview)
 		if (isDevelopmentMode) {
 			alert("You are currently in Development Mode, Live Mode is unavailable.")
 		} else {
@@ -40,7 +44,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 			} else {
 				const exit = confirm("Would you like to exit Preview Mode?")
 				if (exit === true) {
-					window.location.href = `/api/preview/exit?slug=${encodeURIComponent(window.location.pathname)}`
+					window.location.href = `${window.location.origin}/api/preview/exit?slug=${encodeURIComponent(window.location.pathname.substring(1))}`
 				} else return
 			}
 		}
@@ -106,7 +110,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 						{open ? <FaChevronUp className="text-agility" /> : <FaChevronDown className="text-gray-200" />}
 					</div>
 					<div
-						className="absolute bg-white text-white text-sm py-4 px-4 w-15.1 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl md:max-w-full"
+						className="absolute bg-white text-white text-sm py-4 px-4 w-15 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl md:max-w-full"
 						style={{display: open ? "block" : "none"}}
 					>
 						{isPreview ? (

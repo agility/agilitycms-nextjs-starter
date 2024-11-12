@@ -43,7 +43,8 @@ export const getPostListing = async ({ sitemap, locale, skip, take }: LoadPostsP
 			languageCode: locale,
 			contentLinkDepth: 2,
 			take,
-			skip
+			skip,
+			locale
 		})
 
 		// resolve dynamic urls

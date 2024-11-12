@@ -20,7 +20,7 @@ export interface GetNextPostsProps {
 }
 
 const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
-	const {sitemap, locale} = useAgilityContext()
+	const {sitemap, locale} = await useAgilityContext()
 
 	// get posts for the initial page load
 	const {posts} = await getPostListing({sitemap, locale, take: 10, skip: 0})

@@ -41,7 +41,6 @@ interface Props {
  */
 export const getHeaderContent = async ({ locale, sitemap }: Props) => {
 
-
 	// set up content item
 	let contentItem: ContentItem<IHeader> | null = null
 
@@ -54,6 +53,7 @@ export const getHeaderContent = async ({ locale, sitemap }: Props) => {
 			referenceName: "siteheader",
 			languageCode: locale,
 			take: 1,
+			locale
 		})
 
 		// if we have a header, set as content item
@@ -74,6 +74,7 @@ export const getHeaderContent = async ({ locale, sitemap }: Props) => {
 		let nodes = await getSitemapNested({
 			channelName: sitemap,
 			languageCode: locale,
+			locale
 		})
 
 		// grab the top level links that are visible on menu

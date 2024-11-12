@@ -8,7 +8,6 @@ import {Metadata, ResolvingMetadata} from "next"
 import {resolveAgilityMetaData} from "lib/cms-content/resolveAgilityMetaData"
 import NotFound from "./not-found"
 import InlineError from "components/common/InlineError"
-import {cacheConfig} from "lib/cms/cacheConfig"
 import {SitemapNode} from "lib/types/SitemapNode"
 
 export const revalidate = 60
@@ -21,9 +20,7 @@ export const dynamic = "force-static"
 export async function generateStaticParams() {
 	const isDevelopmentMode = process.env.NODE_ENV === "development";
 	const isPreview = isDevelopmentMode;
-  
 	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY;
-  
 	const agilityClient = agilitySDK.getApi({
 	  guid: process.env.AGILITY_GUID,
 	  apiKey,

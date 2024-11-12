@@ -1,6 +1,5 @@
 import { ContentItemRequestParams } from "@agility/content-fetch/dist/methods/getContentItem"
 import getAgilitySDK from "lib/cms/getAgilitySDK"
-import { cacheConfig } from "lib/cms/cacheConfig"
 import { ContentItem } from "@agility/content-fetch"
 
 /**

@@ -1,9 +1,4 @@
 import { ContentItem, ImageField } from "@agility/nextjs"
-
-import getAgilitySDK from "../cms/getAgilitySDK"
-import { unstable_cache } from "next/cache"
-import { getAgilityContext } from "../cms/useAgilityContext"
-import { cacheConfig } from "../cms/cacheConfig"
 import { getContentList } from "lib/cms/getContentList"
 import { getSitemapNested } from "lib/cms/getSitemapNested"
 

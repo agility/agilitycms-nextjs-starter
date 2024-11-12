@@ -11,18 +11,16 @@ export async function GET(request: NextRequest) {
 	const ContentID = searchParams.get('ContentID');
 
 	//disable draft/preview mode
-	(await draftMode()).disable()
+	const { disable} = await draftMode()
+	disable()
 
 	let url = new URL(slug || '', request.nextUrl.origin).toString();
 
 	if (ContentID) {
 		const dynamicPath = await getDynamicPageURL({ contentID: Number(ContentID), preview: false, slug: slug || undefined });
-
-		console.log("dynamicPath", dynamicPath)
 		if (dynamicPath) {
 			url = dynamicPath;
 		}
-
 	}
 
 	// Remove the preview URL param if it exists

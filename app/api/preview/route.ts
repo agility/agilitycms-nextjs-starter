@@ -46,7 +46,8 @@ export async function GET(request: NextRequest) {
 	}
 
 	//enable draft/preview mode
-	(await draftMode()).enable()
+	const { enable } = await draftMode()
+	enable()
 
 	// Redirect to the slug
 	//Add an extra querystring to the location header - since Netlify will keep the QS for the incoming request by default

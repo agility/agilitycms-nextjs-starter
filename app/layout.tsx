@@ -1,4 +1,4 @@
-import { draftMode } from "next/headers"
+import {  draftMode } from "next/headers"
 import LoadingWidget from "components/common/LoadingWidget"
 import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
@@ -32,7 +32,8 @@ export default async function RootLayout({
     "use server";
 
     //turn on draft/preview mode
-    (await draftMode()).enable()
+    const { enable } = await draftMode()
+    enable()
 
     // Redirect to the same page
     let url = `${pathname}`

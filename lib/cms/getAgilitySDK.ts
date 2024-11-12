@@ -9,7 +9,8 @@ const getAgilitySDK = async () => {
 
 	//get the preview data
 	const isDevelopmentMode = process.env.NODE_ENV === "development"
-	const isPreview = isDevelopmentMode || (await draftMode()).isEnabled
+	const { isEnabled:isDraftMode} = await draftMode()
+	const isPreview = isDevelopmentMode || isDraftMode
 
 	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY
 

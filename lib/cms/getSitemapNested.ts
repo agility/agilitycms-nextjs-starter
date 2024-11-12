@@ -1,5 +1,4 @@
 import getAgilitySDK from "lib/cms/getAgilitySDK"
-import { cacheConfig } from "lib/cms/cacheConfig"
 
 import { SitemapNestedRequestParams } from "@agility/content-fetch/dist/methods/getSitemapNested"
 

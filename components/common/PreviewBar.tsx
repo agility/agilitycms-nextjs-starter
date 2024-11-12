@@ -35,7 +35,9 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 						console.log("Preview Mode Started")
 					})
 					.catch((error) => {
-						console.error("Error generating preview key", error)
+						if(error.message !== 'NEXT_REDIRECT') {
+							console.error("Error generating preview key", error)
+						}
 					})
 					.finally(() => {
 						setOpen(false)

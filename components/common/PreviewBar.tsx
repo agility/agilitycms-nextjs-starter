@@ -43,7 +43,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 			} else {
 				const exit = confirm("Would you like to exit Preview Mode?")
 				if (exit === true) {
-					window.location.href = `/api/preview/exit?slug=${encodeURIComponent(window.location.pathname.substring(1))}`
+					window.location.href = `/api/preview/exit?slug=${encodeURIComponent(window.location.pathname)}`
 				} else return
 			}
 		}

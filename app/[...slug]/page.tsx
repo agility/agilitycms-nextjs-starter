@@ -9,6 +9,7 @@ import {resolveAgilityMetaData} from "lib/cms-content/resolveAgilityMetaData"
 import NotFound from "./not-found"
 import InlineError from "components/common/InlineError"
 import {SitemapNode} from "lib/types/SitemapNode"
+import {notFound} from "next/navigation"
 
 export const revalidate = 60
 export const runtime = "nodejs"
@@ -17,7 +18,7 @@ export const dynamic = "force-static"
 /**
  * Generate the list of pages that we want to generate a build time.
  */
-export async function generateStaticParams() {
+export async function getStaticPaths() {
 	const isDevelopmentMode = process.env.NODE_ENV === "development";
 	const isPreview = isDevelopmentMode;
 	const apiKey = isPreview ? process.env.AGILITY_API_PREVIEW_KEY : process.env.AGILITY_API_FETCH_KEY;
@@ -55,7 +56,10 @@ export async function generateStaticParams() {
   
 	console.log("Pre-rendering", paths.length, "static paths.");
   
-	return paths;
+	return {
+		paths,
+		fallback: "blocking",
+	};
   }
 
 /**
@@ -83,7 +87,7 @@ export async function generateMetadata(
   export default async function Page({ params }: PageProps) {
 	const agilityData = await getAgilityPage({ params });
   
-	if (!agilityData.page) return NotFound();
+	if (!agilityData.page) notFound();
   
 	const AgilityPageTemplate = getPageTemplate(agilityData.pageTemplateName || "");
   

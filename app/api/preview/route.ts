@@ -49,12 +49,13 @@ export async function GET(request: NextRequest) {
 	(await draftMode()).enable()
 
 	// Redirect to the slug
-	//Add an extra querystring to the location header - since Netlify will keep the QS for the incoming request by default
-	let url = `${previewUrl}`
+	// Construct an absolute URL for the redirect
+	const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+	let url = `${baseUrl}${previewUrl}`;
 	if (url.includes("?")) {
-		url = `${url}&preview=1`
+		url = `${url}&preview=1`;
 	} else {
-		url = `${url}?preview=1`
+		url = `${url}?preview=1`;
 	}
 
 	return NextResponse.redirect(url, 307);

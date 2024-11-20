@@ -1,6 +1,5 @@
 import { ContentItemRequestParams } from "@agility/content-fetch/dist/methods/getContentItem"
 import getAgilitySDK from "lib/cms/getAgilitySDK"
-import { cacheConfig } from "lib/cms/cacheConfig"
 import { ContentItem } from "@agility/content-fetch"
 
 /**
@@ -10,12 +9,12 @@ import { ContentItem } from "@agility/content-fetch"
  */
 export const getContentItem = async <T>(params: ContentItemRequestParams) => {
 
-	const agilitySDK = getAgilitySDK()
+	const agilitySDK = await getAgilitySDK()
 
 	agilitySDK.config.fetchConfig = {
 		next: {
 			tags: [`agility-content-${params.contentID}-${params.languageCode || params.locale}`],
-			revalidate: cacheConfig.cacheDuration,
+			revalidate: 60,
 		},
 	}
 

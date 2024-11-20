@@ -13,20 +13,18 @@ export async function middleware(request: NextRequest) {
 	 * 3: Check if this is a direct to a dynamic page
 	 *    based on a content id
 	 *******************************/
+
 	const previewQ = request.nextUrl.searchParams.get("AgilityPreview")
 	let contentIDStr = request.nextUrl.searchParams.get("ContentID") as string || ""
 
 	if (request.nextUrl.searchParams.has("agilitypreviewkey")) {
 		//*** this is a preview request ***
 		const agilityPreviewKey = request.nextUrl.searchParams.get("agilitypreviewkey") || ""
-
 		//locale is also passed in the querystring on preview requests
 		const locale = request.nextUrl.searchParams.get("lang")
 		const slug = request.nextUrl.pathname
-
 		//valid preview key: we need to redirect to the correct url for preview
 		let redirectUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}/api/preview?locale=${locale}&ContentID=${contentIDStr}&slug=${encodeURIComponent(slug)}&agilitypreviewkey=${encodeURIComponent(agilityPreviewKey)}`
-
 		return NextResponse.rewrite(redirectUrl)
 
 	} else if (previewQ === "0") {

@@ -3,8 +3,8 @@ import { getAgilityPageProps } from "@agility/nextjs/node";
 import { getAgilityContext } from "./useAgilityContext";
 
 export interface PageProps {
-	params: { slug: string[] }
-	searchParams?: { [key: string]: string | string[] | undefined }
+	params: Promise<{ slug: string[] }>
+	searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 
@@ -15,12 +15,13 @@ export interface PageProps {
  */
 export const getAgilityPage = async ({ params }: PageProps) => {
 
-	const { isPreview: preview, locale } = getAgilityContext()
+	const awaitedParams = await params
+	const { isPreview: preview, locale } = await getAgilityContext()
 
-	if (!params.slug) params.slug = [""]
+	if (!awaitedParams.slug) awaitedParams.slug = [""]
 
 	const page = await getAgilityPageProps({
-		params, preview, locale, apiOptions: {
+		params:awaitedParams, preview, locale, apiOptions: {
 			contentLinkDepth: 0
 		}
 	})

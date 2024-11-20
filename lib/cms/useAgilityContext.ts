@@ -1,13 +1,13 @@
-import { draftMode } from 'next/headers'
+import { draftMode } from 'next/headers';
 import { agilityConfig } from "@agility/nextjs"
 
 /**
  * Gets the Agility context for the current request.
  */
-export const getAgilityContext = () => {
+export const getAgilityContext = async () => {
 
 	//determine if we're in preview mode based on "draft" mode from next.js
-	const { isEnabled } = draftMode()
+	const { isEnabled } = await draftMode()
 
 	const isDevelopmentMode = process.env.NODE_ENV === "development"
 

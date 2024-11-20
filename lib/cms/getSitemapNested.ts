@@ -1,5 +1,4 @@
 import getAgilitySDK from "lib/cms/getAgilitySDK"
-import { cacheConfig } from "lib/cms/cacheConfig"
 
 import { SitemapNestedRequestParams } from "@agility/content-fetch/dist/methods/getSitemapNested"
 
@@ -11,12 +10,12 @@ import { SitemapNestedRequestParams } from "@agility/content-fetch/dist/methods/
 export const getSitemapNested = async (params: SitemapNestedRequestParams) => {
 
 
-	const agilitySDK = getAgilitySDK()
+	const agilitySDK = await getAgilitySDK()
 
 	agilitySDK.config.fetchConfig = {
 		next: {
 			tags: [`agility-sitemap-nested-${params.languageCode || params.locale}`],
-			revalidate: cacheConfig.cacheDuration,
+			revalidate: 60,
 		},
 	}
 

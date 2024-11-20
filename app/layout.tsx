@@ -1,5 +1,4 @@
 import { draftMode } from "next/headers"
-import LoadingWidget from "components/common/LoadingWidget"
 import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
 import SiteHeader from "components/common/SiteHeader"
@@ -12,7 +11,6 @@ import "/styles/globals.css"
 
 import { getHeaderContent } from "lib/cms-content/getHeaderContent"
 import { redirect } from "next/navigation"
-import { NextRequest } from "next/server"
 import Script from "next/script"
 
 const inter = Inter({
@@ -25,15 +23,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { locale, sitemap, isDevelopmentMode, isPreview } = useAgilityContext()
-
+  const { locale, sitemap, isDevelopmentMode, isPreview } = await useAgilityContext()
   const header = await getHeaderContent({ sitemap, locale })
 
   async function startPreviewMode(pathname: string) {
-    "use server"
+    "use server";
 
     //turn on draft/preview mode
-    draftMode().enable()
+    (await draftMode()).enable()
 
     // Redirect to the same page
     let url = `${pathname}`
@@ -42,6 +39,7 @@ export default async function RootLayout({
     } else {
       url = `${url}?preview=1`
     }
+
     redirect(url)
   }
 

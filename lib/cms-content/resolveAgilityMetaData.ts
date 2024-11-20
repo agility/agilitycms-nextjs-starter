@@ -17,6 +17,7 @@ interface Props {
 
 export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
 
+	
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
 
@@ -28,7 +29,8 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 		try {
 			const contentItem: ContentItem = await getContentItem({
 				contentID: agilityData.sitemapNode.contentID,
-				languageCode: locale
+				languageCode: locale,
+				locale
 			})
 
 			if (contentItem.properties.definitionName === "Post") {

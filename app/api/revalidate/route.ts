@@ -13,7 +13,7 @@ interface IRevalidateRequest {
 	changeDateUTC: string
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 
 	//parse the body
 	const data = await req.json() as IRevalidateRequest
@@ -46,9 +46,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 		}
 	}
 
-	return new Response(`OK`, {
-		status: 200
-	})
+	return NextResponse.json({ message: "OK" }, { status: 200 });
 
 
 }

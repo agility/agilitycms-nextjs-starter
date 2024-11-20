@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@agility/content-fetch/-/content-fetch-2.0.0.tgz#57a3e93ea0927284be582fc6382251385ab9ad95"
   integrity sha512-ghqdv/IozVASwPgZThZrmufbo8q5a5UMOMOyy9CCSS8BVx5r+QxjRLTEXQOp7xpoJO1vhe3QUkOmCppssBf3Eg==
 
-"@agility/nextjs@^14.0.1":
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-14.0.1.tgz#d45bcf945836d73fafd6aed3a4d44c40c2f0dd64"
-  integrity sha512-w8gaQNLM+rHRGA2PXfSByBTy+Mp7BIszRd3nDis1jp6i4rA4aKME6hvnBecp4E5tN/N3URkKMliX2qrlTJf7wA==
+"@agility/nextjs@^15.0.3":
+  version "15.0.3"
+  resolved "https://registry.yarnpkg.com/@agility/nextjs/-/nextjs-15.0.3.tgz#eb69c6d964bec3a8387ee048f3e223a9f860fd82"
+  integrity sha512-79azUZwO+HVGj9jqV5cRHL0nRUc3qEQ9yetrDuteLVynjAOtm65tJ8t583VUE0/cYyD0wVwvugxjfELLPBbb1w==
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"

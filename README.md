@@ -6,9 +6,9 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
 
-## 📢 UPDATED FOR NEXT.JS 14 📢
+## 📢 UPDATED FOR NEXT.JS 15 📢
 
-- We have updated this starter for Next.js 14. It is built on top of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
+- We have updated this starter for Next.js 15.0.3. It is built on top of the [@agility/nextjs](https://www.npmjs.com/package/@agility/nextjs) npm package specialized for app router.
 
 ### Caching
 
@@ -37,7 +37,7 @@ This starter now relies on component based data-fetching.
 ## About This Starter
 
 - Uses our [`@agility/nextjs`](https://www.npmjs.com/package/@agility/nextjs) package to make getting started with Agility CMS and Next.js easy
-- Support for Next.js 14
+- Support for Next.js 15.0.3
 - Connected to a sample Agility CMS Instance for sample content & pages
 - Supports [`next/image`](https://nextjs.org/docs/api-reference/next/image) for image optimization using the `<Image />` component or the next.js `<Image />` component for images that aren't stored in Agility.
 - Supports full [Page Management](https://help.agilitycms.com/hc/en-us/articles/360055805831)

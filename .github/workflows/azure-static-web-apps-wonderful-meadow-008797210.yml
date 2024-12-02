@@ -19,6 +19,10 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify the Node.js version you want to use
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

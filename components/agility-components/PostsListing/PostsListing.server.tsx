@@ -7,6 +7,7 @@ import PostListingClient from "./PostsListing.client"
 import {getContentItem} from "lib/cms/getContentItem"
 import {UnloadedModuleProps} from "@agility/nextjs"
 import {DateTime} from "luxon"
+import { UnloadedComponentProps } from "lib/types/Components"
 
 interface IPostListing {
 	title: string
@@ -19,7 +20,7 @@ export interface GetNextPostsProps {
 	take: number
 }
 
-const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
+const PostListing = async ({component, languageCode}: UnloadedComponentProps) => {
 	const {sitemap, locale} = await useAgilityContext()
 
 	// get posts for the initial page load

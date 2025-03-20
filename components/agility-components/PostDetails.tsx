@@ -2,8 +2,9 @@ import React from "react"
 import { AgilityPic, UnloadedModuleProps, renderHTML } from "@agility/nextjs"
 
 import { DateTime } from "luxon"
+import { UnloadedComponentProps } from "lib/types/Components"
 
-const PostDetails = async ({ dynamicPageItem }: UnloadedModuleProps) => {
+const PostDetails = async ({ dynamicPageItem }: UnloadedComponentProps) => {
   if (!dynamicPageItem) {
     return <div>Post not found</div>
   }

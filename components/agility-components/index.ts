@@ -10,27 +10,27 @@ import NoComponentFound from "./NoComponentFound";
 // All of the Agility Page Module Components that are in use in this site need to be imported into this index file.
 // Place Page Modules in allModules array below, passing in a name and the component.
 
-const allModules = [
-	{ name: "TextBlockWithImage", module: TextBlockWithImage },
-	{ name: "Heading", module: Heading },
-	{ name: "FeaturedPost", module: FeaturedPost },
-	{ name: "PostsListing", module: PostsListing },
-	{ name: "PostDetails", module: PostDetails },
-	{ name: "RichTextArea", module: RichTextArea },
+const components = [
+	{ name: "TextBlockWithImage", component: TextBlockWithImage },
+	{ name: "Heading", component: Heading },
+	{ name: "FeaturedPost", component: FeaturedPost },
+	{ name: "PostsListing", component: PostsListing },
+	{ name: "PostDetails", component: PostDetails },
+	{ name: "RichTextArea", component: RichTextArea },
 ];
 
 /**
  * Get the Agility Component/Module by name.
  * If the component is not found, a default component will be returned.
- * @param moduleName
+ * @param componentName
  * @returns
  */
-export const getModule = (moduleName: string): any | null => {
+export const getComponent = (componentName: string): any | null => {
 
-	if (!moduleName) return null;
-	const obj = allModules.find(
-		(m) => m.name.toLowerCase() === moduleName.toLowerCase()
+	if (!componentName) return null;
+	const obj = components.find(
+		(c) => c.name.toLowerCase() === componentName.toLowerCase()
 	);
 	if (!obj) return NoComponentFound;
-	return obj.module
+	return obj.component
 };

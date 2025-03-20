@@ -10,16 +10,13 @@ import {
 } from "@agility/nextjs"
 import { IPost } from "../../lib/types/IPost"
 import { getContentItem } from "lib/cms/getContentItem"
+import { UnloadedComponentProps } from "lib/types/Components"
+import { IFeaturedPostModule } from "lib/types/Components"
 
-interface IFeaturedPostModule {
-  featuredPost?: {
-    contentid: number
-  }
-}
 
-const FeaturedPost = async ({ module, languageCode }: UnloadedModuleProps) => {
+const FeaturedPost = async ({ component, languageCode }: UnloadedComponentProps) => {
   const { fields, contentID } = await getContentItem<IFeaturedPostModule>({
-    contentID: module.contentid,
+    contentID: component.contentid,
     languageCode,
     contentLinkDepth: 0,
   })

@@ -1,26 +1,10 @@
 import React from "react"
 import {
   AgilityPic,
-  ContentItem,
-  ImageField,
-  Module,
-  URLField,
-  UnloadedModule,
-  UnloadedModuleProps,
 } from "@agility/nextjs"
 import Link from "next/link"
-import getAgilitySDK from "lib/cms/getAgilitySDK"
 import { getContentItem } from "lib/cms/getContentItem"
-
-interface ITextBlockWithImage {
-  title: string
-  content: string
-  tagline?: string
-  imagePosition: "left" | "right"
-  image: ImageField
-  primaryButton: URLField
-  highPriority?: string
-}
+import { UnloadedComponentProps, ITextBlockWithImage } from "lib/types/Components"
 
 /**
  * Text Block With Image.  This is "unloaded" since we have set the depth property to 0 when fetching the page.
@@ -28,11 +12,11 @@ interface ITextBlockWithImage {
  * @returns
  */
 const TextBlockWithImage = async ({
-  module,
+  component,
   languageCode,
-}: UnloadedModuleProps) => {
+}: UnloadedComponentProps) => {
   const { fields, contentID } = await getContentItem<ITextBlockWithImage>({
-    contentID: module.contentid,
+    contentID: component.contentid,
     languageCode,
   })
 

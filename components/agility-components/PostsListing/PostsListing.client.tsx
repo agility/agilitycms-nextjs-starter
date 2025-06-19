@@ -1,28 +1,28 @@
 "use client"
 
-import React, {use, useState} from "react"
+import React, { use, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import {IPostMin} from "lib/cms-content/getPostListing"
+import { IPostMin } from "lib/cms-content/getPostListing"
 import InfiniteScroll from "react-infinite-scroll-component"
-import {AgilityPic} from "@agility/nextjs"
-import {GetNextPostsProps} from "./PostsListing.server"
+import { AgilityPic } from "@agility/nextjs"
+import { GetNextPostsProps } from "./PostsListing.server"
 
 interface Props {
 	posts: IPostMin[]
 	locale: string
 	sitemap: string
-	getNextPosts: ({skip, take}: GetNextPostsProps) => Promise<IPostMin[]>
+	getNextPosts: ({ skip, take }: GetNextPostsProps) => Promise<IPostMin[]>
 }
 
-const PostListingClient = ({posts, locale, sitemap, getNextPosts}: Props) => {
+const PostListingClient = ({ posts, locale, sitemap, getNextPosts }: Props) => {
 	const [hasMore, setHasMore] = useState(true)
 	const [items, setItems] = useState(posts)
 
 	const fetchPosts = async () => {
 		try {
 			//call the server action declared in the server component to get the next page of posts...
-			const morePosts = await getNextPosts({skip: items.length, take: 10})
+			const morePosts = await getNextPosts({ skip: items.length, take: 10 })
 
 			setItems((prev) => {
 				return [...prev, ...morePosts]
@@ -36,7 +36,7 @@ const PostListingClient = ({posts, locale, sitemap, getNextPosts}: Props) => {
 
 	return (
 		<div className="relative px-8 mb-12">
-			<div className="max-w-screen-xl mx-auto">
+			<div className="max-w-(--breakpoint-xl) mx-auto">
 				<div className="">
 					<InfiniteScroll
 						dataLength={items.length}
@@ -72,20 +72,20 @@ const PostListingClient = ({posts, locale, sitemap, getNextPosts}: Props) => {
 													},
 
 													//screen at least than 640, it's 1/2 of the screen
-													{media: "(min-width: 640px)", width: 640},
+													{ media: "(min-width: 640px)", width: 640 },
 													//screen less than 640, full width of screen
-													{media: "(max-width: 639px)", width: 640},
+													{ media: "(max-width: 639px)", width: 640 },
 												]}
 											/>
 										)}
 									</div>
-									<div className="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
-										<div className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
+									<div className="bg-gray-100 dark:bg-gray-900 p-8 border-2 border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg">
+										<div className="uppercase text-primary-500 dark:text-primary-400 text-xs font-bold tracking-widest leading-loose">
 											{post.category}
 										</div>
-										<div className="border-b-2 border-primary-500 w-8"></div>
-										<div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">{post.date}</div>
-										<h2 className="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+										<div className="border-b-2 border-primary-500 dark:border-primary-400 w-8"></div>
+										<div className="mt-4 uppercase text-gray-600 dark:text-gray-300 italic font-semibold text-xs">{post.date}</div>
+										<h2 className="text-secondary-500 dark:text-secondary-200 mt-1 font-black text-2xl group-hover:text-primary-500 dark:group-hover:text-primary-400 transition duration-300">
 											{post.title}
 										</h2>
 									</div>

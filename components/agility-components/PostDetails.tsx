@@ -25,7 +25,7 @@ const PostDetails = async ({ dynamicPageItem }: UnloadedModuleProps) => {
   return (
     <>
       <div className="relative px-8" data-agility-component={contentID}>
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-(--breakpoint-xl) mx-auto">
           <div className="h-64 md:h-96  lg:h-[480px] relative overflow-hidden rounded-lg">
             <AgilityPic
               data-agility-field="image"

@@ -66,7 +66,7 @@ const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 				<div className="my-10">
 					<Link
 						href={"/"}
-						className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary transition duration-300"
+						className="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-hidden focus:border-primary-700 focus:shadow-outline-primary transition duration-300"
 					>
 						Return Home
 					</Link>

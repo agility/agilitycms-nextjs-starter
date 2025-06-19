@@ -1,17 +1,51 @@
 "use client"
 
-import React, {useState} from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import {IHeaderData} from "lib/cms-content/getHeaderContent"
-import {AgilityImage} from "@agility/nextjs"
+import { IHeaderData } from "lib/cms-content/getHeaderContent"
+import { AgilityImage } from "@agility/nextjs"
+import { Switch } from '@headlessui/react'
+import { IconBrightnessDown, IconBrightnessUp } from "@tabler/icons-react"
 
 interface Props {
 	header: IHeaderData | null
 }
 
-const SiteHeader = ({header}: Props) => {
+const SiteHeader = ({ header }: Props) => {
 	// open / close mobile nav
 	const [open, setOpen] = useState(false)
+	const [darkMode, setDarkMode] = useState(false)
+	useEffect(() => {
+		// set inital dark mode based on user preference
+		const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+
+		function handleDarkModeChange(event: any) {
+			if (event.matches) {
+				// User prefers dark mode
+				setDarkMode(true)
+			} else {
+				// User prefers light mode
+				setDarkMode(false)
+			}
+		}
+
+		// Initial check for dark mode preference
+		handleDarkModeChange(darkModePreference);
+
+		// Listen for changes in dark mode preference
+		darkModePreference.addEventListener("change", handleDarkModeChange);
+
+		return () => {
+			darkModePreference.removeEventListener("change", handleDarkModeChange);
+		}
+
+	}, [])
+
+	useEffect(() => {
+		//set the dark mode class on the html element
+		document.documentElement.classList.toggle('dark', darkMode)
+
+	}, [darkMode])
 
 	if (!header) {
 		return (
@@ -22,40 +56,57 @@ const SiteHeader = ({header}: Props) => {
 	}
 
 	return (
-		<header className="relative w-full mx-auto bg-white px-8">
-			<div className="max-w-screen-xl mx-auto">
+		<header className="relative w-full mx-auto bg-white dark:bg-gray-900 px-8 transition-colors duration-300">
+			<div className="max-w-(--breakpoint-xl) mx-auto">
 				<div className="flex justify-between items-center py-6 md:justify-start md:space-x-10 w-full">
 					<div className="md:w-0 md:flex-1">
 						<Link href="/" className="flex items-center">
 							<AgilityImage
-								className="h-14 sm:h-20 w-auto"
+								className="h-10 sm:h-12 w-auto"
 								src={header.logo.url}
 								alt={header.logo.label}
 								width={header.logo.height}
 								height={header.logo.width}
 								fill={false}
 							/>
-							<p className="font-bold text-xl text-secondary-500 ml-3 mt-2">{header.siteName}</p>
+							<p className="font-bold text-xl text-secondary-500 ml-3 mt-2 sr-only" >{header.siteName}</p>
 						</Link>
 					</div>
-					<div className="-mr-2 -my-2 md:hidden">
-						<button
-							onClick={() => setOpen(!open)}
-							aria-label="Toggle Menu"
-							type="button"
-							className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+					<div className="flex items-center space-x-4">
+						<Switch
+							checked={darkMode}
+							onChange={setDarkMode}
+							title="Toggle dark mode"
+							className="group relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 dark:bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:outline-hidden data-checked:bg-indigo-600"
 						>
-							{/* <!-- Heroicon name: menu --> */}
-							<svg
-								className="h-6 w-6"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
+							<span className="sr-only">Toggle dark mode</span>
+							<span className="pointer-events-none relative inline-block size-5 transform rounded-full bg-white dark:bg-gray-900 shadow-xs ring-0 transition duration-200 ease-in-out group-data-checked:translate-x-5">
+								<span
+									aria-hidden="true"
+									className="absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in group-data-checked:opacity-0 group-data-checked:duration-100 group-data-checked:ease-out"
+								>
+									<IconBrightnessDown />
+								</span>
+								<span
+									aria-hidden="true"
+									className="absolute inset-0 flex size-full items-center justify-center opacity-0 transition-opacity duration-100 ease-out group-data-checked:opacity-100 group-data-checked:duration-200 group-data-checked:ease-in"
+								>
+									<IconBrightnessUp className="text-slate-500" />
+								</span>
+							</span>
+						</Switch>
+
+						<div className="-mr-2 -my-2 md:hidden">
+							<button
+								onClick={() => setOpen(!open)}
+								aria-label="Toggle Menu"
+								type="button"
+								className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
 							>
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-							</svg>
-						</button>
+								{/* <!-- Heroicon name: menu --> */}
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="icon icon-tabler icons-tabler-filled icon-tabler-brightness-down"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 8a4 4 0 1 1 -3.995 4.2l-.005 -.2l.005 -.2a4 4 0 0 1 3.995 -3.8z" /><path d="M12 4a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M17 6a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M19 11a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M17 16a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M12 18a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M7 16a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M5 11a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /><path d="M7 6a1 1 0 0 1 .993 .883l.007 .127a1 1 0 0 1 -1.993 .117l-.007 -.127a1 1 0 0 1 1 -1z" /></svg>
+							</button>
+						</div>
 					</div>
 					<nav className="hidden md:flex space-x-10">
 						{header.links.map((navitem, index) => {
@@ -63,7 +114,7 @@ const SiteHeader = ({header}: Props) => {
 								<Link
 									href={navitem.path}
 									key={`mobile-${index}`}
-									className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 border-transparent border-b-2 hover:border-primary-500 hover:border-b-primary hover:border-b-2 focus:outline-none focus:text-primary-500 transition duration-300"
+									className="text-base leading-6 font-medium text-secondary-500 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-400 border-transparent border-b-2 hover:border-primary-500 dark:hover:border-primary-400 hover:border-b-primary hover:border-b-2 focus:outline-hidden focus:text-primary-500 dark:focus:text-primary-400 transition duration-300"
 								>
 									{navitem.title}
 								</Link>
@@ -75,10 +126,10 @@ const SiteHeader = ({header}: Props) => {
 
 			<div
 				className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-20"
-				style={{display: open ? "block" : "none"}}
+				style={{ display: open ? "block" : "none" }}
 			>
 				<div className="rounded-lg shadow-lg">
-					<div className="rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50">
+					<div className="rounded-lg shadow-2xs bg-white dark:bg-gray-900 divide-y-2 divide-gray-50 dark:divide-gray-800">
 						<div className="pt-5 pb-6 px-5 space-y-6">
 							<div className="flex items-center justify-between ">
 								<div>
@@ -99,7 +150,7 @@ const SiteHeader = ({header}: Props) => {
 										onClick={() => setOpen(!open)}
 										aria-label="Toggle Menu"
 										type="button"
-										className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-300"
+										className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 focus:text-gray-500 transition duration-300"
 									>
 										{/* <!-- Heroicon name: x --> */}
 										<svg
@@ -126,7 +177,7 @@ const SiteHeader = ({header}: Props) => {
 											>
 												{/* <!-- Heroicon name: view-grid --> */}
 												<svg
-													className="flex-shrink-0 h-6 w-6 text-primary-600"
+													className="shrink-0 h-6 w-6 text-primary-600"
 													xmlns="http://www.w3.org/2000/svg"
 													fill="none"
 													viewBox="0 0 24 24"
@@ -139,7 +190,7 @@ const SiteHeader = ({header}: Props) => {
 														d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
 													/>
 												</svg>
-												<div className="text-base leading-6 font-medium text-gray-900">{navitem.title}</div>
+												<div className="text-base leading-6 font-medium text-gray-900 dark:text-gray-100">{navitem.title}</div>
 											</Link>
 										)
 									})}

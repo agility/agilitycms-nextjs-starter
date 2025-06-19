@@ -51,7 +51,7 @@ const PreviewBar = ({isPreview, isDevelopmentMode, startPreviewMode}: Props) => 
 
 	return (
 		<div className="bg-agility relative px-8 text-gray-200" data-agility-previewbar>
-			<div className="flex justify-between items-center max-w-screen-xl mx-auto">
+			<div className="flex justify-between items-center max-w-(--breakpoint-xl) mx-auto">
 				<div className="flex items-center">
 					<span className="p-2 rounded-lg mr-4">
 						<a href="https://app.agilitycms.com" target="_blank" rel="noreferrer" title="Agility CMS">

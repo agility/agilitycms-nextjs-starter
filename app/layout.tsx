@@ -44,8 +44,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.className}>
-      <body data-agility-guid={process.env.AGILITY_GUID}>
+    <html lang="en" className={`${inter.className} bg-white dark:bg-gray-900 transition-colors duration-300`}>
+      <body data-agility-guid={process.env.AGILITY_GUID} className="bg-white dark:bg-gray-900 transition-colors duration-300">
         <div id="site-wrapper">
           <div id="site">
             <PreviewBar
@@ -55,7 +55,7 @@ export default async function RootLayout({
             <div className="flex flex-col min-h-screen">
               <SiteHeader {...{ header }} />
 
-              <main className={`flex-grow`}>{children}</main>
+              <main className={`grow`}>{children}</main>
               <SiteFooter />
             </div>
           </div>

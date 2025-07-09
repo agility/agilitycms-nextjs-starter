@@ -1,0 +1,195 @@
+# Agility CMS + Next.js 15 Cursor Rules
+
+## AI Agent Instructions
+You are an **Expert Frontend Developer** for Agility CMS. Before starting any task:
+
+1. **ALWAYS consult `.cursor/project.md`** for project context and methodology
+2. **Reference `.cursor/rules.md`** for detailed implementation patterns when needed
+3. **Use `.cursor/manifest.md`** for planning and progress tracking
+4. **Ask clarifying questions** if requirements are unclear - never make assumptions
+5. **Follow the established workflow** for planning, implementation, and validation
+
+## Workflow Methodology
+
+### Manifest Usage (`cursor/manifest.md`)
+- **ALWAYS start** by updating manifest with your analysis and plan
+- **Structure tasks** into logical phases that can be executed in parallel
+- **Track progress** using ✅ (completed), 🔄 (in progress), ⚠️ (blocked)
+- **Document decisions** and technical choices in the manifest
+- **Ask questions** in the manifest before making assumptions
+
+### Before Implementation:
+1. **Analyze** the request and identify requirements
+2. **Plan** in `.cursor/manifest.md` with phases, tasks, and subtasks
+3. **Identify** tasks that can be executed in parallel
+4. **Ask** for clarification on any unclear requirements
+
+### During Implementation:
+1. **Update** manifest with progress after each major step
+2. **Follow** established patterns from existing code
+3. **Ensure** strong typing and error handling
+4. **Test** components in isolation where possible
+
+### After Implementation:
+1. **Validate** against requirements
+2. **Update** manifest with completion status
+3. **Document** any new patterns or decisions
+4. **Clean up** manifest for future reference
+
+## Context
+This is a Next.js 15 project with Agility CMS integration. The CMS library is in @/lib with server-side caching.
+
+## Core Rules
+
+### CMS Data Fetching
+- ALWAYS use `import "server-only"` for CMS functions
+- NEVER fetch CMS data in client components
+- Use server components for all CMS data fetching
+- All CMS functions return cached data with 60s revalidation
+
+### Component Structure
+- Agility components go in `components/agility-components/`
+- Use `UnloadedModuleProps` for server components that fetch CMS data
+- Add `data-agility-component` attribute to component root elements
+- Register new components in `components/agility-components/index.ts`
+
+### Required Imports
+```typescript
+// For CMS data fetching
+import { getContentItem } from "@/lib/cms/getContentItem"
+import { getContentList } from "@/lib/cms/getContentList"
+import { getAgilityContext } from "@/lib/cms/useAgilityContext"
+
+// For types
+import { IPost } from "@/lib/types/IPost"
+import { ContentItem, ImageField } from "@agility/nextjs"
+import { UnloadedModuleProps } from "@agility/nextjs"
+```
+
+### Library Functions
+- `getContentItem<T>()` - Single content item with type
+- `getContentList()` - List of content items
+- `getAgilityContext()` - Locale, preview state, sitemap
+- `getAgilityPage()` - Page data with metadata
+
+### Parameters Required
+- `contentID`: number
+- `languageCode`: string (usually "en-us")
+- `locale`: string (usually "en-us")
+- `referenceName`: string (for content lists)
+
+### TypeScript Patterns
+- Define interfaces in `lib/types/` with `I` prefix
+- Use generics: `getContentItem<IPost>(...)`
+- Import Agility types for fields: `ImageField`, `ContentItem`
+- Always type CMS content properly
+
+### Error Handling
+- Use try/catch blocks for CMS calls
+- Return null for missing content
+- Provide fallback content/components
+- Use `NoComponentFound` for missing Agility components
+
+### Common Code Patterns
+```typescript
+// Server component with CMS data
+const MyComponent = async ({ module, languageCode, contentID }: UnloadedModuleProps) => {
+  const content = await getContentItem<IMyContent>({
+    contentID,
+    languageCode,
+    locale: languageCode
+  })
+  
+  if (!content) return null
+  
+  return (
+    <div data-agility-component="MyComponent">
+      <h1>{content.fields.title}</h1>
+    </div>
+  )
+}
+
+// Content list fetching
+const posts = await getContentList({
+  referenceName: "posts",
+  languageCode: "en-us",
+  locale: "en-us",
+  take: 10,
+  skip: 0
+})
+```
+
+### File Organization (DRY & Granular)
+- `/lib/cms/` - Core SDK functions (20-30 lines each, reuse getAgilitySDK())
+- `/lib/cms-content/` - Business logic functions (reuse /lib/cms/ functions)
+- `/lib/types/` - TypeScript interfaces (one per file, 3-15 lines each)
+- `/components/agility-components/` - CMS components (reuse existing patterns)
+- `/components/common/` - Shared UI components
+
+### Code Reuse Principles
+- ALWAYS check existing code before creating new functions
+- NEVER duplicate SDK initialization - reuse getAgilitySDK()
+- NEVER create bridge functions - extend existing ones
+- ALWAYS use existing /lib/cms/ functions instead of creating new ones
+- One function per file, one interface per file
+
+### Environment Variables
+- `AGILITY_GUID` - CMS instance ID
+- `AGILITY_API_FETCH_KEY` - Production API key
+- `AGILITY_API_PREVIEW_KEY` - Preview API key
+- `AGILITY_SECURITY_KEY` - Webhook security
+
+### Cache Configuration
+- All CMS functions use Next.js cache with 60s revalidation
+- Cache tags format: `agility-content-${id}-${locale}`
+- Never bypass caching unless explicitly needed
+- Use `/api/revalidate` for cache invalidation
+
+### Development Workflow
+1. CHECK existing code in `lib/types/` for similar patterns
+2. CREATE TypeScript interface in `lib/types/` (one per file)
+3. CHECK existing functions in `lib/cms-content/` before creating new ones
+4. CHECK existing components in `components/agility-components/` for similar functionality
+5. CREATE component reusing existing data fetching patterns
+6. ADD to `components/agility-components/index.ts`
+7. TEST with preview mode
+8. VERIFY caching behavior
+
+### Code Quality Requirements
+- **Strong Typing**: All CMS content MUST be properly typed with interfaces
+- **Interface Naming**: Use `I` prefix for content types (e.g., `IPost`, `IAuthor`)
+- **Generic Usage**: Use generics for type safety (`getContentItem<IPost>()`)
+- **Error Handling**: Explicit error handling with graceful degradation
+- **Null Safety**: Always handle null/undefined states
+- **Data Attributes**: Consistent use of `data-agility-*` attributes
+- **Performance**: Optimize for cache efficiency and minimal re-renders
+
+### Common Mistakes to Avoid
+- Don't use CMS functions in client components
+- Don't forget `data-agility-component` attributes
+- Don't hard-code contentID or locale values
+- Don't ignore error states
+- Don't use deep contentLinkDepth unnecessarily
+- Don't forget to register new components
+- Don't make assumptions about content structure
+- Don't skip type definitions for new content types
+
+### Next.js 15 Specific
+- Always await `draftMode()` calls
+- Use `Promise<{ slug: string[] }>` for params but DON'T await in generateMetadata
+- Include `generateStaticParams()` for static generation
+- Export `revalidate`, `runtime`, `dynamic` constants
+- Server actions for form handling
+- App Router conventions for routing
+
+### Data Attributes
+- `data-agility-component={contentID}` on component root
+- `data-agility-field="fieldName"` for individual fields
+- `data-agility-page={pageID}` for page containers
+- `data-agility-guid={process.env.AGILITY_GUID}` on body
+- Required for Agility Web Studio SDK
+
+### Web Studio SDK
+- Include SDK script in layout.tsx
+- `<Script src="https://unpkg.com/@agility/web-studio-sdk@latest/dist/index.js" />`
+- Enables visual editing in Agility CMS 

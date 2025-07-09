@@ -105,6 +105,110 @@ You can use the Agility Content Fetch SDK normally - either REST or GraphQL with
 
 The easiest way to deploy a Next.js website to production is to use [Vercel](https://vercel.com/) from the creators of Next.js, or [Netlify](https:netlify.com). Vercel and Netlify are all-in-one platforms - perfect for Next.js.
 
+## 🤖 Cursor AI Configuration
+
+This starter includes a comprehensive Cursor AI configuration designed to provide expert-level assistance for Agility CMS development. The configuration follows DRY principles and emphasizes code reuse patterns established in this codebase.
+
+### Configuration Files
+
+#### `.cursorrules` (Root Level)
+The main Cursor rules file that provides quick reference during active coding:
+- **Purpose**: Immediate guidance and workflow instructions
+- **Contains**: Core patterns, common mistakes to avoid, essential imports
+- **Workflow**: Mandates planning in manifest before implementation
+- **Code Quality**: Enforces strong typing and DRY principles
+
+#### `.cursor/project.md` 
+Project context and AI agent role definition:
+- **AI Role**: Defines Cursor as an "Expert Frontend Developer" for Agility CMS
+- **Architecture**: Documents the granular, DRY file structure (20-30 lines per function)
+- **Methodology**: 5-phase development workflow (Analysis → Setup → Implementation → Integration → Documentation)
+- **Communication**: Sets expectations for asking clarifying questions vs. making assumptions
+
+#### `.cursor/rules.md`
+Comprehensive implementation rules and patterns:
+- **DRY Principles**: Emphasizes code reuse and avoiding duplication
+- **Architecture**: Documents the `/lib/cms` SDK wrapper patterns
+- **Type Safety**: Strong typing requirements with `I` prefix conventions
+- **Examples**: Good/bad code examples with detailed explanations
+- **Performance**: Caching strategies and optimization patterns
+
+#### `.cursor/manifest.md`
+Task planning and progress tracking template:
+- **Structure**: 5-phase project breakdown with parallel task identification
+- **Progress**: Visual indicators (✅ completed, 🔄 in progress, ⚠️ blocked)
+- **Decision Tracking**: Documents technical choices and pattern decisions
+- **Questions**: Formal process for clarifying unclear requirements
+
+### Key Principles
+
+#### DRY & Code Reuse
+- **ALWAYS** check existing code before creating new functions
+- **NEVER** duplicate SDK initialization - reuse `getAgilitySDK()`
+- **AVOID** bridge functions - extend existing patterns instead
+- **ONE** function per file, one interface per file
+
+#### Granular Architecture
+```
+/lib/cms/              # Core SDK functions (20-30 lines each)
+├── getAgilitySDK.ts   # Centralized SDK initialization (reused by all)
+├── getContentItem.ts  # Content fetching + caching wrapper
+├── getContentList.ts  # List fetching + caching wrapper
+└── ...
+
+/lib/types/            # TypeScript definitions (3-15 lines each)
+├── IPost.ts           # Single content type interface
+├── IAuthor.ts         # Single content type interface
+└── ...
+```
+
+#### Workflow Methodology
+
+1. **Before Implementation:**
+   - Update `.cursor/manifest.md` with analysis and task breakdown
+   - Identify tasks that can be executed in parallel
+   - Ask clarifying questions for unclear requirements
+
+2. **During Implementation:**
+   - Follow established patterns from existing codebase
+   - Update manifest with progress after each major step
+   - Ensure strong typing and comprehensive error handling
+
+3. **After Implementation:**
+   - Validate against original requirements
+   - Update manifest with completion status
+   - Document any new patterns or architectural decisions
+
+### Strong Typing Requirements
+
+All code must follow these TypeScript patterns:
+- **Interface Naming**: Use `I` prefix for content types (`IPost`, `IAuthor`)
+- **Generic Usage**: Type-safe patterns (`getContentItem<IPost>()`)
+- **Error Handling**: Explicit error handling with graceful degradation
+- **Null Safety**: Always handle null/undefined states
+- **Data Attributes**: Consistent `data-agility-*` attributes for Web Studio SDK
+
+### Getting Started with Cursor
+
+1. Open the project in Cursor IDE
+2. The AI will automatically reference the configuration files
+3. For any Agility CMS development task, the AI will:
+   - Consult `.cursor/project.md` for context
+   - Plan tasks in `.cursor/manifest.md`
+   - Reference `.cursor/rules.md` for implementation details
+   - Ask clarifying questions instead of making assumptions
+
+### Benefits
+
+- **Expert Guidance**: AI acts as an experienced Agility CMS developer
+- **Consistent Patterns**: Follows established codebase architecture
+- **DRY Enforcement**: Prevents code duplication and unnecessary abstractions
+- **Type Safety**: Ensures comprehensive TypeScript usage
+- **Performance**: Optimized caching and component patterns
+- **Planning**: Structured approach with progress tracking
+
+This configuration ensures that Cursor AI provides expert-level assistance while maintaining the high-quality, granular architecture that makes this starter both maintainable and performant.
+
 ## Resources
 
 ### Agility CMS

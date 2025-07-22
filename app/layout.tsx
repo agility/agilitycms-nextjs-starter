@@ -3,7 +3,7 @@ import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
 import SiteHeader from "components/common/SiteHeader"
 
-import { useAgilityContext } from "lib/cms/useAgilityContext"
+import { getAgilityContext } from "lib/cms/getAgilityContext"
 
 import { Inter } from "next/font/google"
 
@@ -23,7 +23,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { locale, sitemap, isDevelopmentMode, isPreview } = await useAgilityContext()
+  const { locale, sitemap, isDevelopmentMode, isPreview } = await getAgilityContext()
   const header = await getHeaderContent({ sitemap, locale })
 
   async function startPreviewMode(pathname: string) {

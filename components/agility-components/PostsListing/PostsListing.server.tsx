@@ -1,12 +1,12 @@
 import React from "react"
 import Link from "next/link"
 
-import {IPostMin, getPostListing} from "lib/cms-content/getPostListing"
-import {useAgilityContext} from "lib/cms/useAgilityContext"
+import { IPostMin, getPostListing } from "lib/cms-content/getPostListing"
+import { getAgilityContext } from "lib/cms/getAgilityContext"
 import PostListingClient from "./PostsListing.client"
-import {getContentItem} from "lib/cms/getContentItem"
-import {UnloadedModuleProps} from "@agility/nextjs"
-import {DateTime} from "luxon"
+import { getContentItem } from "lib/cms/getContentItem"
+import { UnloadedModuleProps } from "@agility/nextjs"
+import { DateTime } from "luxon"
 
 interface IPostListing {
 	title: string
@@ -19,17 +19,17 @@ export interface GetNextPostsProps {
 	take: number
 }
 
-const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
-	const {sitemap, locale} = await useAgilityContext()
+const PostListing = async ({ module, languageCode }: UnloadedModuleProps) => {
+	const { sitemap, locale } = await getAgilityContext()
 
 	// get posts for the initial page load
-	const {posts} = await getPostListing({sitemap, locale, take: 10, skip: 0})
+	const { posts } = await getPostListing({ sitemap, locale, take: 10, skip: 0 })
 
 	// get next posts for infinite scroll
-	const getNextPosts = async ({skip, take}: GetNextPostsProps) => {
+	const getNextPosts = async ({ skip, take }: GetNextPostsProps) => {
 		"use server"
 
-		const postsRes = await getPostListing({sitemap: sitemap, locale, skip, take})
+		const postsRes = await getPostListing({ sitemap: sitemap, locale, skip, take })
 
 		if (postsRes.posts.length > 0) {
 			return postsRes.posts
@@ -75,7 +75,7 @@ const PostListing = async ({module, languageCode}: UnloadedModuleProps) => {
 		)
 	}
 
-	return <PostListingClient {...{posts, sitemap, locale, getNextPosts}} />
+	return <PostListingClient {...{ posts, sitemap, locale, getNextPosts }} />
 }
 
 export default PostListing

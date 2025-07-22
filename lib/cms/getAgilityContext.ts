@@ -22,7 +22,3 @@ export const getAgilityContext = async () => {
 		isDevelopmentMode
 	}
 }
-
-export const useAgilityContext = () => {
-	return getAgilityContext()
-}

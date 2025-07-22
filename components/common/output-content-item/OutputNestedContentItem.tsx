@@ -10,7 +10,7 @@ interface Props {
 export default function OutputNestedContentItem({contentItem}: Props) {
 	return (
 		<div className="mt-2">
-			<div className="p-4 rounded border border-gray-200 bg-gray-50 mx-auto">
+			<div className="p-4 rounded-sm border border-gray-200 bg-gray-50 mx-auto">
 				<div>
 					<span className="rounded-full px-2 py-1 bg-gray-200 text-gray-800 text-xs font-medium uppercase">
 						Linked Content Item

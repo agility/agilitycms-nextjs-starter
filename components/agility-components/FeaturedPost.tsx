@@ -49,7 +49,7 @@ const FeaturedPost = async ({ module, languageCode }: UnloadedModuleProps) => {
 
   return (
     <div className="relative px-8 mb-8">
-      <div className="flex flex-col sm:flex-row max-w-screen-xl mx-auto pt-8 group">
+      <div className="flex flex-col sm:flex-row max-w-(--breakpoint-xl) mx-auto pt-8 group">
         <div className="sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg relative">
           <Link
             href={`/blog/${featuredPost.fields.slug}`}
@@ -91,7 +91,7 @@ const FeaturedPost = async ({ module, languageCode }: UnloadedModuleProps) => {
             </div>
           </Link>
         </div>
-        <div className="sm:w-1/2 lg:w-1/3 bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0 relative">
+        <div className="sm:w-1/2 lg:w-1/3 bg-gray-100 dark:bg-gray-900 p-8 border-2 border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg sm:border-t-2 sm:border-l-0 relative">
           <Link
             href={`/blog/${featuredPost.fields.slug}`}
             className="cursor-pointer"
@@ -100,13 +100,13 @@ const FeaturedPost = async ({ module, languageCode }: UnloadedModuleProps) => {
               {featuredPost.fields.category?.fields.title}
             </div>
             <div className="border-b-2 border-primary-500 w-8"></div>
-            <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+            <div className="mt-4 uppercase text-gray-600 dark:text-gray-300 italic font-semibold text-xs">
               {dateStr}
             </div>
-            <h2 className="font-display text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+            <h2 className="font-display text-secondary-500 dark:text-secondary-200 mt-1 font-black text-2xl group-hover:text-primary-500 dark:group-hover:text-primary-400 transition duration-300">
               {featuredPost.fields.title}
             </h2>
-            <p className="text-sm mt-3 leading-loose text-gray-600 font-medium line-clamp-4">
+            <p className="text-sm mt-3 leading-loose text-gray-600 dark:text-gray-300 font-medium line-clamp-4">
               {contentStr}
             </p>
           </Link>

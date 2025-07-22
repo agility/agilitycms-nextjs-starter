@@ -71,7 +71,7 @@ export default function OutputField({fieldName, fieldValue}: Props) {
 				{fieldValue?.contentID > 0 && fieldValue?.fields ? (
 					<OutputNestedContentItem contentItem={fieldValue} />
 				) : isImage ? (
-					<div className="border border-gray-200 rounded bg-white">
+					<div className="border border-gray-200 rounded-sm bg-white">
 						<div className={cn("transition-all overflow-auto", isExpanded ? "max-h-full" : "max-h-32 ")}>
 							<AgilityPic image={fieldValue} fallbackWidth={500} className="rounded-t w-full" />
 						</div>
@@ -80,7 +80,7 @@ export default function OutputField({fieldName, fieldValue}: Props) {
 				) : isHtml ? (
 					//assume html field...
 
-					<div className="border border-gray-200 rounded bg-white overflow-auto">
+					<div className="border border-gray-200 rounded-sm bg-white overflow-auto">
 						<div className={cn("p-2 transition-all overflow-auto", isExpanded ? "max-h-full" : "max-h-32")}>
 							<div className="prose prose-sm" dangerouslySetInnerHTML={renderHTML(fieldValueStr)} />
 						</div>
@@ -97,7 +97,7 @@ export default function OutputField({fieldName, fieldValue}: Props) {
 				) : isString ? (
 					<div className={cn(isExpanded ? "" : "max-h-20 overflow-auto")}>{fieldValue}</div>
 				) : isJSON ? (
-					<div className=" rounded bg-gray-200 overflow-auto">
+					<div className=" rounded-sm bg-gray-200 overflow-auto">
 						<div className={cn(" transition-all overflow-auto", isExpanded ? "max-h-full" : "max-h-32")}>
 							<pre className="text-xs">{jsonValue}</pre>
 						</div>

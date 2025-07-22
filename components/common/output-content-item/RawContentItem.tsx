@@ -23,7 +23,7 @@ export default function RawContentItem({contentItem}: Props) {
 			<div className={cn("overflow-hidden transition-all", !jsonExpanded ? "h-0" : "h-auto")}>
 				<pre
 					className={cn(
-						"text-sm  bg-gray-100 rounded p-4 border border-gray-300  transition-transform",
+						"text-sm  bg-gray-100 rounded-sm p-4 border border-gray-300  transition-transform",
 						jsonExpanded ? "translate-y-0" : "-translate-y-full"
 					)}
 				>

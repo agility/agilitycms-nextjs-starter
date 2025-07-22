@@ -1,13 +1,13 @@
-import {renderHTML, Module, UnloadedModuleProps} from "@agility/nextjs"
-import {getContentItem} from "lib/cms/getContentItem"
+import { renderHTML, Module, UnloadedModuleProps } from "@agility/nextjs"
+import { getContentItem } from "lib/cms/getContentItem"
 
 interface RichText {
 	textblob: string
 }
 
-const RichTextArea = async ({module, languageCode}: UnloadedModuleProps) => {
+const RichTextArea = async ({ module, languageCode }: UnloadedModuleProps) => {
 	const {
-		fields: {textblob},
+		fields: { textblob },
 		contentID,
 	} = await getContentItem<RichText>({
 		contentID: module.contentid,
@@ -20,7 +20,7 @@ const RichTextArea = async ({module, languageCode}: UnloadedModuleProps) => {
 				<div
 					data-agility-field="textblob"
 					data-agility-html
-					className="my-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full"
+					className="my-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-full dark:prose-invert"
 					dangerouslySetInnerHTML={renderHTML(textblob)}
 				></div>
 			</div>

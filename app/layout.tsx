@@ -3,7 +3,7 @@ import PreviewBar from "components/common/PreviewBar"
 import SiteFooter from "components/common/SiteFooter"
 import SiteHeader from "components/common/SiteHeader"
 
-import { useAgilityContext } from "lib/cms/useAgilityContext"
+import { getAgilityContext } from "lib/cms/getAgilityContext"
 
 import { Inter } from "next/font/google"
 
@@ -23,7 +23,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { locale, sitemap, isDevelopmentMode, isPreview } = await useAgilityContext()
+  const { locale, sitemap, isDevelopmentMode, isPreview } = await getAgilityContext()
   const header = await getHeaderContent({ sitemap, locale })
 
   async function startPreviewMode(pathname: string) {
@@ -44,8 +44,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.className}>
-      <body data-agility-guid={process.env.AGILITY_GUID}>
+    <html lang="en" className={`${inter.className} bg-white dark:bg-gray-900 transition-colors duration-300`}>
+      <body data-agility-guid={process.env.AGILITY_GUID} className="bg-white dark:bg-gray-900 transition-colors duration-300">
         <div id="site-wrapper">
           <div id="site">
             <PreviewBar
@@ -55,7 +55,7 @@ export default async function RootLayout({
             <div className="flex flex-col min-h-screen">
               <SiteHeader {...{ header }} />
 
-              <main className={`flex-grow`}>{children}</main>
+              <main className={`grow`}>{children}</main>
               <SiteFooter />
             </div>
           </div>

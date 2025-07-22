@@ -50,7 +50,7 @@ const TextBlockWithImage = async ({
           href={url}
           title={text}
           target={target}
-          className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+          className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 dark:bg-primary-400 dark:hover:bg-primary-600 focus:outline-hidden focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
         >
           {text}
         </Link>
@@ -63,7 +63,7 @@ const TextBlockWithImage = async ({
           href={url}
           title={text}
           target={target}
-          className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+          className="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 dark:bg-primary-400 dark:hover:bg-primary-600 focus:outline-hidden focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
         >
           {text}
         </a>
@@ -76,9 +76,9 @@ const TextBlockWithImage = async ({
 
   return (
     <div className="relative px-8" data-agility-component={contentID}>
-      <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
+      <div className="flex flex-col md:flex-row justify-between max-w-(--breakpoint-xl) mx-auto py-20 md:py-24 items-center bg-white dark:bg-gray-900 transition-colors duration-300 rounded-lg">
         <div
-          className="md:w-6/12 flex-shrink-0 relative "
+          className="md:w-6/12 shrink-0 relative "
           data-agility-field="image"
         >
           {fields.primaryButton ? (
@@ -114,30 +114,29 @@ const TextBlockWithImage = async ({
           )}
         </div>
         <div
-          className={`md:w-6/12 mt-16 md:mt-0 ${
-            fields.imagePosition != "right"
-              ? `md:ml-12 lg:ml-16 md:order-last`
-              : `md:mr-12 lg:mr-16 md:order-first`
-          }`}
+          className={`md:w-6/12 mt-16 md:mt-0 ${fields.imagePosition != "right"
+            ? `md:ml-12 lg:ml-16 md:order-last`
+            : `md:mr-12 lg:mr-16 md:order-first`
+            }`}
         >
           <div className="g:py-8 text-center md:text-left">
             {fields.tagline && (
               <div
                 data-agility-field="tagline"
-                className="font-bold text-primary-500 text-sm text-center md:text-left uppercase py-1"
+                className="font-bold text-primary-500 dark:text-primary-400 text-sm text-center md:text-left uppercase py-1"
               >
                 {fields.tagline}
               </div>
             )}
             <h2
               data-agility-field="title"
-              className="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left"
+              className="font-display text-4xl font-black text-secondary-500 dark:text-secondary-200 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left"
             >
               {fields.title}
             </h2>
             <p
               data-agility-field="content"
-              className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200"
+              className="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200 dark:text-gray-300"
             >
               {fields.content}
             </p>

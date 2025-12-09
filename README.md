@@ -633,10 +633,14 @@ This documentation-first approach makes AI assistants highly effective at extend
 
 Detailed documentation for specific topics:
 
+- [**QUICK-START-AI.md**](./docs/QUICK-START-AI.md) - **Quick reference for AI assistants** (start here for vibe coding!)
 - [**ARCHITECTURE.md**](./docs/ARCHITECTURE.md) - Deep dive into code structure and patterns
 - [**AGILITY-CMS-GUIDE.md**](./docs/AGILITY-CMS-GUIDE.md) - CMS integration patterns and best practices
 - [**COMPONENTS.md**](./docs/COMPONENTS.md) - Component API reference and usage
 - [**CONTENT-MODELS.md**](./docs/CONTENT-MODELS.md) - Complete CMS schema documentation
+
+**AI Assistant Configuration:**
+- [`.cursorrules`](./.cursorrules) - Rules for Cursor, Claude Code, and other AI tools (auto-loaded)
 
 ## 🛠️ Development
 

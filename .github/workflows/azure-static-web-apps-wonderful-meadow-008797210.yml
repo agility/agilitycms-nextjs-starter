@@ -38,7 +38,7 @@ jobs:
           AGILITY_API_FETCH_KEY: ${{ secrets.AGILITY_API_FETCH_KEY }}
           AGILITY_LOCALES: ${{ vars.AGILITY_LOCALES }}
           AGILITY_SITEMAP: ${{ vars.AGILITY_SITEMAP }}
-          NODE_VERSION: "22.x"
+          NODE_VERSION: "20.x"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"Agility CMS": {
+			"url": "https://mcp.agilitycms.com/api/mcp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}

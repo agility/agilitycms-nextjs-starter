@@ -1,43 +1,43 @@
 {
-	"name": "agility-next-starter",
-	"version": "13.0.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"build-swa": "next build && rm -rf ./.next/cache",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"engines": {
-		"node": ">=20.x"
-	},
-	"dependencies": {
-		"@headlessui/react": "^2.2.4",
-		"@tabler/icons-react": "^3.34.0",
-		"@types/node": "18.11.9",
-		"@types/react": "18.0.25",
-		"@types/react-dom": "18.0.9",
-		"classnames": "^2.3.2",
-		"eslint": "8.27.0",
-		"eslint-config-next": "13.0.3",
-		"html-react-parser": "^3.0.4",
-		"luxon": "^3.1.0",
-		"next": "^15.2.3",
-		"react": "^18.3.1",
-		"react-dom": "18.2.0",
-		"react-icons": "^4.11.0",
-		"react-infinite-scroll-component": "^6.1.0",
-		"string-strip-html": "^13.4.8",
-		"typescript": "4.9.3"
-	},
-	"devDependencies": {
-		"@agility/content-fetch": "^2.0.0",
-		"@agility/nextjs": "^15.0.3",
-		"@tailwindcss/postcss": "^4.1.10",
-		"@tailwindcss/typography": "^0.5.8",
-		"@types/luxon": "^3.1.0",
-		"postcss": "^8.4.19",
-		"tailwindcss": "^4.1.10"
-	}
+  "name": "agility-next-starter",
+  "version": "13.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build-swa": "next build && rm -rf ./.next/cache",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "engines": {
+    "node": ">=20.x"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@tabler/icons-react": "^3.34.0",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "classnames": "^2.3.2",
+    "eslint": "8.27.0",
+    "eslint-config-next": "13.0.3",
+    "html-react-parser": "^3.0.4",
+    "luxon": "^3.1.0",
+    "next": "15.2.6",
+    "react": "^18.3.1",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "string-strip-html": "^13.4.8",
+    "typescript": "4.9.3"
+  },
+  "devDependencies": {
+    "@agility/content-fetch": "^2.0.0",
+    "@agility/nextjs": "^15.0.3",
+    "@tailwindcss/postcss": "^4.1.10",
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/luxon": "^3.1.0",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^4.1.10"
+  }
 }

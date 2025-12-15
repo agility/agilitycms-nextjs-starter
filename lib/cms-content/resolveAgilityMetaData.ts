@@ -17,7 +17,7 @@ interface Props {
 
 export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
 
-	
+
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
 
@@ -62,7 +62,7 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	if (metaHTML) {
 		const additionalHeaderMarkup = ReactHtmlParser(metaHTML)
 
-		const handleMetaTag = (item: JSX.Element) => {
+		const handleMetaTag = (item: React.ReactElement<any>) => {
 			if (!item.type) return
 			//check if this is a meta tag and add it to the otherMetaData if so
 			if (item.type === "meta") {

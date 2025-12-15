@@ -24,7 +24,7 @@ const PostDetails = async ({ dynamicPageItem }: UnloadedModuleProps) => {
 
   return (
     <>
-      <div className="relative px-8" data-agility-component={contentID}>
+      <div className="relative px-8 dark:bg-gray-900" data-agility-component={contentID}>
         <div className="max-w-(--breakpoint-xl) mx-auto">
           <div className="h-64 md:h-96  lg:h-[480px] relative overflow-hidden rounded-lg">
             <AgilityPic
@@ -43,27 +43,27 @@ const PostDetails = async ({ dynamicPageItem }: UnloadedModuleProps) => {
           <div className="max-w-2xl mx-auto mt-4">
             <div
               data-agility-field="category"
-              className="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose"
+              className="uppercase text-primary-500 dark:text-primary-400 text-xs font-bold tracking-widest leading-loose"
             >
               {category}
             </div>
-            <div className="border-b-2 border-primary-500 w-8"></div>
+            <div className="border-b-2 border-primary-500 dark:border-primary-400 w-8"></div>
             <div
               data-agility-field="date"
-              className="mt-4 uppercase text-gray-600 italic font-semibold text-xs"
+              className="mt-4 uppercase text-gray-600 dark:text-gray-400 italic font-semibold text-xs"
             >
               {dateStr}
             </div>
             <h1
               data-agility-field="title"
-              className="font-display text-4xl font-bold my-6 text-secondary-500"
+              className="font-display text-4xl font-bold my-6 text-secondary-500 dark:text-gray-100"
             >
               {post.title}
             </h1>
             <div
               data-agility-field="content"
               data-agility-html="true"
-              className="prose max-w-full mb-20"
+              className="prose dark:prose-invert max-w-full mb-20"
               dangerouslySetInnerHTML={renderHTML(post.content)}
             />
           </div>

@@ -1,0 +1,335 @@
+# Agility CMS Next.js Starter - AI Coding Assistant Rules
+
+You are helping develop an Agility CMS + Next.js 15 application. Follow these rules strictly.
+
+## Architecture Patterns
+
+### File Organization
+- **CMS utilities**: `lib/cms/` - Generic Agility SDK operations
+- **Domain logic**: `lib/cms-content/` - Business-specific queries
+- **Type definitions**: `lib/types/` - TypeScript interfaces for CMS models
+- **Components (CMS)**: `components/agility-components/` - Modules that map to Agility CMS
+- **Components (Pages)**: `components/agility-pages/` - Page templates
+- **Components (Common)**: `components/common/` - Shared UI components
+
+### Component Patterns
+
+#### Server Components (Default)
+```typescript
+// Async components that fetch data
+export default async function MyComponent({ module, languageCode }: UnloadedModuleProps) {
+  const { fields } = await getContentItem<IMyModule>({
+    contentID: module.contentid,
+    languageCode,
+  });
+
+  return <div>{fields.title}</div>;
+}
+```
+
+#### Client Components (When Needed)
+```typescript
+"use client";
+
+import { useState } from "react";
+
+export default function MyInteractiveComponent({ initialData }) {
+  const [state, setState] = useState(initialData);
+  // ... interactive logic
+}
+```
+
+**When to use Client Components:**
+- User interactions (onClick, onChange, forms)
+- React hooks (useState, useEffect, useContext)
+- Browser APIs (localStorage, window, document)
+
+### Data Fetching Layers
+
+**Layer 1: CMS Utilities** (`lib/cms/`)
+```typescript
+// Generic, reusable functions
+await getContentItem({ contentID, languageCode });
+await getContentList({ referenceName, languageCode });
+```
+
+**Layer 2: Domain Logic** (`lib/cms-content/`)
+```typescript
+// Business-specific queries
+await getPostListing({ take, skip, category });
+await getHeaderContent();
+```
+
+**Layer 3: Components**
+```typescript
+// Use domain functions, not SDK directly
+const posts = await getPostListing({ take: 10 });
+```
+
+## CMS Integration
+
+### Content Models vs Component Models
+
+**Content Models** = Data storage (Post, Author, Category)
+- Live in Agility CMS as content
+- Fetched via `getContentItem()` or `getContentList()`
+- Define structure of stored content
+
+**Component Models** = Presentation blocks (PostListing, Hero, Testimonials)
+- Placed on pages in content zones
+- Map to React components via registry
+- Configure how content is displayed
+
+### Linked Content
+
+When creating linked content fields:
+```typescript
+// Always include hidden fields for IDs and names
+interface IPost {
+  category: string;        // Container reference name
+  categoryID: number;      // Auto-populated
+  categoryName: string;    // Auto-populated
+}
+```
+
+### Fetching with Cache Tags
+
+```typescript
+const item = await getContentItem({
+  contentID: 123,
+  languageCode: "en-us",
+  // Tags for on-demand revalidation
+  cacheTags: [`agility-content-123-en-us`],
+});
+```
+
+## Component Registration
+
+### CRITICAL: Always Register New Components
+
+When creating a new CMS component:
+
+1. **Create component file**: `components/agility-components/MyComponent.tsx`
+2. **Register in index**: `components/agility-components/index.ts`
+
+```typescript
+// components/agility-components/index.ts
+import MyComponent from "./MyComponent";
+
+const allModules = [
+  // ... existing modules
+  { name: "MyComponent", module: MyComponent },
+];
+```
+
+3. **Name must match exactly** - Case-sensitive, same as in Agility CMS
+
+## TypeScript Requirements
+
+### Always Create Interfaces
+
+For every content/component model, create a TypeScript interface:
+
+```typescript
+// lib/types/IMyModel.ts
+export interface IMyModel {
+  contentID: number;
+  title: string;
+  description?: string;  // Optional fields with ?
+  image?: {
+    url: string;
+    label: string;
+    width: number;
+    height: number;
+  };
+}
+```
+
+### Use Generics
+
+```typescript
+const item = await getContentItem<IPost>({ ... });
+// item.title is now typed as string
+```
+
+## Styling Guidelines
+
+### Use Tailwind CSS
+
+```typescript
+// Good - Tailwind classes
+<div className="max-w-7xl mx-auto py-12 px-4">
+
+// Bad - Inline styles
+<div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+```
+
+### Dark Mode Support
+
+```typescript
+// Always support dark mode
+<div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+```
+
+### Responsive Design
+
+```typescript
+// Mobile-first responsive
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+```
+
+## Image Optimization
+
+### Use AgilityPic or Next.js Image
+
+```typescript
+// Agility images - use AgilityPic
+import { AgilityPic } from "@agility/nextjs";
+
+<AgilityPic
+  image={fields.image}
+  fallbackWidth={800}
+  sources={[
+    { media: "(min-width: 1280px)", width: 800 },
+    { media: "(min-width: 640px)", width: 640 },
+    { media: "(max-width: 639px)", width: 640 },
+  ]}
+/>
+
+// Non-Agility images - use Next.js Image
+import Image from "next/image";
+
+<Image
+  src={imageUrl}
+  alt="Description"
+  width={800}
+  height={600}
+  sizes="(max-width: 768px) 100vw, 800px"
+/>
+```
+
+## Error Handling
+
+### Graceful Degradation
+
+```typescript
+export default async function MyComponent({ module }) {
+  const data = await getContentItem({ ... }).catch(() => null);
+
+  if (!data) {
+    return <InlineError message="Content not found" />;
+  }
+
+  return <div>{data.title}</div>;
+}
+```
+
+## Preview Mode
+
+### Always Respect Preview Context
+
+```typescript
+const { isPreview } = await getAgilityContext();
+
+// No caching in preview
+const revalidate = isPreview ? 0 : 60;
+```
+
+## Do NOT Do These Things
+
+❌ **Don't fetch data directly in components**
+```typescript
+// BAD
+const api = agilitySDK({ ... });
+const item = await api.getContentItem({ ... });
+
+// GOOD
+const item = await getContentItem({ ... });
+```
+
+❌ **Don't hardcode URLs**
+```typescript
+// BAD
+const postUrl = `/blog/${post.slug}`;
+
+// GOOD
+const sitemap = await getSitemapFlat({ ... });
+const blogNode = sitemap.find(n => n.contentID === blogPageID);
+const postUrl = `${blogNode.path}/${post.slug}`;
+```
+
+❌ **Don't skip TypeScript interfaces**
+```typescript
+// BAD
+const fields: any = module.fields;
+
+// GOOD
+const fields = module.fields as IMyModule;
+```
+
+❌ **Don't use inline styles**
+```typescript
+// BAD
+<div style={{ padding: '20px' }}>
+
+// GOOD
+<div className="p-5">
+```
+
+## Documentation References
+
+When implementing features, reference these docs:
+
+- **Architecture patterns**: `docs/ARCHITECTURE.md`
+- **CMS integration**: `docs/AGILITY-CMS-GUIDE.md`
+- **Component examples**: `docs/COMPONENTS.md`
+- **Content schemas**: `docs/CONTENT-MODELS.md`
+
+## Environment Variables
+
+Required environment variables:
+- `AGILITY_GUID` - Instance ID
+- `AGILITY_API_FETCH_KEY` - Live API key
+- `AGILITY_API_PREVIEW_KEY` - Preview API key
+- `AGILITY_SECURITY_KEY` - Webhook security key
+- `AGILITY_LOCALES` - Comma-separated locales (e.g., "en-us")
+- `AGILITY_SITEMAP` - Sitemap name (e.g., "website")
+- `AGILITY_FETCH_CACHE_DURATION` - SDK cache seconds
+- `AGILITY_PATH_REVALIDATE_DURATION` - Path revalidation seconds
+
+## Example Workflow
+
+When asked to create a new feature:
+
+1. **Understand the ask** - Is it a content model or component model?
+2. **Create TypeScript interface** - Define the data structure
+3. **Create component file** - Follow server/client pattern
+4. **Register component** - Add to `index.ts`
+5. **Add styling** - Use Tailwind with dark mode
+6. **Handle errors** - Graceful degradation
+7. **Test** - Verify it works in preview mode
+
+## Advanced Features Reference
+
+For complex features like:
+- Multi-locale routing
+- AI integration
+- Personalization (audience/region)
+- A/B testing
+- Advanced caching
+
+See: https://github.com/agility/nextjs-demo-site-2025
+
+This repository has production-ready implementations of all advanced patterns.
+
+## Code Quality
+
+- Always use TypeScript strict mode
+- Add proper error handling
+- Support dark mode
+- Make responsive
+- Optimize images
+- Use semantic HTML
+- Follow accessibility best practices
+
+Remember: This is a Next.js 15 App Router project with React Server Components. Default to server components unless client interactivity is needed.

@@ -17,7 +17,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/image-loaders/agility-loader.js"
+    "lib/image-loaders/agility-loader.js",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

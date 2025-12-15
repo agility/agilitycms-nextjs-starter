@@ -7,7 +7,7 @@ import { getAgilityContext } from "lib/cms/getAgilityContext"
 
 import { Inter } from "next/font/google"
 
-import "/styles/globals.css"
+import "../styles/globals.css"
 
 import { getHeaderContent } from "lib/cms-content/getHeaderContent"
 import { redirect } from "next/navigation"

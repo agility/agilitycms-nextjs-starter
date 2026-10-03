@@ -1,6 +1,6 @@
 # Agility CMS & Next.js Starter
 
-A modern, production-ready starter for building content-managed websites with [Agility CMS](https://agilitycms.com) and [Next.js 15](https://nextjs.org/).
+A modern, production-ready starter for building content-managed websites with [Agility CMS](https://agilitycms.com) and [Next.js 16](https://nextjs.org/).
 
 [Live Website Demo](https://agilitycms-nextjs-starter-blog.vercel.app/)
 
@@ -8,7 +8,7 @@ A modern, production-ready starter for building content-managed websites with [A
 
 ## ✨ Features
 
-### Next.js 15 & React 18
+### Next.js 16 & React 19
 
 - **App Router** - Modern Next.js routing with Server Components
 - **TypeScript** - Full type safety throughout the project
@@ -51,7 +51,7 @@ A modern, production-ready starter for building content-managed websites with [A
 
 ### Prerequisites
 
-- Node.js 18.x or higher
+- Node.js 20.9 or higher (Next.js 16 minimum); Node.js 24 LTS recommended (see `.nvmrc`)
 - npm or yarn package manager
 - An Agility CMS instance ([sign up for free](https://agilitycms.com/free))
 
@@ -522,8 +522,8 @@ This starter can deploy to any platform supporting Next.js:
 
 Ensure your platform supports:
 
-- Node.js 18+
-- Next.js 15
+- Node.js 20.9+ (24 LTS recommended)
+- Next.js 16
 - On-demand revalidation (optional but recommended)
 
 ## 🤖 AI-Powered Development (Vibe Coding)

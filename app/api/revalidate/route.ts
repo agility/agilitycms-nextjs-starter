@@ -13,6 +13,20 @@ interface IRevalidateRequest {
 	changeDateUTC: string
 }
 
+/**
+ * Agility publish webhook -> cache tag revalidation.
+ *
+ * SECURITY NOTE: this handler does NOT verify webhook signatures, so anyone who
+ * knows this URL can POST to it and trigger revalidation.
+ *
+ * Agility can sign webhooks using the Standard Webhooks spec: tick "Enable secure
+ * delivery" in the webhook's settings (Settings > Webhooks) and Agility generates
+ * a `whsec_...` signing secret and sends `webhook-id`, `webhook-timestamp` and
+ * `webhook-signature` headers with every delivery. To verify them, read the raw
+ * body with `req.text()` before parsing it, then check it with a Standard
+ * Webhooks library (e.g. `standardwebhooks` on npm). See:
+ * https://agilitycms.com/docs/developers/verifying-signed-webhooks
+ */
 export async function POST(req: NextRequest) {
 
 	//parse the body

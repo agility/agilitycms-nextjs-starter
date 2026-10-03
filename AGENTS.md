@@ -4,9 +4,9 @@ Instructions and context for AI coding agents working on the Agility CMS + Next.
 
 ## Project Overview
 
-This is a production-ready Next.js 15 starter template that integrates with Agility CMS, a headless content management system. The project demonstrates modern React patterns, server-first rendering, and sophisticated caching strategies.
+This is a production-ready Next.js 16 starter template that integrates with Agility CMS, a headless content management system. The project demonstrates modern React patterns, server-first rendering, and sophisticated caching strategies.
 
-**Stack:** Next.js 15 + React 18 + TypeScript + Agility CMS + Tailwind CSS 4
+**Stack:** Next.js 16 + React 19 + TypeScript + Agility CMS + Tailwind CSS 4
 
 **Key Characteristics:**
 
@@ -131,8 +131,8 @@ export default async function PostsList() {
 
 ```typescript
 // lib/types/ITeamMember.ts
+// Fields only: contentID lives on the ContentItem wrapper
 export interface ITeamMember {
-	contentID: number
 	name: string
 	title: string
 	bio?: string
@@ -148,9 +148,9 @@ export interface ITeamMember {
 ```typescript
 // components/agility-components/TeamGrid.tsx
 import {UnloadedModuleProps} from "@agility/nextjs"
-import {getContentList} from "@/lib/cms/getContentList"
-import {ITeamMember} from "@/lib/types/ITeamMember"
-import {AgilityPic} from "@agility/nextjs"
+import {getContentList} from "lib/cms/getContentList"
+import {ITeamMember} from "lib/types/ITeamMember"
+import {AgilityPic, ContentItem} from "@agility/nextjs"
 
 interface ITeamGridModule {
 	heading: string
@@ -160,11 +160,12 @@ interface ITeamGridModule {
 export default async function TeamGrid({module, languageCode}: UnloadedModuleProps) {
 	const {fields} = module as {fields: ITeamGridModule}
 
-	// Fetch data using CMS utility
-	const members = await getContentList<ITeamMember>({
+	// Fetch data using CMS utility (returns a ContentList: { items, totalCount })
+	const {items} = await getContentList({
 		referenceName: fields.teamContainer || "teammembers",
 		languageCode,
 	})
+	const members = items as ContentItem<ITeamMember>[]
 
 	return (
 		<section className="py-16 px-8">
@@ -173,15 +174,15 @@ export default async function TeamGrid({module, languageCode}: UnloadedModulePro
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					{members.map((member) => (
 						<div key={member.contentID} className="bg-white dark:bg-gray-800 rounded-lg p-6">
-							{member.photo && (
+							{member.fields.photo && (
 								<AgilityPic
-									image={member.photo}
+									image={member.fields.photo}
 									fallbackWidth={300}
 									className="w-full h-64 object-cover rounded-lg mb-4"
 								/>
 							)}
-							<h3 className="text-xl font-bold dark:text-white">{member.name}</h3>
-							<p className="text-gray-600 dark:text-gray-400">{member.title}</p>
+							<h3 className="text-xl font-bold dark:text-white">{member.fields.name}</h3>
+							<p className="text-gray-600 dark:text-gray-400">{member.fields.title}</p>
 						</div>
 					))}
 				</div>
@@ -215,8 +216,9 @@ When you need business logic for fetching data:
 
 ```typescript
 // lib/cms-content/getTeamListing.ts
-import {getContentList} from "@/lib/cms/getContentList"
-import {ITeamMember} from "@/lib/types/ITeamMember"
+import {ContentItem} from "@agility/nextjs"
+import {getContentList} from "lib/cms/getContentList"
+import {ITeamMember} from "lib/types/ITeamMember"
 
 export async function getTeamListing({
 	department,
@@ -227,7 +229,7 @@ export async function getTeamListing({
 	take?: number
 	skip?: number
 }) {
-	const members = await getContentList<ITeamMember>({
+	const {items} = await getContentList({
 		referenceName: "teammembers",
 		languageCode: "en-us",
 		take,
@@ -237,10 +239,13 @@ export async function getTeamListing({
 		filter: department ? `fields.department[eq]${department}` : undefined,
 	})
 
+	const members = items as ContentItem<ITeamMember>[]
+
 	// Add computed fields or transformations
 	const enrichedMembers = members.map((member) => ({
-		...member,
-		fullName: `${member.name}, ${member.title}`,
+		...member.fields,
+		contentID: member.contentID,
+		fullName: `${member.fields.name}, ${member.fields.title}`,
 	}))
 
 	return {
@@ -379,7 +384,7 @@ const item = await getContentItem<IPost>({
 ### Fetching Content List
 
 ```typescript
-const items = await getContentList<IPost>({
+const {items, totalCount} = await getContentList({
 	referenceName: "posts",
 	languageCode: "en-us",
 	take: 10,
@@ -440,7 +445,8 @@ Content fetches are automatically tagged:
 
 - `agility-content-{contentID}-{locale}` - Specific item
 - `agility-content-{referenceName}-{locale}` - Content list
-- `agility-sitemap-{locale}` - Sitemap
+- `agility-sitemap-flat-{locale}` - Flat sitemap
+- `agility-sitemap-nested-{locale}` - Nested sitemap
 
 ### Invalidation
 
@@ -647,7 +653,7 @@ After using MCP to generate code, verify:
 ## External Resources
 
 - **Agility CMS Docs:** https://agilitycms.com/docs
-- **Next.js 15 Docs:** https://nextjs.org/docs
+- **Next.js 16 Docs:** https://nextjs.org/docs
 - **Next.js App Router:** https://nextjs.org/docs/app
 - **Tailwind CSS:** https://tailwindcss.com/docs
 - **MCP Documentation:** https://modelcontextprotocol.io/

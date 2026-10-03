@@ -25,12 +25,12 @@ This starter is built on modern React and Next.js patterns, emphasizing:
 ### Technology Stack
 
 ```
-Next.js 15.2.3 (App Router)
-├── React 18.3.1 (Server Components)
-├── TypeScript 4.9.3
-├── Tailwind CSS 4.1.10
-├── @agility/content-fetch 2.0.0
-└── @agility/nextjs 15.0.3
+Next.js 16.3 (App Router)
+├── React 19.3 (Server Components)
+├── TypeScript 5.9
+├── Tailwind CSS 4.3
+├── @agility/content-fetch 2.0
+└── @agility/nextjs 16.0
 ```
 
 ## Routing Architecture

@@ -4,7 +4,7 @@ This guide helps AI coding assistants (Claude Code, Cursor, GitHub Copilot, Chat
 
 ## Project Overview
 
-**Stack:** Next.js 15 + React 18 + TypeScript + Agility CMS + Tailwind CSS
+**Stack:** Next.js 16 + React 19 + TypeScript + Agility CMS + Tailwind CSS
 
 **Key Directories:**
 ```
@@ -427,4 +427,4 @@ implement similar functionality here.
 
 ---
 
-**Remember:** This project uses Next.js 15 App Router with React Server Components. Always default to server components unless client interactivity is required.
+**Remember:** This project uses Next.js 16 App Router with React Server Components. Always default to server components unless client interactivity is required.

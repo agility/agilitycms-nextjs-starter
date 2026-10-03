@@ -1,6 +1,6 @@
 # Agility CMS Next.js Starter - AI Coding Assistant Rules
 
-You are helping develop an Agility CMS + Next.js 15 application. Follow these rules strictly.
+You are helping develop an Agility CMS + Next.js 16 application. Follow these rules strictly.
 
 ## Architecture Patterns
 
@@ -332,4 +332,4 @@ This repository has production-ready implementations of all advanced patterns.
 - Use semantic HTML
 - Follow accessibility best practices
 
-Remember: This is a Next.js 15 App Router project with React Server Components. Default to server components unless client interactivity is needed.
+Remember: This is a Next.js 16 App Router project with React Server Components. Default to server components unless client interactivity is needed.

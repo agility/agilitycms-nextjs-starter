@@ -163,8 +163,8 @@ agilitycms-nextjs-starter/
 │   ├── cms-content/                # Domain-specific queries
 │   │   ├── getPostListing.ts       # Blog posts with URLs
 │   │   ├── getHeaderContent.ts     # Header navigation data
-│   │   ├── getPageMetaData.ts      # Page SEO metadata
-│   │   └── resolveAgilityMetaData.ts # Advanced metadata
+│   │   ├── getPageScripts.ts       # JSON-LD + page scripts
+│   │   └── resolveAgilityMetaData.ts # Page SEO metadata
 │   └── types/                      # TypeScript interfaces
 │       └── (IPost, IAuthor, ICategory, etc.)
 ├── styles/
@@ -345,7 +345,8 @@ Located in `lib/cms-content/`, these build on the CMS utilities for specific use
 
 - `getPostListing()` - Blog posts with category filtering and URLs
 - `getHeaderContent()` - Navigation structure and branding
-- `getPageMetaData()` - SEO metadata for pages
+- `resolveAgilityMetaData()` - SEO metadata for pages (used by `generateMetadata`)
+- `getPageScripts()` - JSON-LD and scripts from Additional Header Markup and the page's Scripts fields
 
 See [AGILITY-CMS-GUIDE.md](./docs/AGILITY-CMS-GUIDE.md) for complete data fetching patterns.
 

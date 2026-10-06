@@ -81,6 +81,8 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 					return
 				}
 			}
+			//script tags (including JSON-LD) are rendered by the page itself - see getPageScripts
+			if (item.type === "script") return
 			console.warn("Could not output tag in Additional Header Markup", item)
 		}
 

@@ -163,8 +163,8 @@ agilitycms-nextjs-starter/
 │   ├── cms-content/                # Domain-specific queries
 │   │   ├── getPostListing.ts       # Blog posts with URLs
 │   │   ├── getHeaderContent.ts     # Header navigation data
-│   │   ├── getPageMetaData.ts      # Page SEO metadata
-│   │   └── resolveAgilityMetaData.ts # Advanced metadata
+│   │   ├── getPageScripts.ts       # JSON-LD + page scripts
+│   │   └── resolveAgilityMetaData.ts # Page SEO metadata
 │   └── types/                      # TypeScript interfaces
 │       └── (IPost, IAuthor, ICategory, etc.)
 ├── styles/
@@ -345,7 +345,17 @@ Located in `lib/cms-content/`, these build on the CMS utilities for specific use
 
 - `getPostListing()` - Blog posts with category filtering and URLs
 - `getHeaderContent()` - Navigation structure and branding
-- `getPageMetaData()` - SEO metadata for pages
+- `resolveAgilityMetaData()` - SEO metadata for pages (used by `generateMetadata`)
+- `getPageScripts()` - JSON-LD and scripts from Additional Header Markup and the page's Scripts fields
+
+#### Additional Header Markup and page Scripts
+
+`generateMetadata` can't output `<script>` tags, so the page (`app/[...slug]/page.tsx`) renders them itself:
+
+- **Meta tags** in SEO > Additional Header Markup go through `resolveAgilityMetaData()`. Open Graph tags (`og:*`, `article:*`) are rendered as `<meta property>`; others (`robots`, `twitter:*`, `google-site-verification`, …) as `<meta name>`.
+- **JSON-LD** (`<script type="application/ld+json">`, including blocks nested in a wrapper element) is validated and rendered in the server HTML. Invalid JSON is skipped with a warning.
+- **Other scripts** from Additional Header Markup and Scripts > Top are rendered at the start of the page content, and Scripts > Bottom at the end, as plain `<script>` elements with all their attributes (`async`, `defer`, `crossorigin`, `data-*`, …) and in document order. Inline event-handler attributes (`onload`, …) are dropped. The App Router doesn't let a page add a blocking script to `<head>`, so "top" scripts sit in the `<body>`, after the site header and ahead of the page's own content. React 19 does move `<script async src>` into `<head>`.
+- **Scripts run on a full page load only.** They don't run on client-side navigation: following a `<Link>` to a page doesn't run that page's scripts, and returning to a page doesn't re-run them. Scripts that need to run on every route change (analytics page views, for example) should listen for navigation themselves or be written as a client component.
 
 See [AGILITY-CMS-GUIDE.md](./docs/AGILITY-CMS-GUIDE.md) for complete data fetching patterns.
 

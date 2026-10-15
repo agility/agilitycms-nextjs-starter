@@ -3,7 +3,7 @@ import { ContentItem } from "@agility/content-fetch"
 import { Metadata, ResolvingMetadata } from "next"
 import { getHeaderContent } from "./getHeaderContent"
 import getAgilitySDK from "../cms/getAgilitySDK"
-import ReactHtmlParser from "html-react-parser"
+import { htmlToDOM } from "html-react-parser"
 import { getContentItem } from "lib/cms/getContentItem"
 
 interface Props {
@@ -53,64 +53,24 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	}
 	//#endregion
 
-	//#region *** resolve the "additional" meta tags ***
-	let metaHTML = agilityData.page?.seo?.metaHTML
-
-	let otherMetaData: { [name: string]: string } = {}
-
-
-	if (metaHTML) {
-		const additionalHeaderMarkup = ReactHtmlParser(metaHTML)
-
-		const handleMetaTag = (item: React.ReactElement<any>) => {
-			if (!item.type) return
-			//check if this is a meta tag and add it to the otherMetaData if so
-			if (item.type === "meta") {
-				const metaTag = item.props as React.MetaHTMLAttributes<HTMLMetaElement>
-				if (metaTag && metaTag.property && metaTag.content) {
-
-					//special case for og:image
-					if (metaTag.property === "og:image") {
-						ogImages.push({
-							url: metaTag.content
-						})
-					} else {
-						otherMetaData[metaTag.property] = metaTag.content
-					}
-
-					return
-				}
-			}
-			//script tags (including JSON-LD) are rendered by the page itself - see getPageScripts
-			if (item.type === "script") return
-			console.warn("Could not output tag in Additional Header Markup", item)
-		}
-
-		if (typeof additionalHeaderMarkup === "string") {
-			console.warn("Could not parse additional meta tags from Agility CMS")
-		} else if (Array.isArray(additionalHeaderMarkup)) {
-			//array of meta tags
-			additionalHeaderMarkup.forEach((item) => handleMetaTag(item));
-		} else {
-			//single meta tag
-			handleMetaTag(additionalHeaderMarkup)
-		}
-	}
+	//#region *** resolve the meta tags in Additional Header Markup (seo.metaHTML) ***
+	const seo = agilityData.page?.seo
+	const { openGraph, other, description, keywords } = resolveAdditionalMetaTags(seo?.metaHTML, ogImages)
 	//#endregion
-
-
 
 	const metaData: Metadata = {
 		metadataBase: new URL('https://preview-tests-nov-2023.vercel.app'),
 		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}`,
-		description: agilityData.page?.seo?.metaDescription,
-		keywords: agilityData.page?.seo?.metaKeywords,
+		// the SEO fields win; a description/keywords meta tag in the markup only fills in an empty field
+		description: seo?.metaDescription || description,
+		keywords: seo?.metaKeywords || keywords,
 		openGraph: {
+			...openGraph,
 			images: ogImages,
-		},
+		} as Metadata["openGraph"],
 
 		generator: `Agility CMS`,
-		other: otherMetaData
+		other
 
 	}
 
@@ -118,4 +78,162 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 
 
 
+}
+
+// og:type values Next.js can render (any other value makes its metadata renderer throw)
+const OG_TYPES = new Set(["website", "article", "book", "profile", "music.song", "music.album", "music.playlist", "music.radio_station", "video.movie", "video.episode", "video.tv_show", "video.other"])
+
+// og:image:* sub-properties, mapped to Next's image descriptor fields
+const OG_IMAGE_FIELDS: Record<string, "url" | "secureUrl" | "type" | "width" | "height" | "alt"> = {
+	"og:image:url": "url",
+	"og:image:secure_url": "secureUrl",
+	"og:image:type": "type",
+	"og:image:width": "width",
+	"og:image:height": "height",
+	"og:image:alt": "alt",
+}
+
+// article:* properties, mapped to Next's openGraph fields (rendered only when og:type is "article")
+const ARTICLE_FIELDS: Record<string, { field: string; multiple?: boolean }> = {
+	"article:published_time": { field: "publishedTime" },
+	"article:modified_time": { field: "modifiedTime" },
+	"article:expiration_time": { field: "expirationTime" },
+	"article:section": { field: "section" },
+	"article:author": { field: "authors", multiple: true },
+	"article:tag": { field: "tags", multiple: true },
+}
+
+// Owned by the app (Next.js emits these); a second copy would conflict.
+const APP_OWNED_META = new Set(["charset", "viewport", "generator"])
+
+interface MarkupImage {
+	url: string
+	secureUrl?: string
+	type?: string
+	width?: string
+	height?: string
+	alt?: string
+}
+
+interface AdditionalMetaTags {
+	openGraph: Record<string, unknown>
+	other: Record<string, string | string[]>
+	description?: string
+	keywords?: string
+}
+
+/** Every `<meta property|name="…" content="…">` in the markup, in document order (including nested ones). */
+const parseMetaTags = (html: string): { key: string; content: string }[] => {
+	const tags: { key: string; content: string }[] = []
+	const walk = (nodes: any[]) => {
+		for (const node of nodes) {
+			if (node?.type !== "tag" || node.name === "noscript" || node.name === "template") continue
+			if (node.name === "meta") {
+				const attribs = node.attribs || {}
+				const key = (attribs.property || attribs.name || "").trim()
+				if (key && attribs.content !== undefined) {
+					tags.push({ key, content: attribs.content })
+				} else if (!attribs.charset) {
+					console.warn("Could not output <meta> tag in Additional Header Markup (it needs a property or name, and content)", attribs)
+				}
+				continue
+			}
+			// <script> tags (including JSON-LD) are rendered by the page itself - see getPageScripts
+			console.warn(`Could not output <${node.name}> tag in Additional Header Markup`)
+			if (Array.isArray(node.children)) walk(node.children)
+		}
+	}
+	try {
+		walk(htmlToDOM(html) as any[])
+	} catch (error) {
+		console.warn("Could not parse additional meta tags from Agility CMS", error)
+	}
+	return tags
+}
+
+/**
+ * Map the meta tags in Additional Header Markup onto Next.js metadata.
+ * Open Graph tags (og:*, article:*) go through `openGraph` so Next renders them as `<meta property>`;
+ * anything else (robots, twitter:*, google-site-verification, …) goes through `other`,
+ * which Next renders as `<meta name>`.
+ */
+export const resolveAdditionalMetaTags = (html: string | null | undefined, ogImages: { push(image: MarkupImage): number }): AdditionalMetaTags => {
+	const result: AdditionalMetaTags = { openGraph: {}, other: {} }
+	if (!html || !html.trim()) return result
+
+	const openGraph = result.openGraph
+	const article: Record<string, string | string[]> = {}
+	let lastImage: MarkupImage | undefined
+
+	const addOther = (key: string, content: string) => {
+		const existing = result.other[key]
+		result.other[key] = existing === undefined ? content : [...(Array.isArray(existing) ? existing : [existing]), content]
+	}
+
+	for (const { key, content } of parseMetaTags(html)) {
+		const lowerKey = key.toLowerCase()
+
+		if (lowerKey === "og:image" || lowerKey === "og:image:url") {
+			lastImage = { url: content }
+			ogImages.push(lastImage)
+			continue
+		}
+		if (OG_IMAGE_FIELDS[lowerKey]) {
+			// og:image:* describes the og:image before it
+			if (lastImage) lastImage[OG_IMAGE_FIELDS[lowerKey]] = content
+			else console.warn(`Ignoring <meta property="${key}"> in Additional Header Markup: it must follow an og:image tag`)
+			continue
+		}
+		if (ARTICLE_FIELDS[lowerKey]) {
+			const { field, multiple } = ARTICLE_FIELDS[lowerKey]
+			const existing = article[field]
+			article[field] = multiple ? [...(Array.isArray(existing) ? existing : []), content] : content
+			continue
+		}
+
+		switch (lowerKey) {
+			case "og:title":
+				openGraph.title = content
+				break
+			case "og:description":
+				openGraph.description = content
+				break
+			case "og:url":
+				openGraph.url = content
+				break
+			case "og:site_name":
+				openGraph.siteName = content
+				break
+			case "og:locale":
+				openGraph.locale = content
+				break
+			case "og:locale:alternate":
+				openGraph.alternateLocale = [...((openGraph.alternateLocale as string[]) || []), content]
+				break
+			case "og:type":
+				if (OG_TYPES.has(content)) openGraph.type = content
+				else addOther(key, content)
+				break
+			case "description":
+				result.description ??= content
+				break
+			case "keywords":
+				result.keywords ??= content
+				break
+			default:
+				if (!APP_OWNED_META.has(lowerKey)) addOther(key, content)
+		}
+	}
+
+	// Next.js only renders article:* when og:type is "article"; otherwise keep them as plain meta tags
+	if (openGraph.type === "article") {
+		Object.assign(openGraph, article)
+	} else {
+		const reverse = Object.fromEntries(Object.entries(ARTICLE_FIELDS).map(([property, { field }]) => [field, property]))
+		for (const [field, value] of Object.entries(article)) {
+			for (const content of Array.isArray(value) ? value : [value]) addOther(reverse[field], content)
+		}
+	}
+
+	return result
 }

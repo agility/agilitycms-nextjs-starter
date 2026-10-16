@@ -1,13 +1,16 @@
 import { AgilityPageProps, ImageField } from "@agility/nextjs"
+import { generateAgilityMetadata } from "@agility/nextjs/geo"
 import { ContentItem } from "@agility/content-fetch"
 import { Metadata, ResolvingMetadata } from "next"
 import { getHeaderContent } from "./getHeaderContent"
-import getAgilitySDK from "../cms/getAgilitySDK"
 import { htmlToDOM } from "html-react-parser"
 import { getContentItem } from "lib/cms/getContentItem"
+import { getPageUrl, getSiteUrl } from "./getSiteUrl"
 
 interface Props {
 	agilityData: AgilityPageProps
+	/** The path the page is served at (`/` for the home page). */
+	path: string
 	locale: string
 	sitemap: string
 	isPreview: boolean
@@ -15,11 +18,28 @@ interface Props {
 	parent: ResolvingMetadata
 }
 
-export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
+export const resolveAgilityMetaData = async ({ agilityData, path, locale, sitemap, isDevelopmentMode, isPreview, parent }: Props): Promise<Metadata> => {
 
 
 	const header = await getHeaderContent({ locale, sitemap })
 	const ogImages = (await parent).openGraph?.images || []
+	const url = getPageUrl(path)
+	const page = agilityData.page
+	const dynamicPageItem = agilityData.dynamicPageItem as ContentItem | null | undefined
+
+	//#region *** the page's SEO and GEO fields: title, description, canonical, robots, share image ***
+	// On a dynamic page, generateAgilityMetadata uses the item's own description and URL; only the
+	// dynamic page's robots carry over to its items.
+	const seoMetadata = generateAgilityMetadata({
+		page,
+		item: dynamicPageItem,
+		url,
+		locale,
+		title: agilityData.sitemapNode?.title,
+		titleTemplate: header?.siteName ? `%s | ${header.siteName}` : undefined,
+	})
+	const seoImages = (seoMetadata.openGraph?.images || []) as typeof ogImages
+	//#endregion
 
 	//#region *** resolve open graph stuff from dynamic pages ***
 	if (agilityData.sitemapNode.contentID !== undefined
@@ -54,19 +74,32 @@ export const resolveAgilityMetaData = async ({ agilityData, locale, sitemap, isD
 	//#endregion
 
 	//#region *** resolve the meta tags in Additional Header Markup (seo.metaHTML) ***
-	const seo = agilityData.page?.seo
-	const { openGraph, other, description, keywords } = resolveAdditionalMetaTags(seo?.metaHTML, ogImages)
+	// A dynamic page's markup applies to every item it renders; the item's own markup follows it and wins.
+	const pageTags = resolveAdditionalMetaTags(page?.seo?.metaHTML, ogImages)
+	const itemTags = resolveAdditionalMetaTags(dynamicPageItem?.seo?.metaHTML, ogImages)
+	const openGraph = { ...pageTags.openGraph, ...itemTags.openGraph }
+	const other = { ...pageTags.other, ...itemTags.other }
+	// the SEO fields win; a description/keywords meta tag in the markup only fills in an empty field
+	const description = seoMetadata.description || itemTags.description || pageTags.description
+	const keywords = seoMetadata.keywords || itemTags.keywords || pageTags.keywords
+	// a robots setting on the page replaces a robots meta tag pasted into the markup
+	if (seoMetadata.robots) {
+		for (const key of Object.keys(other)) if (key.toLowerCase() === "robots") delete other[key]
+	}
 	//#endregion
 
 	const metaData: Metadata = {
-		metadataBase: new URL('https://preview-tests-nov-2023.vercel.app'),
-		title: `${agilityData.sitemapNode?.title} | ${header?.siteName || ""}`,
-		// the SEO fields win; a description/keywords meta tag in the markup only fills in an empty field
-		description: seo?.metaDescription || description,
-		keywords: seo?.metaKeywords || keywords,
+		metadataBase: new URL(getSiteUrl()),
+		title: seoMetadata.title,
+		description,
+		keywords,
+		alternates: seoMetadata.alternates,
+		robots: seoMetadata.robots,
 		openGraph: {
+			url: seoMetadata.alternates?.canonical ?? url,
 			...openGraph,
-			images: ogImages,
+			// the page's share image (SEO > share image) comes first
+			images: [...seoImages, ...ogImages],
 		} as Metadata["openGraph"],
 
 		generator: `Agility CMS`,

@@ -23,7 +23,7 @@
 		"eslint-config-next": "13.0.3",
 		"html-react-parser": "^5.1.19",
 		"luxon": "^3.1.0",
-		"next": "16.0.7",
+		"next": "16.0.11",
 		"react": "19.2.1",
 		"react-dom": "19.2.1",
 		"react-icons": "^4.11.0",
@@ -34,7 +34,8 @@
 	"devDependencies": {
 		"@agility/content-fetch": "^2.0.0",
 		"shx": "^0.3.4",
-		"@agility/nextjs": "^16.0.7",
+		"@agility/geo": "^0.1.0",
+		"@agility/nextjs": "^16.1.0",
 		"@tailwindcss/postcss": "^4.1.10",
 		"@tailwindcss/typography": "^0.5.8",
 		"@types/luxon": "^3.1.0",

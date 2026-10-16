@@ -12,6 +12,9 @@ import { SitemapNode } from "lib/types/SitemapNode"
 import { notFound } from "next/navigation"
 import { getPageScripts } from "lib/cms-content/getPageScripts"
 import { JsonLdScripts, PageScripts } from "components/common/PageScripts"
+import { AgilityJsonLd } from "@agility/nextjs/geo"
+import { getSitemapFlat } from "lib/cms/getSitemapFlat"
+import { getPageUrl } from "lib/cms-content/getSiteUrl"
 
 export const revalidate = 60
 export const runtime = "nodejs"
@@ -73,6 +76,7 @@ export async function generateMetadata(
 	if (!agilityData.page) return {};
 	return await resolveAgilityMetaData({
 		agilityData,
+		path: getPagePath((await params).slug),
 		locale,
 		sitemap,
 		isDevelopmentMode,
@@ -87,12 +91,26 @@ export default async function Page({ params }: PageProps) {
 
 	const AgilityPageTemplate = getPageTemplate(agilityData.pageTemplateName || "");
 
-	// JSON-LD and scripts from Additional Header Markup and the page's Scripts fields
+	// JSON-LD and scripts from Additional Header Markup (the page's, then a dynamic item's own)
+	// and the page's Scripts fields
 	// (generateMetadata can't output <script> tags, so they are rendered with the page)
-	const { jsonLd, headScripts, bodyScripts } = getPageScripts(agilityData.page);
+	const { jsonLd, headScripts, bodyScripts } = getPageScripts(agilityData.page, agilityData.dynamicPageItem);
+
+	// The page's schema.org structured data, built from its SEO and GEO fields: the WebPage (typed by
+	// the page's schema type), a BreadcrumbList from the sitemap, and the editor's structured data.
+	const { locale, sitemap } = await getAgilityContext();
+	const sitemapFlat = await getSitemapFlat({ channelName: sitemap, languageCode: locale });
 
 	return (
 		<>
+			<AgilityJsonLd
+				page={agilityData.page}
+				item={agilityData.dynamicPageItem}
+				url={getPageUrl(getPagePath((await params).slug))}
+				path={agilityData.sitemapNode?.path}
+				locale={agilityData.languageCode || locale}
+				sitemap={sitemapFlat}
+			/>
 			<JsonLdScripts jsonLd={jsonLd} />
 			<PageScripts scripts={headScripts} />
 			<div data-agility-page={agilityData.page?.pageID} data-agility-dynamic-content={agilityData.sitemapNode.contentID}>
@@ -105,4 +123,10 @@ export default async function Page({ params }: PageProps) {
 			<PageScripts scripts={bodyScripts} />
 		</>
 	);
+}
+
+/** The path a page is served at, from the catch-all route's slug (`/` for the home page). */
+const getPagePath = (slug: string[] | undefined): string => {
+	const segments = (slug || []).filter(Boolean)
+	return segments.length > 0 ? `/${segments.join("/")}` : "/"
 }

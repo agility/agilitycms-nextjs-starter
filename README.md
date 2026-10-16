@@ -357,7 +357,7 @@ The page's SEO and GEO fields are rendered with the adapters in `@agility/nextjs
 
 - **Metadata:** `resolveAgilityMetaData()` calls `generateAgilityMetadata()` for the SEO title (used as the whole `<title>`, without the site name), description (falling back to the page's GEO summary), keywords, canonical URL (the page's override, otherwise its own URL), robots and share image.
 - **Structured data:** the page renders `<AgilityJsonLd />`, one schema.org `@graph` in the server HTML: a WebPage typed by the page's schema type, a BreadcrumbList from the sitemap, and any structured data the editor added.
-- **Dynamic pages** (e.g. a blog post): each item gets its own URL as its canonical URL and its own description. Only the dynamic page's schema type, robots and AI settings carry over to its items; its summary and structured data describe the listing page and aren't repeated on every item.
+- **Dynamic pages** (e.g. a blog post): the item (with its own SEO and GEO fields) is passed to both adapters, and `@agility/geo` combines it with the dynamic page. The item's own schema type, robots and AI settings win, and the dynamic page's are the defaults for every item. The item's summary and structured data are its own only: the dynamic page's describe the listing page and aren't repeated on every item. An item with no summary uses its meta description, and each item gets its own URL as its canonical URL.
 - Set `SITE_URL` in production. Without it, the Vercel production domain is used, then `http://localhost:3000`.
 
 #### Additional Header Markup and page Scripts

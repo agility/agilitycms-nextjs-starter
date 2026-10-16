@@ -28,8 +28,9 @@ export const resolveAgilityMetaData = async ({ agilityData, path, locale, sitema
 	const dynamicPageItem = agilityData.dynamicPageItem as ContentItem | null | undefined
 
 	//#region *** the page's SEO and GEO fields: title, description, canonical, robots, share image ***
-	// On a dynamic page, generateAgilityMetadata uses the item's own description and URL; only the
-	// dynamic page's robots carry over to its items.
+	// On a dynamic page, pass the item with its own SEO and GEO fields: generateAgilityMetadata uses
+	// the item's own description (its GEO summary as the fallback), title, canonical URL and share
+	// image, and falls back to the dynamic page's robots only when the item sets none.
 	const seoMetadata = generateAgilityMetadata({
 		page,
 		item: dynamicPageItem,

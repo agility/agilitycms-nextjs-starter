@@ -98,6 +98,8 @@ export default async function Page({ params }: PageProps) {
 
 	// The page's schema.org structured data, built from its SEO and GEO fields: the WebPage (typed by
 	// the page's schema type), a BreadcrumbList from the sitemap, and the editor's structured data.
+	// On a dynamic page the item's own GEO fields are used too (its schema type and AI settings,
+	// else the dynamic page's; its own summary and structured data only).
 	const { locale, sitemap } = await getAgilityContext();
 	const sitemapFlat = await getSitemapFlat({ channelName: sitemap, languageCode: locale });
 

@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@agility/content-fetch": "^2.0.14",
 		"shx": "^0.3.4",
-		"@agility/geo": "^0.1.0",
+		"@agility/geo": "^0.1.2",
 		"@agility/nextjs": "^16.1.0",
 		"@tailwindcss/postcss": "^4.1.10",
 		"@tailwindcss/typography": "^0.5.8",

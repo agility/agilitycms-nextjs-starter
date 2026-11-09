@@ -1,4 +1,4 @@
-import { Page } from "@agility/content-fetch"
+import { ContentItem, Page } from "@agility/content-fetch"
 import { attributesToProps, htmlToDOM } from "html-react-parser"
 
 /**
@@ -76,7 +76,7 @@ const extractScriptTags = (html: string | null | undefined, source: string): Scr
 			if (node?.type === "script" && node.name === "script") {
 				tags.push({ attributes: { ...(node.attribs || {}) }, content: getText(node), parentName })
 			} else if ((node?.type === "tag" || node?.type === "style") && !INERT_ELEMENTS.has(node.name)) {
-				if (source !== ADDITIONAL_HEADER_MARKUP) {
+				if (!source.endsWith(ADDITIONAL_HEADER_MARKUP)) {
 					console.warn(`Could not output <${node.name}> tag from the page's ${source} field; only <script> tags are supported there.`)
 				}
 				if (Array.isArray(node.children)) walk(node.children, node.name)
@@ -128,17 +128,20 @@ const toPageScript = (tag: ScriptTag, key: string): PageScript => {
 /**
  * Get the JSON-LD and scripts that a page defines in Agility CMS:
  * - <script> tags in SEO > Additional Header Markup (`seo.metaHTML`)
+ * - on a dynamic page, <script> tags in the item's own Additional Header Markup (`seo.metaHTML` on
+ *   the item), after the dynamic page's
  * - the Scripts > Top and Bottom fields (`scripts.top` / `scripts.bottom`)
  *
  * Next.js `generateMetadata` cannot output <script> tags, so these are rendered by the page itself.
  */
-export const getPageScripts = (page: Page | undefined | null): PageScripts => {
+export const getPageScripts = (page: Page | undefined | null, dynamicPageItem?: ContentItem | null): PageScripts => {
 	const result: PageScripts = { jsonLd: [], headScripts: [], bodyScripts: [] }
 	if (!page) return result
 
 	const scriptsFields = (page as PageWithScripts).scripts
 	const sources: { source: string; key: string; html: string | null | undefined; target: PageScript[] }[] = [
 		{ source: ADDITIONAL_HEADER_MARKUP, key: "meta", html: page.seo?.metaHTML, target: result.headScripts },
+		{ source: `dynamic item's ${ADDITIONAL_HEADER_MARKUP}`, key: "item-meta", html: dynamicPageItem?.seo?.metaHTML, target: result.headScripts },
 		{ source: "Scripts (Top)", key: "top", html: scriptsFields?.top, target: result.headScripts },
 		{ source: "Scripts (Bottom)", key: "bottom", html: scriptsFields?.bottom, target: result.bodyScripts },
 	]

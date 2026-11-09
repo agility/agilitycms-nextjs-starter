@@ -2,15 +2,20 @@
 # yarn lockfile v1
 
 
-"@agility/content-fetch@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/@agility/content-fetch/-/content-fetch-2.0.0.tgz"
-  integrity sha512-ghqdv/IozVASwPgZThZrmufbo8q5a5UMOMOyy9CCSS8BVx5r+QxjRLTEXQOp7xpoJO1vhe3QUkOmCppssBf3Eg==
+"@agility/content-fetch@^2.0.14", "@agility/content-fetch@>=2.0.0":
+  version "2.0.14"
+  resolved "https://registry.npmjs.org/@agility/content-fetch/-/content-fetch-2.0.14.tgz"
+  integrity sha512-rdEnawg6kM/+7Vj86YJEKC/0xeRZVMbF9d8vbBFJ1wZPYEVFjatxn6l+VDjyxR1HbZGi3uusSK+55id85LZ5hg==
 
-"@agility/nextjs@^16.0.7":
-  version "16.0.7"
-  resolved "https://registry.npmjs.org/@agility/nextjs/-/nextjs-16.0.7.tgz"
-  integrity sha512-DLB948pH8RswQH0VziHGaa+RvJZ4ZHnPWqJRYqpuL3l0VL4jN3qvGVVw1J5HA+HO4UAKw2C7afK40oJkJMfRuQ==
+"@agility/geo@^0.1.2", "@agility/geo@>=0.1.0 <1":
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/@agility/geo/-/geo-0.1.2.tgz"
+  integrity sha512-mLhO1dQPMOswuupWYNDSE0rG+Ryt0wqfpX3jlzc6as9KRNNoj22OZ56Vle39vf9O3Q5kVXieQHk7tsDMgK+3BA==
+
+"@agility/nextjs@^16.1.0":
+  version "16.1.0"
+  resolved "https://registry.npmjs.org/@agility/nextjs/-/nextjs-16.1.0.tgz"
+  integrity sha512-KBm+0kaqUsmPN/bpeCKx59RXtMaZUJOFoLxDHz5KGVk5OQFu9SJYyqn5TYvsUDLy5PwYk3D+Kvh/AuWQMj50Tg==
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
@@ -122,14 +127,21 @@
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
 "@img/colour@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@img/colour/-/colour-1.0.0.tgz"
-  integrity sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@img/colour/-/colour-1.1.0.tgz"
+  integrity sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==
 
-"@img/sharp-win32-x64@0.34.5":
+"@img/sharp-darwin-arm64@0.34.5":
   version "0.34.5"
-  resolved "https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz"
-  integrity sha512-+29YMsqY2/9eFEiW93eqWnuLcWcufowXewwSNIT6UwZdUUCrM3oFjMWH/Z6/TMmb4hlFenmfAVbpWeup2jryCw==
+  resolved "https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.34.5.tgz"
+  integrity sha512-imtQ3WMJXbMY4fxb/Ndp6HBTNVtWCUI0WdobyheGf5+ad6xX8VIDO8u2xE4qc/fr08CKG/7dDseFtn6M6g/r3w==
+  optionalDependencies:
+    "@img/sharp-libvips-darwin-arm64" "1.2.4"
+
+"@img/sharp-libvips-darwin-arm64@1.2.4":
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.2.4.tgz"
+  integrity sha512-zqjjo7RatFfFoP0MkQ51jfuFZBnVE2pRiaydKJ1G/rHZvnsrHAOcQALIi9sA5co5xenQdTugCvtb1cuf78Vf4g==
 
 "@isaacs/fs-minipass@^4.0.0":
   version "4.0.1"
@@ -170,10 +182,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@next/env@16.0.7":
-  version "16.0.7"
-  resolved "https://registry.npmjs.org/@next/env/-/env-16.0.7.tgz"
-  integrity sha512-gpaNgUh5nftFKRkRQGnVi5dpcYSKGcZZkQffZ172OrG/XkrnS7UBTQ648YY+8ME92cC4IojpI2LqTC8sTDhAaw==
+"@next/env@16.0.11":
+  version "16.0.11"
+  resolved "https://registry.npmjs.org/@next/env/-/env-16.0.11.tgz"
+  integrity sha512-hULMheQaOhFK1vAoFPigXca42LguwyLILtJKPRzpY1d+og6jk0YNAQVwLGNYYhWEMd2zj4gcIWSf1yC5PffqqA==
 
 "@next/eslint-plugin-next@13.0.3":
   version "13.0.3"
@@ -182,10 +194,10 @@
   dependencies:
     glob "7.1.7"
 
-"@next/swc-win32-x64-msvc@16.0.7":
-  version "16.0.7"
-  resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-16.0.7.tgz"
-  integrity sha512-gniPjy55zp5Eg0896qSrf3yB1dw4F/3s8VK1ephdsZZ129j2n6e1WqCbE2YgcKhW9hPB9TVZENugquWJD5x0ug==
+"@next/swc-darwin-arm64@16.0.11":
+  version "16.0.11"
+  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-16.0.11.tgz"
+  integrity sha512-3G7Rx6m6tgLqkc3Ce3QY/Yrsx7nJF4ithdHfx70Jmzel8m2xpjnGRC+oB4UcCHvQwN0ZP5YsLJakwx/M0vWbSQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -305,10 +317,10 @@
     source-map-js "^1.2.1"
     tailwindcss "4.1.10"
 
-"@tailwindcss/oxide-win32-x64-msvc@4.1.10":
+"@tailwindcss/oxide-darwin-arm64@4.1.10":
   version "4.1.10"
-  resolved "https://registry.npmjs.org/@tailwindcss/oxide-win32-x64-msvc/-/oxide-win32-x64-msvc-4.1.10.tgz"
-  integrity sha512-sGiJTjcBSfGq2DVRtaSljq5ZgZS2SDHSIfhOylkBvHVjwOsodBhnb3HdmiKkVuUGKD0I7G63abMOVaskj1KpOA==
+  resolved "https://registry.npmjs.org/@tailwindcss/oxide-darwin-arm64/-/oxide-darwin-arm64-4.1.10.tgz"
+  integrity sha512-ZIFqvR1irX2yNjWJzKCqTCcHZbgkSkSkZKbRM3BPzhDL/18idA8uWCoopYA2CSDdSGFlDAxYdU2yBHwAwx8euQ==
 
 "@tailwindcss/oxide@4.1.10":
   version "4.1.10"
@@ -577,9 +589,9 @@ callsites@^3.0.0:
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
 caniuse-lite@^1.0.30001579:
-  version "1.0.30001680"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001680.tgz"
-  integrity sha512-rPQy70G6AGUMnbwS1z6Xg+RkHYPAi18ihs47GH0jcxIG7wArmPgY3XbS2sRdBbxJljp3thdT8BIqv9ccCypiPA==
+  version "1.0.30001823"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001823.tgz"
+  integrity sha512-TQ5s/djDjNk1axreUW+4rULH+BmdCMLiJkhaXnO5wqivG7tITkSUj4ItIdzqdZHKaXcHAV8dhH3JxOM7/7bwqw==
 
 chalk@^4.0.0:
   version "4.1.2"
@@ -1505,10 +1517,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lightningcss-win32-x64-msvc@1.30.1:
+lightningcss-darwin-arm64@1.30.1:
   version "1.30.1"
-  resolved "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.30.1.tgz"
-  integrity sha512-PVqXh48wh4T53F/1CCu8PIPCxLzWyCnn/9T5W1Jpmdy5h9Cwd+0YQS6/LwhHXSafuc61/xg9Lv5OrCby6a++jg==
+  resolved "https://registry.npmjs.org/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.30.1.tgz"
+  integrity sha512-c8JK7hyE65X1MHMN+Viq9n11RRC7hgin3HhYKhrMyaXflk5GVplZ60IxyoVtzILeKr+xAJwg6zK6sjTBJ0FKYQ==
 
 lightningcss@1.30.1:
   version "1.30.1"
@@ -1636,25 +1648,25 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next@^16.0.7, next@16.0.7:
-  version "16.0.7"
-  resolved "https://registry.npmjs.org/next/-/next-16.0.7.tgz"
-  integrity sha512-3mBRJyPxT4LOxAJI6IsXeFtKfiJUbjCLgvXO02fV8Wy/lIhPvP94Fe7dGhUgHXcQy4sSuYwQNcOLhIfOm0rL0A==
+next@^16.0.10, next@16.0.11:
+  version "16.0.11"
+  resolved "https://registry.npmjs.org/next/-/next-16.0.11.tgz"
+  integrity sha512-Xlo2aFWaoypPzXr4PFLSNmxrzNptlp+hgxnG9Y2THYvHrvmXIuHUyNAWO6Q+F4rm4/bmTOukprXEyF/j4qsC2A==
   dependencies:
-    "@next/env" "16.0.7"
+    "@next/env" "16.0.11"
     "@swc/helpers" "0.5.15"
     caniuse-lite "^1.0.30001579"
     postcss "8.4.31"
     styled-jsx "5.1.6"
   optionalDependencies:
-    "@next/swc-darwin-arm64" "16.0.7"
-    "@next/swc-darwin-x64" "16.0.7"
-    "@next/swc-linux-arm64-gnu" "16.0.7"
-    "@next/swc-linux-arm64-musl" "16.0.7"
-    "@next/swc-linux-x64-gnu" "16.0.7"
-    "@next/swc-linux-x64-musl" "16.0.7"
-    "@next/swc-win32-arm64-msvc" "16.0.7"
-    "@next/swc-win32-x64-msvc" "16.0.7"
+    "@next/swc-darwin-arm64" "16.0.11"
+    "@next/swc-darwin-x64" "16.0.11"
+    "@next/swc-linux-arm64-gnu" "16.0.11"
+    "@next/swc-linux-arm64-musl" "16.0.11"
+    "@next/swc-linux-x64-gnu" "16.0.11"
+    "@next/swc-linux-x64-musl" "16.0.11"
+    "@next/swc-win32-arm64-msvc" "16.0.11"
+    "@next/swc-win32-x64-msvc" "16.0.11"
     sharp "^0.34.4"
 
 object-assign@^4.1.1:
@@ -2263,7 +2275,7 @@ tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.4.0, tslib@^2.8.0:
+tslib@^2.8.0:
   version "2.8.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==

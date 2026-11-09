@@ -99,6 +99,8 @@ A modern, production-ready starter for building content-managed websites with [A
    AGILITY_SITEMAP=website
    AGILITY_FETCH_CACHE_DURATION=120
    AGILITY_PATH_REVALIDATE_DURATION=10
+   # your site's public URL, for canonical URLs and structured data (no trailing slash)
+   SITE_URL=https://www.example.com
    ```
 
 6. **Run the development server**
@@ -347,11 +349,22 @@ Located in `lib/cms-content/`, these build on the CMS utilities for specific use
 - `getHeaderContent()` - Navigation structure and branding
 - `resolveAgilityMetaData()` - SEO metadata for pages (used by `generateMetadata`)
 - `getPageScripts()` - JSON-LD and scripts from Additional Header Markup and the page's Scripts fields
+- `getSiteUrl()` / `getPageUrl()` - the site's public URL (`SITE_URL`), for canonical URLs and structured data
+
+#### SEO and structured data (GEO / AEO)
+
+The page's SEO and GEO fields are rendered with the adapters in `@agility/nextjs/geo`, which use [`@agility/geo`](https://github.com/agility/agility-geo):
+
+- **Metadata:** `resolveAgilityMetaData()` calls `generateAgilityMetadata()` for the SEO title (used as the whole `<title>`, without the site name), description (falling back to the page's GEO summary), keywords, canonical URL (the page's override, otherwise its own URL), robots and share image.
+- **Structured data:** the page renders `<AgilityJsonLd />`, one schema.org `@graph` in the server HTML: a WebPage typed by the page's schema type, a BreadcrumbList from the sitemap, and any structured data the editor added.
+- **Dynamic pages** (e.g. a blog post): the item (with its own SEO and GEO fields) is passed to both adapters, and `@agility/geo` combines it with the dynamic page. The item's own schema type, robots and AI settings win, and the dynamic page's are the defaults for every item. The item's summary and structured data are its own only: the dynamic page's describe the listing page and aren't repeated on every item. An item with no summary uses its meta description, and each item gets its own URL as its canonical URL.
+- Set `SITE_URL` in production. Without it, the Vercel production domain is used, then `http://localhost:3000`.
 
 #### Additional Header Markup and page Scripts
 
 `generateMetadata` can't output `<script>` tags, so the page (`app/[...slug]/page.tsx`) renders them itself:
 
+- On a dynamic page, the item's own Additional Header Markup is rendered after the dynamic page's, and its meta tags win.
 - **Meta tags** in SEO > Additional Header Markup go through `resolveAgilityMetaData()`. Open Graph tags (`og:*`, `article:*`) are rendered as `<meta property>`; others (`robots`, `twitter:*`, `google-site-verification`, …) as `<meta name>`.
 - **JSON-LD** (`<script type="application/ld+json">`, including blocks nested in a wrapper element) is validated and rendered in the server HTML. Invalid JSON is skipped with a warning.
 - **Other scripts** from Additional Header Markup and Scripts > Top are rendered at the start of the page content, and Scripts > Bottom at the end, as plain `<script>` elements with all their attributes (`async`, `defer`, `crossorigin`, `data-*`, …) and in document order. Inline event-handler attributes (`onload`, …) are dropped. The App Router doesn't let a page add a blocking script to `<head>`, so "top" scripts sit in the `<body>`, after the site header and ahead of the page's own content. React 19 does move `<script async src>` into `<head>`.
@@ -503,6 +516,7 @@ AGILITY_LOCALES
 AGILITY_SITEMAP
 AGILITY_FETCH_CACHE_DURATION
 AGILITY_PATH_REVALIDATE_DURATION
+SITE_URL
 ```
 
 **Configure Webhooks in Agility CMS:**

@@ -32,7 +32,7 @@
 		"typescript": "5.7.2"
 	},
 	"devDependencies": {
-		"@agility/content-fetch": "^2.0.0",
+		"@agility/content-fetch": "^2.0.14",
 		"shx": "^0.3.4",
 		"@agility/geo": "^0.1.0",
 		"@agility/nextjs": "^16.1.0",
